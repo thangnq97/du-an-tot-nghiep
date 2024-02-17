@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bills', function (Blueprint $table) {
-            $table->id();
-            $table->integer('total_price');
-            $table->timestamps();
+        Schema::table('room_interior', function (Blueprint $table) {
+            //
         });
     }
 
@@ -23,6 +21,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bills');
+        Schema::table('room_interior', function (Blueprint $table) {
+            $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
+            $table->foreignId('interior_id')->constrained('interiors')->cascadeOnDelete();
+        });
     }
 };

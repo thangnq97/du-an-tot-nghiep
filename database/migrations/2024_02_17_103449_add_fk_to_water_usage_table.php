@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('electricity_usage', function (Blueprint $table) {
-            $table->id();
-            $table->integer('price');
-            $table->timestamps();
+        Schema::table('water_usage', function (Blueprint $table) {
+            //
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('electricity_usage');
+        Schema::table('water_usage', function (Blueprint $table) {
+            $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
+        });
     }
 };

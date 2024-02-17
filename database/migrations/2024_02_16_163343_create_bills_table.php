@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bill_detail', function (Blueprint $table) {
+        Schema::create('bills', function (Blueprint $table) {
             $table->id();
-            $table->integer('water_number');
-            $table->integer('electricity_number');
-            $table->integer('water_number_history');
-            $table->integer('electricity_number_history');
+            $table->integer('total_price');
+            $table->boolean('is_paid');
+            $table->integer('paid_amount');
+            $table->integer('remaining_amount');
+            $table->integer('total_price_service');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bill_detail');
+        Schema::dropIfExists('bills');
     }
 };
