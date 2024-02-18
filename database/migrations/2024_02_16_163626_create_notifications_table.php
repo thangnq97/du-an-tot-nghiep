@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
             $table->string('message', 255);
-            $table->boolean('is_complete');
+            $table->boolean('is_complete')->default(false);
             $table->timestamps();
         });
     }
