@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('pre_water');
             $table->integer('current_water');
+            $table->integer('used_water');
             $table->timestamps();
         });
     }
