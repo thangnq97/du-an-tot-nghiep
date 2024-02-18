@@ -53,7 +53,7 @@
                                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                                <span class="hide-menu">Quản lí điện điện</span>
+                                <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
