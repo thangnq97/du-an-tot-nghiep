@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminHomeController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('view', function (){
-    return view("layouts.admin.layout");
-});
+Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
+Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
+Route::post('/login', [AdminHomeController::class, 'saveLogin']);
+Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
+Route::post('/register', [AdminHomeController::class, 'postRegister']);
+Route::get('/active/{admin}/{token}', [AdminHomeController::class, 'active'])->name('admin.active');
