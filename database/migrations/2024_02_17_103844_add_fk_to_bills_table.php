@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('bills', function (Blueprint $table) {
             $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
-            $table->foreignId('payment_method_id')->constrained('payment_methods')->cascadeOnDelete();
+            $table->foreignId('payment_method_id')->nullable(true)->constrained('payment_methods')->cascadeOnDelete();
         });
     }
 
