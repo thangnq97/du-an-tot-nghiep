@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\admin\AdminHomeController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,3 +40,9 @@ Route::prefix('room/')->group(function () {
 });
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
 Route::resource('service', ServiceController::class);
+Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
+Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
+Route::post('/login', [AdminHomeController::class, 'saveLogin']);
+Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
+Route::post('/register', [AdminHomeController::class, 'postRegister']);
+Route::get('/active/{admin}/{token}', [AdminHomeController::class, 'active'])->name('admin.active');
