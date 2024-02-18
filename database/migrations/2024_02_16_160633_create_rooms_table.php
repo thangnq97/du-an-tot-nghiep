@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->integer('price');
             $table->boolean('status');
             $table->tinyInteger('member_quantity');
             $table->tinyInteger('member_maximum');
