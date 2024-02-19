@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->integer('price');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->tinyInteger('member_quantity');
             $table->tinyInteger('member_maximum');
             $table->integer('width');
