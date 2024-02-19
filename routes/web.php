@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\RoomController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('view', function (){
     return view("layouts.admin.layout");
 });
+Route::resource('room' , RoomController::class);
+Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room.createpeople');

@@ -1,0 +1,11 @@
+.card-room{
+    margin: 0 10px;
+}
+.action-room{
+    display: flex;
+    margin-bottom: 30px;
+    justify-content: flex-end;
+}
+.room-button{
+    margin: 0 5px;
+}
