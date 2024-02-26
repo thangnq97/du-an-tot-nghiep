@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\WaterController;
+use App\Models\Water_usage;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +20,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('view', function (){
-    return view("layouts.admin.layout");
+    return view("layouts.layoutAdmin");
 });
+Route::resource('waters', WaterController::class);
+
