@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('pre_electricity');
             $table->integer('current_electricity');
             $table->integer('used_electricity');
+            $table->date('date_time');
             $table->timestamps();
         });
     }
