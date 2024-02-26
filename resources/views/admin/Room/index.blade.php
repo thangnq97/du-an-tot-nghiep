@@ -20,12 +20,13 @@
                     <h6 class="card-text"> Số lượng giới hạn : {{ $query->member_maximum }}</h6>
                     <h6 class="card-text"> Giá tiền : {{ number_format($query->price) }}</h6>
                     <div class="">
-                        <a href="{{ route('room.edit', $query) }}" class="btn btn-primary ">Chỉnh sửa</a>
+                        <a href="{{ route('room.edit', $query) }}" class="btn btn-primary ">
+                            <i class="fa-regular fa-pen-to-square"></i></a>
                         <form action="{{ route('room.destroy', $query) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger" type="submit"
-                                onclick="return confirm('Bạn có muốn xóa không')">Xóa</button>
+                            <button class="btn btn-danger" type="submit" onclick="return confirm('Bạn có muốn xóa không')">
+                                <i class="fa-solid fa-trash-can"></i></button>
                         </form>
                     </div>
                 </div>
