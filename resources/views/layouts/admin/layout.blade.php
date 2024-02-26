@@ -52,6 +52,14 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('service.index') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-alert-circle"></i>
+                                </span>
+                                <span class="hide-menu">Quản lí dịch vụ</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-bill.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-alert-circle"></i>

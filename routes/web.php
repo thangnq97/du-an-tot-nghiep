@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\RoomController;
+use App\Http\Controllers\admin\ServiceController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,4 +23,5 @@ Route::get('view', function (){
     return view("layouts.admin.layout");
 });
 Route::resource('room' , RoomController::class);
+Route::resource('service' , ServiceController::class);
 Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room.createpeople');

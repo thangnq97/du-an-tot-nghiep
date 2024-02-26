@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class RoomController extends Controller
 {
     //
-    const PATHVIEW = "layouts.admin.room.";
+    const PATHVIEW = "admin.room.";
     public function index()
     {
         $data = Room::query()->paginate();
