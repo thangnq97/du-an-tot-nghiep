@@ -5,6 +5,8 @@
             {{ Session::get('msg') }}
         </div>
     @endif
+    <h1>Quản lí dịch vụ</h1>
+    <hr>
     <div class="action-room">
         <a href="{{ route('service.create') }}" class="btn btn-primary ">Thêm dịch vụ</a>
     </div>
@@ -26,16 +28,19 @@
                     <td>{{ $query->name }}</td>
                     <td>{{ number_format($query->price) }}</td>
                     <td>{{ $query->method ? 'Số đồng hồ' : 'Số người' }}</td>
-                    <td>
-                        <a href="{{ route('service.edit', $query) }}" class="btn btn-success"><i
+                    <td> 
+                        <div class="action-button" >
+                            <a href="{{ route('service.edit', $query) }}" class="btn btn-success button-action"><i
                                 class="fa-regular fa-pen-to-square"></i></a>
                         <form action="{{ route('service.destroy', $query) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger"
+                            <button type="submit" class="btn btn-danger button-action"
                                 onclick="return confirm ('Bạn có muốn xóa không')">
                                 <i class="fa-solid fa-trash-can"></i></button>
                         </form>
+                        </div>
+                        
                     </td>
                 </tr>
             @endforeach

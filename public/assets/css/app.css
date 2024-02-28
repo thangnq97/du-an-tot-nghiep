@@ -9,3 +9,13 @@
 .room-button{
     margin: 0 5px;
 }
+.action-button {
+    display: flex;
+    column-gap: 10px;
+}
+.button-action{
+    padding: 7px 8px !important;
+}
+.text-room{
+    margin: 20px 0 !important;
+}
