@@ -1,5 +1,6 @@
 .card-room{
     margin: 0 10px;
+    box-shadow: 5px 5px #ccc;  
 }
 .action-room{
     display: flex;
@@ -18,4 +19,7 @@
 }
 .text-room{
     margin: 20px 0 !important;
+}
+.card{
+    box-shadow: 5px 5px #ccc !important;   
 }
