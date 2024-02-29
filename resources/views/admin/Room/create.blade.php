@@ -52,5 +52,6 @@
             <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
+        <a href="{{ route('room.index') }}" class="btn btn-danger ">Trở về</a>
     </form>
 @endsection

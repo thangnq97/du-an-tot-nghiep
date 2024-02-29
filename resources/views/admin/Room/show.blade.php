@@ -1,5 +1,6 @@
 @extends('layouts.admin.layout')
 @section('content')
+    <a href="{{ route('room.index') }}" class="btn btn-danger my-3">Trở về</a>
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
@@ -18,7 +19,8 @@
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
             <div class="action-room">
-                <a href="{{ route('room.create_service') }}" class="btn btn-primary my-3">Thêm dịch vụ</a>
+                <a href="{{ route('room.create_service', ['room' => $room->id]) }}" class="btn btn-primary my-3">Thêm dịch
+                    vụ</a>
             </div>
             <table class="table">
                 <thead>
@@ -32,7 +34,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($service as $query)
+                    @foreach ($room_service as $query)
                         <tr>
                             {{-- <th scope="row">{{ $query->id }}</th> --}}
                             <td>{{ $query->service->name }}</td>
@@ -42,7 +44,7 @@
                                 <div class="action-button">
                                     {{-- <a href="{{ route('service.edit', $query) }}" class="btn btn-success button-action"><i
                                             class="fa-regular fa-pen-to-square"></i></a> --}}
-                                    <form action="{{ route('service.destroy', $query) }}" method="POST">
+                                    <form action="{{ route('room.delete_service', $query) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger button-action"

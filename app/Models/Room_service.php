@@ -12,4 +12,8 @@ class Room_service extends Model
     protected $table = 'room_service';
 
     protected $fillable = ['room_id', 'service_id'];
+
+    public function service(){
+        return $this->belongsTo(Service::class);
+    }
 }

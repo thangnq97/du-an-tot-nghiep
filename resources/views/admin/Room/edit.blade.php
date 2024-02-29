@@ -56,5 +56,6 @@
                 class="form-control">{{ $room->description }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
+        <a href="{{ route('room.index') }}" class="btn btn-danger ">Trở về</a>
     </form>
 @endsection
