@@ -9,6 +9,8 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/Logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
 </head>
 
 <body>
@@ -103,11 +105,20 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('interiors.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
+                            </a>
+                        </li>
+                       
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                                <span>
+                                    <i class="bi bi-person-circle"></i>
+                                </span>
+                                <span class="hide-menu">Quản Lí Khách Hàng</span>
                             </a>
                         </li>
 

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\admin\InteriorsController as AdminInteriorsController;
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\admin\InteriorsController;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +27,8 @@ Route::get('view', function (){
 Route::resource('room' , RoomController::class);
 Route::resource('service' , ServiceController::class);
 Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room.createpeople');
+
+//  interiors
+
+Route::resource('interiors',InteriorsController::class);
+
