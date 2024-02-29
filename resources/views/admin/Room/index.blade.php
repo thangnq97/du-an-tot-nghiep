@@ -24,6 +24,7 @@
                         <h6 class="card-text text-room"> Số lượng giới hạn : {{ $query->member_maximum }}</h6>
                         <h6 class="card-text text-room"> Giá tiền : {{ number_format($query->price) }}</h6>
                         <div class="action-button">
+                            <a href="{{ route('room.show', $query) }}" class="btn btn-info button-action"><i class="fa-solid fa-eye"></i></a>
                             <a href="{{ route('room.edit', $query) }}" class="btn btn-success button-action">
                                 <i class="fa-regular fa-pen-to-square"></i></a>
                             <form action="{{ route('room.destroy', $query) }}" method="POST">
