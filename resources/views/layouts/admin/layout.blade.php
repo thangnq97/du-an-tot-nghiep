@@ -32,7 +32,7 @@
                             <span class="hide-menu">Home</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                            <a class="sidebar-link" href="" aria-expanded="false">
                                 <span>
                   <i class="ti ti-layout-dashboard"></i>
                 </span>
@@ -65,7 +65,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-TransactionHistory.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('bills.index') }}" aria-expanded="false">
                                 <span>
                   <i class="ti ti-file-description"></i>
                 </span>

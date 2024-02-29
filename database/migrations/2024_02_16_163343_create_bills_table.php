@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->integer('total_price');
             $table->boolean('is_paid')->default(false);
             $table->integer('paid_amount')->default(0);

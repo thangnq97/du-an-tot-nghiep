@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\admin\WaterController;
+use App\Http\Controllers\admin\BillController;
+use App\Models\Bill;
 use App\Models\Water_usage;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
@@ -23,4 +25,6 @@ Route::get('view', function (){
     return view("layouts.layoutAdmin");
 });
 Route::resource('waters', WaterController::class);
+
+Route::resource('bills', BillController::class);
 

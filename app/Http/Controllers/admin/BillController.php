@@ -3,17 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bill;
 use App\Models\Room;
+use App\Models\Payment_method;
 use App\Models\Rooms;
 use App\Models\Water_usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
-class WaterController extends Controller
+class BillController extends Controller
 {
 
-    const PATH_VIEW = 'layouts.admin.water.';
+    const PATH_VIEW = 'layouts.admin.bill.';
     const PATH_UPLOAD = 'admin.water';
 
     /**
@@ -23,7 +25,7 @@ class WaterController extends Controller
     {
         // $room = Room::query()->pluck('name','id');
         // return view(self::PATH_VIEW.__FUNCTION__,compact('room'));
-        $data = Water_usage::query()->with('room')->latest()->paginate(5);
+        $data = Bill::query()->with('room')->latest()->paginate(5);
 
         return view(self::PATH_VIEW.__FUNCTION__,compact('data'));
     }
@@ -33,8 +35,11 @@ class WaterController extends Controller
      */
     public function create()
     {
-         $room = Room::query()->pluck('name','id');
-        return view(self::PATH_VIEW.__FUNCTION__,compact('room'));
+        $room = Room::query()->pluck('name','id');
+        $water = Payment_method::query()->pluck('name','id');
+           
+        dd($water);
+        return view(self::PATH_VIEW.__FUNCTION__,compact('room','water'));
     }
 
     /**

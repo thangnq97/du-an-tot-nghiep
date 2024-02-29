@@ -2,7 +2,7 @@
 @section('content')
     <form action="" class="bg-light px-3 py-3">
         <div class="d-flex justify-content-between align-items-center ">
-            <h1 class=""> Chỉ số điện</h1>
+            <h1 class=""> Chỉ số nước</h1>
             <div class="">
                 <button class="btn btn-warning m-1 "> <i class="fa-solid fa-magnifying-glass text-white "></i>  Xem</button>
                 <button class="btn btn-success  m-1 "> <i class="fa-solid fa-check text-white"></i> Lưu</button>
@@ -30,21 +30,21 @@
         
         <div class="mt-4">
             <p class="fs-3 fw-bold mx-auto">Lưu ý:</p>
-            <p>- Bạn phải gán dịch vụ thuộc loại điện cho khách thuê trước thì phần chỉ số này mới được tính cho phòng đó khi tính tiền.</p>
+            <p>- Bạn phải gán dịch vụ thuộc loại nước cho khách thuê trước thì phần chỉ số này mới được tính cho phòng đó khi tính tiền.</p>
             <p>- Đối với lần đầu tiên sử dụng phần mềm bạn sẽ phải nhập chỉ số cũ và mới cho tháng sử dụng đầu tiên, các tháng tiếp theo phần mềm sẽ tự động lấy chỉ số mới tháng trước làm chỉ số cũ tháng sau.</p>
         </div>
-
+AS
         <div class="d-flex justify-content-center align-items-center gap-2 ">
             <input type="checkbox">
-            <label for="" class="text-danger fw-bold fs-4">Cảnh báo chỉ số điện cũ lớn hơn chỉ số điện mới</label>
+            <label for="" class="text-danger fw-bold fs-4">Cảnh báo chỉ số nước cũ lớn hơn chỉ số nước mới</label>
         </div>
         <a href="{{ route('waters.create') }}" class="btn  btn-success">Thêm</a>
         <table class="table table-striped">
            <thead>
                 <tr>
                     <th>Phòng</th>
-                    <th>Cs điện cũ</th>
-                    <th>Cs điện mới</th>
+                    <th>Cs nước cũ</th>
+                    <th>Cs nước mới</th>
                     <th>Sử Dụng</th>
                     <th>Ngày tháng năm</th>
                 </tr>
@@ -59,8 +59,8 @@
                     <td>{{ $item->used_water }}</td>
                     <td>{{ $item->date_time }}</td>
                     <td>
-
                         <a href="{{ route('waters.edit',$item->id) }}" class="btn  btn-success">Sửa</a>
+                                             
                     </td>
                 </tr>
                 @endforeach
