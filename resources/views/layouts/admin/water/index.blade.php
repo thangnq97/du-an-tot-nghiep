@@ -27,24 +27,7 @@
                 </div>
             </div>
         </div>
-        {{-- <div class="form-group row mt-3">
-            <div class="col ml-3 d-flex ">
-                <label for="" class="fw-bold">Tháng/năm</label>
-                <div class="px-3 ">
-                    <input type="date" class="form-control ">
-                </div>
-            </div>
-            <div class="col ml-3 d-flex">
-                <label for="" class="fw-bold">Trạng thái phòng</label>
-                <div class="px-3 ">
-                    <select name="period" id="period" class="form-select mx-3" aria-label="Default select example" >
-                        <option selected>Tất cả</option>
-                        <option value="1">Tầng 1</option>
-                        <option value="2">Tầng 2</option>
-                    </select>
-                </div>
-            </div>
-        </div> --}}
+        
         <div class="mt-4">
             <p class="fs-3 fw-bold mx-auto">Lưu ý:</p>
             <p>- Bạn phải gán dịch vụ thuộc loại điện cho khách thuê trước thì phần chỉ số này mới được tính cho phòng đó khi tính tiền.</p>
