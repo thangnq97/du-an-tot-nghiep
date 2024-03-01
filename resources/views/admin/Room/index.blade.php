@@ -7,10 +7,11 @@
     @endif
     <h1>Quản lí phòng</h1>
     <hr>
+    <div class="bg-light">
     <div class="action-room">
-        <a href="{{ route('room.create') }}" class="btn btn-primary room-button">Thêm Phòng</a>
-        <a href="" class="btn btn-success room-button">Sửa Phòng</a>
-        <a href="" class="btn btn-danger room-button">Xóa Phòng</a>
+        <a href="{{ route('room.create') }}" class="btn btn-primary room-button m-2">Thêm Phòng</a>
+        <a href="" class="btn btn-success room-button m-2">Sửa Phòng</a>
+        <a href="" class="btn btn-danger room-button m-2">Xóa Phòng</a>
     </div>
     <div class="row ">
         @foreach ($data as $query)
@@ -39,5 +40,6 @@
                 </div>
             </div>
         @endforeach
+    </div>
     @endsection
     <script></script>

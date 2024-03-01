@@ -32,5 +32,6 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
+        <a href="{{ route('service.index') }}" class="btn btn-warning my-3">Trở về</a>
     </form>
 @endsection

@@ -21,11 +21,16 @@ class ServiceController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'method' => 'required',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required',
+                'price' => 'required',
+            ],
+            [
+                'name.required' => 'Không được để trống tên',
+                'price.required' => 'Không được để trống giá',
+            ]
+        );
         $data = $request->all();
         Service::query()->create($data);
         return back()->with('msg', 'Thêm dịch vụ thành công');

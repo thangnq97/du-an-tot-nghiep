@@ -14,7 +14,9 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('room.update', $room) }}" method="POST">
+    <h1>Sửa thông tin phòng</h1>
+    <hr>
+    <form action="{{ route('room.update', $room) }}" method="POST" style="width: 80%; margin: auto">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -56,6 +58,6 @@
                 class="form-control">{{ $room->description }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
-        <a href="{{ route('room.index') }}" class="btn btn-danger ">Trở về</a>
+        <a href="{{ route('room.index') }}" class="btn btn-warning my-3">Trở về</a>
     </form>
 @endsection

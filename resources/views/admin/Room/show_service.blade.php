@@ -3,7 +3,7 @@
     <div class="action-room action-button">
         <a href="{{ route('room.create_service', ['room' => $room->id]) }}" class="btn btn-primary my-3">Thêm dịch
             vụ</a>
-        <a href="{{ route('room.index') }}" class="btn btn-danger my-3">Trở về</a>
+        <a href="{{ route('room.index') }}" class="btn btn-warning my-3">Trở về</a>
     </div>
     <table class="table">
         <thead>

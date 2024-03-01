@@ -31,11 +31,23 @@ class RoomController extends Controller
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'member_maximum' => 'required',
-
-        ]);
+        $request->validate(
+            [
+                'name' => 'required|max:255',
+                'member_maximum' => 'required',
+                'price' => 'required',
+                'width' => 'required',
+                'height' => 'required',
+            ],
+            [
+                'name.required' => 'Không được để trống tên',
+                'name.max' => 'Không được nhập quá 255 kí tự',
+                'member_maximum' => 'Không được để trống số lượng người giới hạn',
+                'price.required' => 'Không được để trống giá phòng',
+                'width.required' => 'Không được để trống chiều rộng',
+                'height.required' => 'Không được để trống chiều dài'
+            ]
+        );
         $data = $request->all();
         Room::query()->create($data);
         return back()->with('msg', 'Thêm phòng thành công');
