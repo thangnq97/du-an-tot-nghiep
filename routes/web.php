@@ -18,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Thang
+Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
+Route::post('/login', [AdminHomeController::class, 'saveLogin']);
+Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
+Route::post('/register', [AdminHomeController::class, 'postRegister']);
+Route::get('/active/{admin}/{token}', [AdminHomeController::class, 'active'])->name('admin.active');
 
-//Hoi
 Route::prefix('room/')->group(function () {
+    // Hoi
     Route::get('/', [RoomController::class, 'index'])->name('room.index');
     Route::get('create', [RoomController::class, 'create'])->name('room.create');
     Route::get('{room}/show_service', [RoomController::class, 'show_service'])->name('room.show_service');
@@ -33,7 +39,16 @@ Route::prefix('room/')->group(function () {
     Route::get('{room}/edit', [RoomController::class, 'edit'])->name('room.edit');
     Route::put('{room}', [RoomController::class, 'update'])->name('room.update');
     Route::delete('{room}', [RoomController::class, 'destroy'])->name('room.destroy');
+
+    // Thang
+    Route::get('/{room}', [UserController::class, 'index'])->name('admin.member.index');
+    Route::get('/{room}/create', [UserController::class, 'create'])->name('admin.member.create');
+    Route::post('/{room}/store', [UserController::class, 'store'])->name('admin.member.store');
+    Route::get('/{room}/{id}/edit', [UserController::class, 'edit'])->name('admin.member.edit');
+    Route::put('/{room}/{id}/update', [UserController::class, 'update'])->name('admin.member.update');
+    Route::delete('/{room}/{id}/delete', [UserController::class, 'destroy'])->name('admin.member.destroy');
 });
+//Hoi
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
 Route::resource('service', ServiceController::class);
 //Thang
