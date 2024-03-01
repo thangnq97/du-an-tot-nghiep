@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bill;
+use App\Models\Electricity_usage;
 use App\Models\Room;
 use App\Models\Payment_method;
 use App\Models\Rooms;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Storage;
 class BillController extends Controller
 {
 
-    const PATH_VIEW = 'layouts.admin.bill.';
+    const PATH_VIEW = 'admin.bill.';
     const PATH_UPLOAD = 'admin.water';
 
     /**
@@ -25,9 +26,11 @@ class BillController extends Controller
     {
         // $room = Room::query()->pluck('name','id');
         // return view(self::PATH_VIEW.__FUNCTION__,compact('room'));
-        $data = Bill::query()->with('room')->latest()->paginate(5);
+        $water = Water_usage::all();
+        $bill = Bill::query()->with('room')->latest()->paginate(5);
+        $room = Room::query()->pluck('name','id');
 
-        return view(self::PATH_VIEW.__FUNCTION__,compact('data'));
+        return view(self::PATH_VIEW.__FUNCTION__,compact('room','bill','water'));
     }
 
     /**
@@ -35,11 +38,10 @@ class BillController extends Controller
      */
     public function create()
     {
-        $room = Room::query()->pluck('name','id');
-        $water = Payment_method::query()->pluck('name','id');
+       
            
-        dd($water);
-        return view(self::PATH_VIEW.__FUNCTION__,compact('room','water'));
+        // dd($water);
+        // return view(self::PATH_VIEW.__FUNCTION__,compact('room','water'));
     }
 
     /**
@@ -91,12 +93,24 @@ class BillController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(String $id)
+    public function demoShow(Request $request)
 
     {
-        $Water_usage = Water_usage::find($id);
-        $room = Room::query()->pluck('name','id');
-        return view(self::PATH_VIEW.__FUNCTION__,compact('Water_usage','room'));
+        $id = $request->room_id;
+
+        $year = date('Y', strtotime($request->date_time));
+
+        $month = date('n', strtotime($request->date_time));
+
+        $water = DB::table('water_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
+        // dd($water_usage);
+        // $water = Water_usage::query()->where('room_id','=',$id)->get();
+        $price_room = Room::query()->where('id','=',$id)->get();
+        // $electricity = Electricity_usage::query()->where('room_id','=',$id)->get();
+        $electricity = DB::table('electricity_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
+        // dd($water);
+        return view(self::PATH_VIEW.__FUNCTION__,compact('water','price_room','electricity'));
+        
     }
 
     /**

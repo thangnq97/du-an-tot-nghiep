@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class WaterController extends Controller
 {
 
-    const PATH_VIEW = 'layouts.admin.water.';
+    const PATH_VIEW = 'admin.water.';
     const PATH_UPLOAD = 'admin.water';
 
     /**
@@ -67,10 +67,10 @@ class WaterController extends Controller
         if(count($water_usage)){
             return back()->with('msg','khong duoc');
         }
-
-        if ($request->hasFile('img')) {
-            $data['img'] = Storage::put(self::PATH_UPLOAD,$request->file('img'));
-        }
+        $data = $request->all();
+        // if ($request->hasFile('img')) {
+        //     $data['img'] = Storage::put(self::PATH_UPLOAD,$request->file('img'));
+        // }
         Water_usage::query()->create($data);
         return back()->with('msg','Lưu thành công');
     }

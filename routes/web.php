@@ -26,5 +26,8 @@ Route::get('view', function (){
 });
 Route::resource('waters', WaterController::class);
 
-Route::resource('bills', BillController::class);
+Route::get('/bill', [BillController::class,'index'])->name('bill.index');
+Route::post('/bill/store', [BillController::class,'store'])->name('bill.store');
+Route::get('/bill/create', [BillController::class,'create'])->name('bill.create');
+Route::post('/bill/demoShow', [BillController::class,'demoShow'])->name('bill.demoShow');
 

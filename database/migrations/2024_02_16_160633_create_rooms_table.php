@@ -20,7 +20,7 @@ return new class extends Migration
             $table->tinyInteger('member_maximum');
             $table->integer('width');
             $table->integer('length');
-            $table->string('image', 255);
+            // $table->string('image', 255);
             $table->string('description', 255);
             $table->timestamps();
         });
