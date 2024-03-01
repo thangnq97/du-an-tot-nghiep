@@ -9,12 +9,18 @@ class Bill extends Model
 {
     use HasFactory;
 
+    protected $table = 'bills';
+
+
     protected $fillable = ['name','room_id', 'total_price', 'remaining_amount', 'total_price_service'];
 
     public function room(){
         return $this->belongsTo(\App\Models\Room::class);
     }
-    public function payment(){
-        return $this->belongsTo(\App\Models\Payment_method::class);
+    public function water(){
+        return $this->belongsTo(Water_usage::class);
+    }
+    public function electricity(){
+        return $this->belongsTo(Electricity_usage::class);
     }
 }

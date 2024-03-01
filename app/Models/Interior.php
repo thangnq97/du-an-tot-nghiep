@@ -9,5 +9,7 @@ class Interior extends Model
 {
     use HasFactory;
 
+    protected $table = 'interiors';
+
     protected $fillable = ['name'];
 }

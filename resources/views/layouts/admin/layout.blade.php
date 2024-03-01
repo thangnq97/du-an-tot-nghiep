@@ -7,6 +7,7 @@
     <title>Modernize Free</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -34,8 +35,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
                                 <span class="hide-menu">Trang chủ</span>
                             </a>
                         </li>
@@ -43,32 +44,32 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-contract.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-article"></i>
-                </span>
+                                    <i class="ti ti-article"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí phòng</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-bill.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
-                                <span class="hide-menu">Quản lí điện điện</span>
+                                    <i class="ti ti-alert-circle"></i>
+                                </span>
+                                <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('waters.index') }}" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-cards"></i>
-                </span>
+                                    <i class="ti ti-cards"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí nước</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('bills.index') }}" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('bill.index') }}" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí hóa đơn</span>
                             </a>
                         </li>
@@ -76,8 +77,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí hợp đồng</span>
                             </a>
                         </li>
@@ -85,8 +86,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí giao dịch</span>
                             </a>
                         </li>
@@ -94,8 +95,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
                         </li>
@@ -104,8 +105,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Thống kê</span>
                             </a>
                         </li>
@@ -162,17 +163,11 @@
                 </nav>
             </header>
             <!--  Header End -->
-            <div class="container-fluid">
-                <div class="container-fluid">
-                    <div class="card">
-                        
-                            <div class="container">
-                                @yield('content')
-                            </div>
 
-                    </div>
-                </div>
+            <div class="container-fluid">
+                @yield('content')
             </div>
+
         </div>
     </div>
     <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }} "></script>
