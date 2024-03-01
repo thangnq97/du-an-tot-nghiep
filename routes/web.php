@@ -26,7 +26,9 @@ Route::get('view', function () {
 Route::prefix('room/')->group(function () {
     Route::get('/', [RoomController::class, 'index'])->name('room.index');
     Route::get('create', [RoomController::class, 'create'])->name('room.create');
-    Route::get('{room}/show', [RoomController::class, 'show'])->name('room.show');
+    Route::get('{room}/show_service', [RoomController::class, 'show_service'])->name('room.show_service');
+    Route::get('{room}/show_user', [RoomController::class, 'show_user'])->name('room.show_user');
+    Route::get('{room}/show_interior', [RoomController::class, 'show_interior'])->name('room.show_interior');
     Route::get('{room}/create_service', [RoomController::class, 'create_service'])->name('room.create_service');
     Route::post('{room}/store_service', [RoomController::class, 'store_service'])->name('room.store_service');
     Route::get('createpeople', [RoomController::class, 'createPeople'])->name('room.createpeople');

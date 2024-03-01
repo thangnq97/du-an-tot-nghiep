@@ -40,14 +40,25 @@ class RoomController extends Controller
         Room::query()->create($data);
         return back()->with('msg', 'Thêm phòng thành công');
     }
-    public function show(Room $room)
+    public function show_service(Room $room)
     {
+        $title = "service";
         $room_service = Room_service::query()->where('room_id', '=', $room->id)->get();
-        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'room_service'));
+        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'room_service', 'title'));
+    }
+    public function show_user(Room $room)
+    {
+        $title = "user";
+        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room'));
+    }
+    public function show_interior(Room $room)
+    {
+        $title = "interior";
+        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room'));
     }
     public function create_service(Room $room)
     {
-        $service = Service::all ();
+        $service = Service::all();
         $service_id = Room_service::query()->where('room_id', '=', $room->id)->get();
         return view(self::PATHVIEW . __FUNCTION__, compact('room', 'service', 'service_id'));
     }
