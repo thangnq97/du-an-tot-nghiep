@@ -11,5 +11,5 @@ class Electricity_usage extends Model
 
     protected $table = 'electricity_usage';
 
-    protected $fillable = ['room_id','pre_electricity', 'current_electricity', 'used_electricity'];
+    protected $fillable = ['room_id','pre_electricity', 'current_electricity', 'used_electricity', 'service_id'];
 }
