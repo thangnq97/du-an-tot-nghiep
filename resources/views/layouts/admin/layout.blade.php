@@ -114,7 +114,7 @@
                         </li>
                        
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('users.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="bi bi-person-circle"></i>
                                 </span>

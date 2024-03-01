@@ -1,5 +1,7 @@
 @extends('layouts.admin.layout')
 @section('content')
+
+
 <form action="{{ route('interiors.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
 

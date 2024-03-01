@@ -12,6 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
+            $table -> id();
+            $table->string('email', 255);
+            $table->string('name', 255);
+            $table->string('phone', 255);
+            $table->string('cccd', 255);
+            $table->string('address', 255);
+            $table->string('avatar', 255);
             $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
             $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
         });
