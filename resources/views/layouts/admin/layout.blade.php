@@ -9,6 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/Logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -62,9 +63,9 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-bill.html" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-alert-circle"></i>
-                                </span>
-                                <span class="hide-menu">Quản lí điện điện</span>
+                  <i class="ti ti-alert-circle"></i>
+                </span>
+                                <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -182,11 +183,13 @@
             <div class="container-fluid">
                 @yield('content')
             </div>
-            <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }} "></script>
-            <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }} "></script>
-            <script src="{{ asset('assets/js/sidebarmenu.js') }} "></script>
-            <script src="{{ asset('assets/js/app.min.js') }} "></script>
-            <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }} "></script>
+        </div>
+    </div>
+    <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }} "></script>
+    <script src="{{ asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }} "></script>
+    <script src="{{ asset('assets/js/sidebarmenu.js') }} "></script>
+    <script src="{{ asset('assets/js/app.min.js') }} "></script>
+    <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }} "></script>
 </body>
 
 </html>
