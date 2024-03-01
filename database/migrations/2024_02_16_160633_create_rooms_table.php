@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->text('name');
             $table->integer('price');
-            $table->boolean('status')->default(0);
-            $table->tinyInteger('member_quantity');
+            $table->boolean('status')->default(false);
+            $table->tinyInteger('member_quantity')->default('0');
             $table->tinyInteger('member_maximum');
             $table->integer('width');
             $table->integer('length');
-            // $table->string('image', 255);
-            $table->string('description', 255);
+            $table->string('description', 255)->nullable();
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('electricity_usage', function (Blueprint $table) {
             $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
+            $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
         });
     }
 
