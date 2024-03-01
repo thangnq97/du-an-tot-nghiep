@@ -49,37 +49,7 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate ([
-            'room_id' => 'required',
-            'pre_water' => 'required|numeric',
-            'current_water' => 'required|numeric|gt:pre_water',
-            'date_time' => 'required|date',
-            
-        ]);
-
-        
-        // dd($request->date_time);
-        // $data = $request->except('img');
-
-        // // $date = "2012-01-05";
-
        
-        $year = date('Y', strtotime($request->date_time));
-
-        $month = date('n', strtotime($request->date_time));
-        // // dd($year,$month);
-        // if($request->date_time == )
-        $water_usage = DB::table('water_usage')->where('room_id','=',$request->room_id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
-        // dd(count($water_usage));
-        if(count($water_usage)){
-            return back()->with('msg','khong duoc');
-        }
-
-        if ($request->hasFile('img')) {
-            $data['img'] = Storage::put(self::PATH_UPLOAD,$request->file('img'));
-        }
-        Water_usage::query()->create($data);
-        return back()->with('msg','Lưu thành công');
     }
 
     /**
@@ -97,17 +67,17 @@ class BillController extends Controller
 
     {
         $id = $request->room_id;
-
+        $room = Room::find($id);
+        
         $year = date('Y', strtotime($request->date_time));
-
         $month = date('n', strtotime($request->date_time));
-
         $water = DB::table('water_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
-        // dd($water_usage);
-        // $water = Water_usage::query()->where('room_id','=',$id)->get();
-        $price_room = Room::query()->where('id','=',$id)->get();
-        // $electricity = Electricity_usage::query()->where('room_id','=',$id)->get();
-        $electricity = DB::table('electricity_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
+      
+        $price_room = $room->price;
+      
+        $electricity = DB::table('electricity_usage')->where('room_id','=',$id)->where('date_time', $year )->whereMonth('date_time',$month)->get();
+
+        // $service = DB::table('service')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
         // dd($water);
         return view(self::PATH_VIEW.__FUNCTION__,compact('water','price_room','electricity'));
         
@@ -118,22 +88,7 @@ class BillController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validated = $request->validate ([
-            'room_id' => 'required',
-            'pre_water' => 'required|numeric',
-            'current_water' => 'required|numeric|gt:pre_water',
-            'date_time' => 'required|date',
-            
-        ]);
-        $data = $request->all();
-        $water = Water_usage::findOrFail($id);
-        $water->update($data);
-        
-        
-        // if($request->hasFile('img') && Storage::exists('img')){
-        //     Storage::delete($old);
-        // }
-        return back()->with('msg','sửa thành công');
+      
     }
 
     /**

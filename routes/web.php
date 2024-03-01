@@ -4,13 +4,8 @@ use App\Http\Controllers\admin\AdminHomeController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
-use App\Http\Controllers\admin\AdminHomeController;
-use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\WaterController;
 use App\Http\Controllers\admin\BillController;
-use App\Models\Bill;
-use App\Models\Water_usage;
-use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,25 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
-Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
-Route::post('/login', [AdminHomeController::class, 'saveLogin']);
-Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
-Route::post('/register', [AdminHomeController::class, 'postRegister']);
-Route::get('/active/{admin}/{token}', [AdminHomeController::class, 'active'])->name('admin.active');
-Route::get('/room/{room}', [UserController::class, 'index'])->name('admin.member.index');
-Route::get('/room/{room}/create', [UserController::class, 'create'])->name('admin.member.create');
-Route::post('/room/{room}/store', [UserController::class, 'store'])->name('admin.member.store');
-Route::get('/room/{room}/{id}/edit', [UserController::class, 'edit'])->name('admin.member.edit');
-Route::put('/room/{room}/{id}/update', [UserController::class, 'update'])->name('admin.member.update');
-Route::delete('/room/{room}/{id}/delete', [UserController::class, 'destroy'])->name('admin.member.destroy');
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('view', function () {
-    return view("layouts.admin.layout");
-});
-// Route::resource('room' , RoomController::class);
+//Hoi
 Route::prefix('room/')->group(function () {
     Route::get('/', [RoomController::class, 'index'])->name('room.index');
     Route::get('create', [RoomController::class, 'create'])->name('room.create');
@@ -59,7 +36,7 @@ Route::prefix('room/')->group(function () {
 });
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
 Route::resource('service', ServiceController::class);
-Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
+//Thang
 Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
 Route::post('/login', [AdminHomeController::class, 'saveLogin']);
 Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
@@ -71,8 +48,8 @@ Route::post('/room/{room}/store', [UserController::class, 'store'])->name('admin
 Route::get('/room/{room}/{id}/edit', [UserController::class, 'edit'])->name('admin.member.edit');
 Route::put('/room/{room}/{id}/update', [UserController::class, 'update'])->name('admin.member.update');
 Route::delete('/room/{room}/{id}/delete', [UserController::class, 'destroy'])->name('admin.member.destroy');
+//Dinh
 Route::resource('waters', WaterController::class);
-
 Route::get('/bill', [BillController::class,'index'])->name('bill.index');
 Route::post('/bill/store', [BillController::class,'store'])->name('bill.store');
 Route::get('/bill/create', [BillController::class,'create'])->name('bill.create');
