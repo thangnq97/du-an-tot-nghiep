@@ -11,11 +11,9 @@ class Water_usage extends Model
     use HasFactory;
 
 
-    protected $fillable = ['room_id','pre_water', 'current_water', 'used_water','date_time'];
+    protected $fillable = ['room_id','pre_water', 'current_water', 'used_water','date_time', 'service_id'];
     protected $table = 'water_usage';
     public function room(){
         return $this->belongsTo(\App\Models\Room::class);
     }
 }
-   
-
