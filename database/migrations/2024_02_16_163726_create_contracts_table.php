@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
-            $table->time('started_at');
-            $table->time('ended_at');
+            $table->date('started_at');
+            $table->date('ended_at');
+            $table->tinyInteger('month_quantity');
             $table->timestamps();
         });
     }
