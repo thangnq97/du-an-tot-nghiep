@@ -60,8 +60,8 @@
            
             
             
-            <a href="{{ route('electric.index') }}" class="btn btn-warning ">Back</a>
-            <button type="submit" class="btn btn-success ">Submit</button>
+            <a href="{{ route('electric.index') }}" class="btn btn-warning ">Quay lại</a>
+            <button type="submit" class="btn btn-success ">Sửa</button>
     </form>
 
     <script>

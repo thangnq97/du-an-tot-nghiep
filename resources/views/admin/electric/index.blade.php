@@ -76,11 +76,12 @@
                         <td>{{ $item->used_electricity }}</td>
                         <td>{{ $item->date_time }}</td>
                         <td>
-                            <a href="{{ route('electric.edit',$item) }}" class="btn btn-success ">Edit</a>
+                            <a href="{{ route('electric.edit',$item) }}" class="btn btn-success ">Sửa</a>
                         </td>
                     </tr>
                 @endforeach
            </tbody>
         </table>
+        {{ $data ->links()  }}
     </form>
 @endsection

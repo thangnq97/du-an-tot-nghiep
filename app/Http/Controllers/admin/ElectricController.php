@@ -15,8 +15,7 @@ class ElectricController extends Controller
     // const PATH_UPLOAD = 'admin.electric';
     
     public function index(){
-       $data = Electricity_usage::query()->with('room')->latest()->paginate(5);
-       
+       $data = Electricity_usage::query()->latest()->paginate(5);
        return view(self::PATH_VIEW .__FUNCTION__, compact('data'));
     }
     public function create(){
