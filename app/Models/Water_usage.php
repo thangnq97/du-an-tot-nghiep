@@ -16,4 +16,7 @@ class Water_usage extends Model
     public function room(){
         return $this->belongsTo(\App\Models\Room::class);
     }
+    public function service(){
+        return $this->belongsTo(\App\Models\Service::class);
+    }
 }

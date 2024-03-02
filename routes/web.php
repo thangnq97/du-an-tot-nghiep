@@ -51,22 +51,9 @@ Route::prefix('room/')->group(function () {
 //Hoi
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
 Route::resource('service', ServiceController::class);
-//Thang
-Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
-Route::post('/login', [AdminHomeController::class, 'saveLogin']);
-Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
-Route::post('/register', [AdminHomeController::class, 'postRegister']);
-Route::get('/active/{admin}/{token}', [AdminHomeController::class, 'active'])->name('admin.active');
-Route::get('/room/{room}', [UserController::class, 'index'])->name('admin.member.index');
-Route::get('/room/{room}/create', [UserController::class, 'create'])->name('admin.member.create');
-Route::post('/room/{room}/store', [UserController::class, 'store'])->name('admin.member.store');
-Route::get('/room/{room}/{id}/edit', [UserController::class, 'edit'])->name('admin.member.edit');
-Route::put('/room/{room}/{id}/update', [UserController::class, 'update'])->name('admin.member.update');
-Route::delete('/room/{room}/{id}/delete', [UserController::class, 'destroy'])->name('admin.member.destroy');
 //Dinh
 Route::resource('waters', WaterController::class);
 Route::get('/bill', [BillController::class,'index'])->name('bill.index');
-Route::post('/bill/store', [BillController::class,'store'])->name('bill.store');
-Route::get('/bill/create', [BillController::class,'create'])->name('bill.create');
-Route::post('/bill/demoShow', [BillController::class,'demoShow'])->name('bill.demoShow');
+Route::post('/bill/demoShow', [BillController::class,'store'])->name('bill.store');
+Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('bill.show');
 

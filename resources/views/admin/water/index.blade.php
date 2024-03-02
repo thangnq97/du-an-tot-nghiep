@@ -38,7 +38,7 @@
                 <td>{{ $item->date_time }}</td>
                 <td>
                     <a href="{{ route('waters.edit',$item->id) }}" class="btn  btn-success"><i class="fa-regular fa-pen-to-square"></i></a>
-
+                        
                 </td>
             </tr>
             @endforeach

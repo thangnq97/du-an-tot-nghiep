@@ -1,6 +1,6 @@
 @extends('layouts.admin.layout')
 @section('content')
-<h1>Quản lí bills</h1>
+<h1>Quản lí hóa đơn</h1>
 <hr>
 <div class="bg-light">
     <div class="d-flex justify-content-end">
@@ -23,7 +23,7 @@
                     </div>
                     <div class="modal-body">
                         <h2 class="text-center ">Bills</h2>
-                        <form action="{{ route('bill.demoShow') }}" method="POST" enctype="multipart/form-data" class="row">
+                        <form action="{{ route('bill.store') }}" method="POST" enctype="multipart/form-data" class="row">
                             @csrf
                             <div>
 
@@ -40,11 +40,13 @@
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Phòng</label>
                                      <input class="form-control " type="date" id="pre_water" name="date_time">
-                                    {{-- <select name="date_time" id="" class="form-control ">
-                                        @foreach ($water as $date)
-                                        <option>{{ $date->date_time }}</option>
-                                        @endforeach
-                                    </select> --}}
+                                   
+                                </div>
+
+                                 <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Ghi chú</label>
+                                    <textarea class="form-control" name="note"></textarea>
+                                   
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -75,25 +77,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($bill as $item)
+            @foreach ($bills as $item)
 
             <tr>
                 <td>{{ $item->room->name }}</td>
                 <td>{{ $item->total_price_service }}</td>
                 <td>{{ $item->total_price }}</td>
-                <td>{{ $item->remaining_amount }}</td>
                 <td>{{ $item->paid_amount }}</td>
+                <td>{{ $item->remaining_amount }}</td>
                 <td>{{ $item->is_paid }}</td>
 
                 <td>
-                    {{-- <a href="{{ route('bill.show',$item->id) }}" class="btn btn-success">Chi tiết</a> --}}
+                    <a href="{{ route('bill.show',$item->id)}}"   class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
 
                 </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{ $bill -> links() }}
+    {{ $bills -> links() }}
 </div>
 
 @endsection

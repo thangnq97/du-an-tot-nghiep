@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Rooms;
+use App\Models\Service;
 use App\Models\Water_usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,7 +35,8 @@ class WaterController extends Controller
     public function create()
     {
          $room = Room::query()->pluck('name','id');
-        return view(self::PATH_VIEW.__FUNCTION__,compact('room'));
+         $services = Service::query()->pluck('name','id');
+         return view(self::PATH_VIEW.__FUNCTION__,compact('room', 'services'));
     }
 
     /**
@@ -47,7 +49,7 @@ class WaterController extends Controller
             'pre_water' => 'required|numeric',
             'current_water' => 'required|numeric|gt:pre_water',
             'date_time' => 'required|date',
-            
+            'service_id' => 'required'
         ]);
 
         
