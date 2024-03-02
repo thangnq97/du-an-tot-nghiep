@@ -19,7 +19,7 @@
                 <div class="card card-room" style="width: 15rem;">
                     <div class="card-body">
                         <h4 class="card-title"><i class="fa-solid fa-house"> {{ $query->name }}</i></h4>
-                        <h6><a href="{{ route('room.createpeople') }}" class="btn btn-primary text-room ">Thêm Khách</a>
+                        <h6><a href="{{ route('room.create_people') }}" class="btn btn-primary text-room ">Thêm Khách</a>
                         </h6>
                         <h6 class="card-text text-room">Số lượng : {{ $query->member_quantity }}</h6>
                         <h6 class="card-text text-room"> Số lượng giới hạn : {{ $query->member_maximum }}</h6>
