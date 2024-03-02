@@ -61,7 +61,7 @@
             
             
             <a href="{{ route('electric.index') }}" class="btn btn-warning ">Quay lại</a>
-            <button type="submit" class="btn btn-success ">Thêm</button>
+            <button type="submit" class="btn btn-primary  ">Thêm</button>
     </form>
 
     <script>

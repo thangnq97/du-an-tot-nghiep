@@ -51,6 +51,6 @@ Route::prefix('room/')->group(function () {
 //Hoi
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
 Route::resource('service', ServiceController::class);
-
+//DUNG
 // Route::get('/electric', [ElectricController::class,'index']);
 Route::resource('/electric', ElectricController::class);
