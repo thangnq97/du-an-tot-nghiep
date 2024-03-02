@@ -16,10 +16,12 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('password');
-            $table->text('phone');
-            $table->text('cccd');
-            $table->string('address', 255);
-            $table->string('avatar', 255);
+            $table->text('phone')->nullable();
+            $table->text('cccd')->nullable();
+            $table->string('address', 255)->nullable();
+            $table->string('avatar', 255)->nullable();
+            $table->string('token')->default('0');
+            $table->boolean('is_active')->default(false);
             $table->timestamps();
         });
     }

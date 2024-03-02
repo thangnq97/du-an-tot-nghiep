@@ -11,5 +11,5 @@ class Water_usage extends Model
 
     protected $table = 'water_usage';
 
-    protected $fillable = ['room_id','pre_water', 'current_water', 'used_water'];
+    protected $fillable = ['room_id','pre_water', 'current_water', 'used_water', 'service_id'];
 }

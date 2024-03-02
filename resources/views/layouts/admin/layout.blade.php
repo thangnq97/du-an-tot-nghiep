@@ -4,23 +4,25 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modernize Free</title>
-    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/favicon.png') }}" />
+    <title>CodeFlow</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/app.css') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/Logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <!--  Body Wrapper -->
-    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
         <!-- Sidebar Start -->
         <aside class="left-sidebar">
             <!-- Sidebar scroll-->
             <div>
                 <div class="brand-logo d-flex align-items-center justify-content-between">
-                    <a href="./index.html" class="text-nowrap logo-img">
-                        <img src="{{ asset('assets/images/logos/dark-logo.svg') }}" width="180" alt="" />
+                    <a href="" class="font-monospace" style="color: orange">
+                        <img  src="{{ asset('assets/images/logos/CodeFlow.png') }}" width="200px" alt="" />
                     </a>
                     <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                         <i class="ti ti-x fs-8"></i>
@@ -36,18 +38,26 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./index.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-layout-dashboard"></i>
-                </span>
+                                    <i class="ti ti-layout-dashboard"></i>
+                                </span>
                                 <span class="hide-menu">Trang chủ</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-contract.html" aria-expanded="false">
+                            <a class="sidebar-link" href="{{ route('room.index') }}" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-article"></i>
-                </span>
+                                    <i class="ti ti-article"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí phòng</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link" href="{{ route('service.index') }}" aria-expanded="false">
+                                <span>
+                                    <i class="ti ti-alert-circle"></i>
+                                </span>
+                                <span class="hide-menu">Quản lí dịch vụ</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
@@ -55,22 +65,22 @@
                                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                                <span class="hide-menu">Quản lí điện </span>
+                                <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-PayBill.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-cards"></i>
-                </span>
+                                    <i class="ti ti-cards"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí nước</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="./ui-TransactionHistory.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí hóa đơn</span>
                             </a>
                         </li>
@@ -78,8 +88,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí hợp đồng</span>
                             </a>
                         </li>
@@ -87,8 +97,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí giao dịch</span>
                             </a>
                         </li>
@@ -96,8 +106,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
                         </li>
@@ -105,8 +115,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
+                                    <i class="ti ti-file-description"></i>
+                                </span>
                                 <span class="hide-menu">Thống kê</span>
                             </a>
                         </li>
@@ -125,7 +135,8 @@
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <ul class="navbar-nav">
                         <li class="nav-item d-block d-xl-none">
-                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
+                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
+                                href="javascript:void(0)">
                                 <i class="ti ti-menu-2"></i>
                             </a>
                         </li>
@@ -140,21 +151,27 @@
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <p target="_blank" class="btn btn-primary mt-3">hello ĐVĐ</p>
                             <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
+                                <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt=""
+                                        width="35" height="35" class="rounded-circle">
                                 </a>
-                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+                                <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
+                                    aria-labelledby="drop2">
                                     <div class="message-body">
-                                        <a href="authentication-MyInformation.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="authentication-MyInformation.html"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Thông tin cá nhân</p>
                                         </a>
-                                        <a href="authentication-ChangePassword.html" class="d-flex align-items-center gap-2 dropdown-item">
+                                        <a href="authentication-ChangePassword.html"
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-mail fs-6"></i>
                                             <p class="mb-0 fs-3">Đổi mật khẩu</p>
                                         </a>
 
-                                        <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
+                                        <a href="./authentication-login.html"
+                                            class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
                                     </div>
                                 </div>
                             </li>
@@ -173,6 +190,7 @@
     <script src="{{ asset('assets/js/sidebarmenu.js') }} "></script>
     <script src="{{ asset('assets/js/app.min.js') }} "></script>
     <script src="{{ asset('assets/libs/simplebar/dist/simplebar.js') }} "></script>
+    @yield('script')
 </body>
 
 </html>
