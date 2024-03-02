@@ -22,12 +22,19 @@ class RoomController extends Controller
     {
         return view(self::PATHVIEW . __FUNCTION__);
     }
-    public function createPeople()
+    public function create_People()
     {
         return view(self::PATHVIEW . __FUNCTION__);
     }
-    public function storePeople()
-    {
+    public function store_People(Request $request)
+    {   
+        $id = $request->room_id;
+        $room = Room::find($id);
+        if($room->member_quantity + 1 > $room->member_maximum){
+            return back()->with('msg', 'Phòng đã đầy');
+        }
+        $room->member_quantity += 1;
+        $room->save();
     }
     public function store(Request $request)
     {
