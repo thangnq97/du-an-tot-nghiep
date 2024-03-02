@@ -9,7 +9,6 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/Logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -36,7 +35,9 @@
                             <span class="hide-menu">Home</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./index.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Trang chủ')
+                                active
+                            @endif" href="./index.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-layout-dashboard"></i>
                                 </span>
@@ -45,7 +46,9 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('room.index') }}" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí phòng')
+                            active
+                        @endif" href="{{ route('room.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>
@@ -53,7 +56,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('service.index') }}" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí dịch vụ')
+                            active
+                        @endif" href="{{ route('service.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-alert-circle"></i>
                                 </span>
@@ -61,7 +66,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-bill.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí điện')
+                            active
+                        @endif" href="./ui-bill.html" aria-expanded="false">
                                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
@@ -69,7 +76,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-PayBill.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí nước')
+                            active
+                        @endif" href="./ui-PayBill.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-cards"></i>
                                 </span>
@@ -77,7 +86,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="./ui-TransactionHistory.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí hóa đơn')
+                            active
+                        @endif" href="./ui-TransactionHistory.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
@@ -86,7 +97,9 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí hợp đồng')
+                            active
+                        @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
@@ -95,7 +108,9 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí giao dịch')
+                            active
+                        @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
@@ -104,25 +119,15 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí cơ sở vật chất')
+                            active
+                        @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
                         </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-file-description"></i>
-                                </span>
-                                <span class="hide-menu">Thống kê</span>
-                            </a>
-                        </li>
-
-
-
                         <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->

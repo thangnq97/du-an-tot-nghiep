@@ -15,16 +15,19 @@ class RoomController extends Controller
     public function index()
     {
         $data = Room::query()->paginate();
+        $title = 'Quản lí phòng';
 
-        return view(self::PATHVIEW . __FUNCTION__, compact('data'));
+        return view(self::PATHVIEW . __FUNCTION__, compact('data', 'title'));
     }
     public function create()
     {
-        return view(self::PATHVIEW . __FUNCTION__);
+        $title = 'Quản lí phòng';
+        return view(self::PATHVIEW . __FUNCTION__, compact('title'));
     }
     public function createPeople()
     {
-        return view(self::PATHVIEW . __FUNCTION__);
+        $title = 'Quản lí phòng';
+        return view(self::PATHVIEW . __FUNCTION__, compact('title'));
     }
     public function storePeople()
     {
@@ -54,25 +57,29 @@ class RoomController extends Controller
     }
     public function show_service(Room $room)
     {
-        $title = "service";
+        $sub_title = "service";
+        $title = 'Quản lí phòng';
         $room_service = Room_service::query()->where('room_id', '=', $room->id)->get();
-        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'room_service', 'title'));
+        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'room_service', 'title', 'sub_title'));
     }
     public function show_user(Room $room)
     {
-        $title = "user";
-        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room'));
+        $sub_title = "user";
+        $title = 'Quản lí phòng';
+        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room', 'sub_title'));
     }
     public function show_interior(Room $room)
     {
-        $title = "interior";
-        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room'));
+        $sub_title = "interior";
+        $title = 'Quản lí phòng';
+        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room', 'sub_title'));
     }
     public function create_service(Room $room)
     {
+        $title = 'Quản lí phòng';
         $service = Service::all();
         $service_id = Room_service::query()->where('room_id', '=', $room->id)->get();
-        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'service', 'service_id'));
+        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'service', 'service_id', 'title', 'sub_title'));
     }
     public function store_service(Request $request, Room $room)
     {
@@ -83,7 +90,8 @@ class RoomController extends Controller
 
     public function edit(Room $room)
     {
-        return view(self::PATHVIEW . __FUNCTION__, compact('room'));
+        $title = 'Quản lí phòng';
+        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'title'));
     }
     public function update(Request $request, Room $room)
     {
