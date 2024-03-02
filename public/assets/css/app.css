@@ -1,25 +1,35 @@
-.card-room{
+.card-room {
     margin: 0 10px;
-    box-shadow: 5px 5px #ccc;  
+    box-shadow: 5px 5px #ccc;
 }
-.action-room{
+
+.action-room {
     display: flex;
     margin-bottom: 30px;
     justify-content: flex-end;
 }
-.room-button{
+
+.room-button {
     margin: 0 5px;
 }
+
 .action-button {
     display: flex;
     column-gap: 10px;
 }
-.button-action{
+
+.button-action {
     padding: 7px 8px !important;
 }
-.text-room{
+
+.text-room {
     margin: 20px 0 !important;
 }
-.card{
-    box-shadow: 5px 5px #ccc !important;   
+
+.card {
+    box-shadow: 5px 5px #ccc !important;
+}
+
+a.disabled {
+    pointer-events: none;
 }

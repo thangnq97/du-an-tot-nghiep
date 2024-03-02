@@ -32,7 +32,8 @@ Route::prefix('room/')->group(function () {
     Route::get('{room}/show_interior', [RoomController::class, 'show_interior'])->name('room.show_interior');
     Route::get('{room}/create_service', [RoomController::class, 'create_service'])->name('room.create_service');
     Route::post('{room}/store_service', [RoomController::class, 'store_service'])->name('room.store_service');
-    Route::get('create_people', [RoomController::class, 'create_People'])->name('room.create_people');
+    Route::get('{room}/create_people', [RoomController::class, 'create_People'])->name('room.create_people');
+    Route::post('{room}/store_people', [RoomController::class, 'store_People'])->name('room.store_people');
     Route::post('store', [RoomController::class, 'store'])->name('room.store');
     Route::get('{room}/edit', [RoomController::class, 'edit'])->name('room.edit');
     Route::put('{room}', [RoomController::class, 'update'])->name('room.update');

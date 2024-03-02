@@ -5,6 +5,11 @@
             {{ Session::get('msg') }}
         </div>
     @endif
+    @if (Session::has('err'))
+        <div class="alert alert-danger">
+            {{ Session::get('err') }}
+        </div>
+    @endif
     @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -14,7 +19,7 @@
                 </ul>
             </div>
         @endif
-    <form action="{{ route('room.store') }}" method="POST">
+    <form action="{{ route('room.store_people', ['room' =>$room->id])}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Họ và tên</label>
@@ -42,8 +47,9 @@
         </div>
         <div class="mb-3">
             <label for="member_maximum" class="form-label">Ảnh</label>
-            <input type="text" class="form-control" id="name" name="avatar">
+            <input type="file" class="form-control" id="name" name="avatar" >
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{{ route('room.index') }}" class="btn btn-warning my-3">Trở về</a>
     </form>
 @endsection
