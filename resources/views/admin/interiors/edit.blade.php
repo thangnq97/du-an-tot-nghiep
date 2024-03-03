@@ -1,5 +1,20 @@
 @extends('layouts.admin.layout')
 @section('content')
+@section('content')
+    @if (Session::has('msg'))
+        <div class="alert alert-success">
+            {{ Session::get('msg') }}
+        </div>
+    @endif
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 <form action="{{ route('interiors.update', ['interior' => $interior->id]) }}" method="POST" enctype="multipart/form-data">
 
 @csrf
@@ -7,11 +22,6 @@
 <label for="name">name</label>
 <input type="text" name="name" id="name" class="form-control " value="{{ $interior->name }}">
 
-<label for="name">price</label>
-<input type="text" name="price" id="price" class="form-control " value="{{ $interior->price }}">
-
-<label for="image">image</label> <br>
-<input type="file" name="image"> <br>
 
 
 <br><br>

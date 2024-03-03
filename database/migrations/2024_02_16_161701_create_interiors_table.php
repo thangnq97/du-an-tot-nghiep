@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('interiors', function (Blueprint $table) {
             $table->id();
             $table->text('name');
-            $table->integer('price')
-            ;$table->string('image', 255);
             $table->timestamps();
         });
     }

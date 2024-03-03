@@ -1,24 +1,38 @@
 @extends('layouts.admin.layout')
 @section('content')
-
-
+@if (Session::has('msg'))
+<div class="alert alert-success">
+    {{ Session::get('msg') }}
+</div>
+@endif
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm nội thất mới</h6>
+    </div>
+<br>
 <form action="{{ route('interiors.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
 
-<label for="name">name</label>
+<label for="name">Tên nội thất</label>
+<p></p>
 <input type="text" name="name" id="name" class="form-control ">
 
-<label for="price" class="form-label">Giá </label>
-<input type="number" class="form-control" id="price" name="price">
-
-<label>image</label>
-<input type="file" class="form-control" placeholder="image" name="image">
 
 
-<br><br>
-<button type="submit" class="btn btn-info ">thêm </button>
+<br>
+<button type="submit" class="btn btn-info m-2 ">thêm </button>
+<a href="{{ route('interiors.index') }}" class="btn btn-danger m-3 ">danh sách</a>
 </form>
 <br>
-<a href="{{ route('interiors.index') }}" class="btn btn-danger ">danh sách</a>
+
 
 @endsection

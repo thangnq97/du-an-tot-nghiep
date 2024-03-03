@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('room_interior', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('quantity');
+            $table->integer('price');
             $table->tinyInteger('status');
-            
+
             $table->timestamps();
         });
     }

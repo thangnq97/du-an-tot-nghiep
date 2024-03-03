@@ -28,7 +28,7 @@
                     <td>{{ $query->name }}</td>
                     <td>{{ number_format($query->price) }}</td>
                     <td>{{ $query->method ? 'Số đồng hồ' : 'Số người' }}</td>
-                    <td> 
+                    <td>
                         <div class="action-button" >
                             <a href="{{ route('service.edit', $query) }}" class="btn btn-success button-action"><i
                                 class="fa-regular fa-pen-to-square"></i></a>
@@ -40,7 +40,7 @@
                                 <i class="fa-solid fa-trash-can"></i></button>
                         </form>
                         </div>
-                        
+
                     </td>
                 </tr>
             @endforeach

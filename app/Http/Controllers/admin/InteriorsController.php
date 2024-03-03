@@ -38,13 +38,13 @@ class InteriorsController extends Controller
         $data = $request->except('image');
         $request->validate([
             'name' => 'required|unique:interiors|max:50',
-            'price' => 'required',
-            
-            
+
+
+
         ]);
 
-       
-        
+
+
         Interior::create($request->all());
         return back()->with('msg', 'them thanh cong');
     }
@@ -73,14 +73,14 @@ class InteriorsController extends Controller
     {
         $interior= Interior::find($id);
         $request->validate([
-            'name' => 'required|max:50',
-            
-           
+            'name' => 'required|unique:interiors|max:50',
+
+
         ]);
 
         $interior->update($request->all());
-        
-        
+
+
         return back()->with('msg', 'sua thanh cong');
     }
 
