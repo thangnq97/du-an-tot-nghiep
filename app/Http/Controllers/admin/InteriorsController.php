@@ -5,7 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Interior;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class InteriorsController extends Controller
 {
@@ -33,12 +35,16 @@ class InteriorsController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->except('image');
         $request->validate([
             'name' => 'required|unique:interiors|max:50',
+            'price' => 'required',
+            
             
         ]);
 
-     
+       
+        
         Interior::create($request->all());
         return back()->with('msg', 'them thanh cong');
     }
@@ -68,6 +74,7 @@ class InteriorsController extends Controller
         $interior= Interior::find($id);
         $request->validate([
             'name' => 'required|max:50',
+            
            
         ]);
 

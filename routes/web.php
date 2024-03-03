@@ -4,7 +4,9 @@ use App\Http\Controllers\admin\InteriorsController as AdminInteriorsController;
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\InteriorsController;
+use App\Http\Controllers\admin\RoominteriorController;
 use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\Roominterior as ControllersRoominterior;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +36,4 @@ Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room
 Route::resource('interiors',InteriorsController::class);
 
 Route::resource('users',UsersController::class);
+Route::resource('Roominterior', RoominteriorController::class);

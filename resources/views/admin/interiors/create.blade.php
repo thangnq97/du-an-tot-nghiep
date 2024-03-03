@@ -8,6 +8,11 @@
 <label for="name">name</label>
 <input type="text" name="name" id="name" class="form-control ">
 
+<label for="price" class="form-label">Giá </label>
+<input type="number" class="form-control" id="price" name="price">
+
+<label>image</label>
+<input type="file" class="form-control" placeholder="image" name="image">
 
 
 <br><br>

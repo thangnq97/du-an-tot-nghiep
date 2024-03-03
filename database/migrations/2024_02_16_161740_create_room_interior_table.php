@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->tinyInteger('quantity');
             $table->tinyInteger('status');
+            
             $table->timestamps();
         });
     }
