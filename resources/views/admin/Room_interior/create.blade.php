@@ -17,7 +17,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Tạo mới</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Thêm thông tin</h6>
             </div>
 
             <div class="card-body">
@@ -50,24 +50,24 @@
                         <div class="form-group">
                             <label>Số lượng (chiếc, cái)</label>
                             <p></p>
-                            <input type="text" class="form-control" placeholder="quantity" name="quantity">
+                            <input type="text" class="form-control" placeholder="Số lượng" name="quantity">
                         </div>
 <br>
                         <div class="form-group">
                             <label>Giá (VND)</label>
-                            <p></p>
-                            <input type="text" class="form-control" placeholder="price" name="price">
+                            <p class="text-danger ">*Lớn hơn 1000</p>
+                            <input type="text" class="form-control" placeholder="Giá" name="price">
                         </div>
 
 <br>
                         <div class="form-group">
                             <p></p>
                             <label>Tình trạng (%)</label> <br>
-                            <input type="text" class="form-control" placeholder="status" name="status">
+                            <input type="text" class="form-control" placeholder="Tình trạng " name="status">
                         </div>
 <br>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('Roominterior.index') }}" class="btn btn-danger ">danh sách</a>
+                        <button type="submit" class="btn btn-primary">Thêm</button>
+                        <a href="{{ route('Roominterior.index') }}" class="btn btn-danger m-3">Danh sách</a>
                     </form>
                 </div>
             </div>

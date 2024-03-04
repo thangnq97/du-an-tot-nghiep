@@ -5,15 +5,16 @@
     {{ Session::get('msg') }}
 </div>
 @endif
-<h1>Danh Sách</h1>
+<h1>Danh Sách Nội Thất</h1>
 
 <a href="{{ route('interiors.create') }}" class="btn btn-info ">  Thêm nội thất</a>
-<a href="{{ route('Roominterior.index') }}" class="btn btn-primary button-action m-3 ">Chi tiết </i></a>
+<a href="{{ route('Roominterior.index') }}" class="btn btn-primary m-3">Chi tiết</a>
+
 <table class="table">
 <thead>
     <tr>
         <th>id</th>
-        <th>Tên</th>
+        <th>Tên nội thất</th>
         <th>Hoạt động</th>
 
     </tr>

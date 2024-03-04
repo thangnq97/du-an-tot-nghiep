@@ -17,7 +17,7 @@
 
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Tạo mới</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Sửa thông tin</h6>
             </div>
 
             <div class="card-body">
@@ -66,8 +66,8 @@
                             <input type="text" class="form-control" placeholder="status" name="status" value="{{ $room_interior->status }}">
                         </div>
 <br>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                        <a href="{{ route('Roominterior.index') }}" class="btn btn-danger ">danh sách</a>
+                        <button type="submit" class="btn btn-primary">Lưu </button>
+                        <a href="{{ route('Roominterior.index') }}" class="btn btn-danger m-3">danh sách</a>
                     </form>
                 </div>
             </div>

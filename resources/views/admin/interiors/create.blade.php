@@ -19,6 +19,7 @@
         <h6 class="m-0 font-weight-bold text-primary">Thêm nội thất mới</h6>
     </div>
 <br>
+<div class="card-body">
 <form action="{{ route('interiors.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
 
@@ -29,9 +30,10 @@
 
 
 <br>
-<button type="submit" class="btn btn-info m-2 ">thêm </button>
-<a href="{{ route('interiors.index') }}" class="btn btn-danger m-3 ">danh sách</a>
+<button type="submit" class="btn btn-info m-2 ">Thêm </button>
+<a href="{{ route('interiors.index') }}" class="btn btn-danger m-3 ">Danh sách</a>
 </form>
+</div>
 <br>
 
 
