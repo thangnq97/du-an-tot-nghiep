@@ -43,10 +43,10 @@ class RoomController extends Controller
         $request->validate(
             [
                 'name' => 'required|max:255',
-                'email' => 'required|email',
+                'email' => 'unique:users|required|email',
                 'password' => 'required',
-                'phone' => 'required',
-                'cccd' => 'required',
+                'phone' => 'unique:users|required',
+                'cccd' => 'unique:users|required',
                 'address' => 'required',
                 'avatar' => 'extensions:jpg,png,JPEG|max:1024',
             ],
@@ -55,9 +55,12 @@ class RoomController extends Controller
                 'name.max' => 'độ dài ko quá 255 kí tự',
                 'email.required' => 'Không được để trống email',
                 'email.email' => 'Bạn nhập phải là địa chỉ email hợp lệ',
+                'email.unique' => 'Email này đã được sử dụng',
                 'password.required' => 'Không được để trống mật khẩu',
                 'phone.required' => 'Không được để trống Số điện thoại',
+                'phone.unique' => 'Số điện thoại này đã được sử dụng',
                 'cccd.required' => 'Không được để trống chứng minh nhân dân',
+                'cccd.unique' => 'Chứng minh nhân dân này đã được sử dụng',
                 'address.required' => 'Không được để trống địa chỉ',
                 'avatar.extensions' => 'Bạn chọn tệp không phải là ảnh'
             ]
