@@ -38,15 +38,15 @@
 
                 <td>
 
-
+                <div class="action-button" >
                     <form action="{{ route('users.destroy',$t) }}" method="POST">
                         <a href="{{ route('users.edit',['user'=>$t->id]) }}" class="btn btn-success button-action "><i class="fa-regular fa-pen-to-square"></i></a>
-                        <a href="" class="btn btn-primary button-action"><i class="bi bi-eye-fill"></i></a>
+                      
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger button-action " onclick="return confirm('bn cos muon xoa')"><i class="fa-solid fa-trash-can"></i></button>
                     </form>
-
+                    </div>
                 </td>
             </tr>
             @endforeach

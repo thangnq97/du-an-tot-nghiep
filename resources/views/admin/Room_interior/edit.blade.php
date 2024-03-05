@@ -20,12 +20,14 @@
                 <h6 class="m-0 font-weight-bold text-primary">Sửa thông tin</h6>
             </div>
 
-            <div class="card-body">
-                <div class="table-responsive">
+            
+                <div class="table-responsive card-body">
                     <form action="{{ route('Roominterior.update',$room_interior) }}" method="POST" enctype="multipart/form-data">
+
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Tên phòng</label>
                             <p></p>
                             <select name="room_id" id="" class="form-control">
@@ -34,8 +36,10 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <br>
-                        <div class="form-group">
+
+                        <div class="form-group mb-3">
                             <label>Tên nội thất</label>
                             <p></p>
                             <select name="interior_id" id="" class="form-control">
@@ -44,33 +48,45 @@
                                 @endforeach
                             </select>
                         </div>
-<br>
 
+                        <br>
 
-                        <div class="form-group">
+                        <div class="form-group mb-3">
                             <label>Số lượng (chiếc, cái)</label>
                             <p></p>
                             <input type="text" class="form-control" placeholder="quantity" name="quantity" value="{{ $room_interior->quantity }}">
                         </div>
-<br>
-                        <div class="form-group">
+
+                        <br>
+
+                        <div class="form-group mb-3">
                             <label>Giá (VND)</label>
-                            <p></p>
+                            <p class="text-danger ">*Lớn hơn 1000 VND</p>
                             <input type="text" class="form-control" placeholder="price" name="price" value="{{ $room_interior->price }}">
                         </div>
 
-<br>
-                        <div class="form-group">
+                        <br>
+
+                        <div class="form-group mb-3">                           
+                            <label>Tình trạng (%)</label> 
                             <p></p>
-                            <label>Tình trạng (%)</label> <br>
                             <input type="text" class="form-control" placeholder="status" name="status" value="{{ $room_interior->status }}">
                         </div>
-<br>
-                        <button type="submit" class="btn btn-primary">Lưu </button>
-                        <a href="{{ route('Roominterior.index') }}" class="btn btn-danger m-3">danh sách</a>
+
+                        <br>
+
+                        <div class="form-group mb-3">
+                            <label >Mô tả</label>
+                            <p></p>
+                            <textarea name="description" id="" cols="30" rows="10" class="form-control" value="{{ $room_interior->description }}"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Gửi </button>
+                        <a href="{{ route('Roominterior.index') }}" class="btn btn-warning my-3 m-3">Trở về</a>
+
                     </form>
-                </div>
-            </div>
+
+                </div>           
         </div>
 
     @endsection

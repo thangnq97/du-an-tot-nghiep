@@ -43,7 +43,7 @@ class UsersController extends Controller
 
 
         Users::create($request->all());
-        return back()->with('msg', 'them thanh cong');
+        return back()->with('msg', 'Thêm Thành Công');
     }
 
     public function edit(string $id)
@@ -74,12 +74,12 @@ class UsersController extends Controller
         $users->update($request->all());
 
 
-        return back()->with('msg', 'sua thanh cong');
+        return back()->with('msg', 'Sửa Thành Công');
     }
     public function destroy(string $id)
     {
         $user= Users::find($id);
         $user->delete();
-        return back()->with('msg', 'xoa thanh cong');
+        return back()->with('msg', 'Xóa Thành Công');
     }
 }

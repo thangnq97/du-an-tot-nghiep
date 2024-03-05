@@ -46,7 +46,7 @@ class InteriorsController extends Controller
 
 
         Interior::create($request->all());
-        return back()->with('msg', 'them thanh cong');
+        return back()->with('msg', 'Thêm Thành Công');
     }
 
     /**
@@ -81,7 +81,7 @@ class InteriorsController extends Controller
         $interior->update($request->all());
 
 
-        return back()->with('msg', 'sua thanh cong');
+        return back()->with('msg', 'Sửa Thành Công');
     }
 
     /**
@@ -91,6 +91,6 @@ class InteriorsController extends Controller
     {
         $interior= Interior::find($id);
         $interior->delete();
-        return back()->with('msg', 'xoa thanh cong');
+        return back()->with('msg', 'Xóa Thành Công');
     }
 }

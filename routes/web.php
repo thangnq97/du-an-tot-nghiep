@@ -1,13 +1,11 @@
 <?php
 
-use App\Http\Controllers\admin\InteriorsController as AdminInteriorsController;
+
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\InteriorsController;
 use App\Http\Controllers\admin\RoominteriorController;
 use App\Http\Controllers\admin\UsersController;
-use App\Http\Controllers\Roominterior as ControllersRoominterior;
-use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,19 +19,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 Route::get('view', function (){
     return view("layouts.admin.layout");
 });
+
 Route::resource('room' , RoomController::class);
 Route::resource('service' , ServiceController::class);
 Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room.createpeople');
 
+
+//tùng
 //  interiors
-
 Route::resource('interiors',InteriorsController::class);
-
+//  sers
 Route::resource('users',UsersController::class);
+//  Roominterior
 Route::resource('Roominterior', RoominteriorController::class);

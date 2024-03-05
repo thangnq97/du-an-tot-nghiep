@@ -11,7 +11,7 @@ class Room_interior extends Model
 
     protected $table = 'room_interior';
 
-    protected $fillable = ['room_id', 'interior_id', 'quantity', 'status',  'price'];
+    protected $fillable = ['room_id', 'interior_id', 'quantity', 'status',  'price',  'description'];
 
     public function interior()
     {

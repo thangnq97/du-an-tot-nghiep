@@ -16,7 +16,7 @@ return new class extends Migration
             $table->tinyInteger('quantity');
             $table->integer('price');
             $table->tinyInteger('status');
-
+            $table->string('description', 255)->nullable();
             $table->timestamps();
         });
     }

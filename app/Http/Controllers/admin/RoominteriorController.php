@@ -45,7 +45,7 @@ class RoominteriorController extends Controller
         ]);
 
         Room_interior::create($request->all());
-        return back()->with('msg', 'Thao tác thành công');
+        return back()->with('msg', 'Thêm Thành Công');
     }
     public function edit(string $id)
     {
@@ -76,7 +76,7 @@ class RoominteriorController extends Controller
         $room_interior->update($request->all());
 
 
-        return back()->with('msg', 'sua thanh cong');
+        return back()->with('msg', 'Sửa Thành Công');
     }
 
 
@@ -84,6 +84,6 @@ class RoominteriorController extends Controller
     {
         $interior= Room_interior::find($id);
         $interior->delete();
-        return back()->with('msg', 'xoa thanh cong');
+        return back()->with('msg', 'Xóa Thành Công');
     }
 }

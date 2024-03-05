@@ -5,50 +5,50 @@
     {{ Session::get('msg') }}
 </div>
 @endif
+
 <h1>Danh Sách Nội Thất</h1>
 
-<a href="{{ route('interiors.create') }}" class="btn btn-info ">  Thêm nội thất</a>
-<a href="{{ route('Roominterior.index') }}" class="btn btn-primary m-3">Chi tiết</a>
+<div class="bg-light">
 
-<table class="table">
-<thead>
-    <tr>
-        <th>id</th>
-        <th>Tên nội thất</th>
-        <th>Hoạt động</th>
+    <a href="{{ route('interiors.create') }}" class="btn btn-primary room-button "> Thêm nội thất</a>
+    <a href="{{ route('Roominterior.index') }}" class="btn btn-info m-3">Chi tiết</a>
 
-    </tr>
-</thead>
-<tbody>
-    @foreach ($data as $e)
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Tên nội thất</th>
+                <th scope="col">Hoạt động</th>
 
-    <tr>
-        <td>{{ $e->id }}</td>
-        <td>{{ $e->name }}</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($data as $e)
 
+            <tr>
+                <td>{{ $e->id }}</td>
+                <td>{{ $e->name }}</td>
+                <td>
+                    <div class="action-button">
+                        <form action="{{ route('interiors.destroy',$e) }}" method="POST">
+                            <a href="{{ route('interiors.edit',['interior'=> $e->id]) }}" class="btn btn-success button-action  "><i class="fa-regular fa-pen-to-square"></i></a>
 
-        <td>
+                            @csrf
+                            @method('DELETE')
 
+                            <button class="btn btn-danger button-action " onclick="return confirm('Bạn có muốn xóa không')"><i class="fa-solid fa-trash-can"></i></button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
 
-            <form action="{{ route('interiors.destroy',$e) }}" method="POST">
-                <a href="{{ route('interiors.edit',['interior'=> $e->id]) }}" class="btn btn-success button-action  "><i class="fa-regular fa-pen-to-square"></i></a>
+            @endforeach
 
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger button-action " onclick="return confirm('bn cos muon xoa')"><i class="fa-solid fa-trash-can"></i></button>
-            </form>
+        </tbody>
+        
+    </table>
 
-        </td>
-    </tr>
-
-    @endforeach
-</tbody>
-
-
-
-</table>
-
-
+</div>
 
 
 @endsection

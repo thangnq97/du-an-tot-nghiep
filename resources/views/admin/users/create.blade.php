@@ -23,11 +23,18 @@
     <br>
     <div class="card-body">
     <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <label for="name">Tên Khách</label>
-        <input type="text" name="name" id="name" class="form-control ">
 
-        <div class="form-group">
+        @csrf
+
+
+        <div class="form-group mb-3">
+        <label for="name">Tên Khách</label>
+        <p></p>
+        <input type="text" name="name" id="name" class="form-control ">
+        </div>
+
+
+        <div class="form-group mb-3">
             <label>Tên phòng</label>
             <p></p>
             <select name="room_id" id="" class="form-control">
@@ -37,23 +44,34 @@
             </select>
         </div>
 
-
+        <div class="form-group mb-3">
+            
         <label for="name">email</label>
+        <p></p>
 <input type="text" name="email" id="email" class="form-control ">
+</div>
 
-
+<div class="form-group mb-3">
 <label for="name">Số điện thoại</label>
+<p></p>
 <input type="text" name="phone" id="phone" class="form-control ">
+</div>
 
 
-
+<div class="form-group mb-3">
 <label for="name">cccd</label>
+<p></p>
 <input type="text" name="cccd" id="cccd" class="form-control ">
+</div>
 
+<div class="form-group mb-3">
+    <p></p>
 <label for="name">Địa chỉ</label>
+<p></p>
 <input type="text" name="address" id="address" class="form-control ">
+</div>
 
-<div class="form-group">
+<div class="form-group mb-3">
     <label>Vai trò</label>
     <p></p>
     <select name="role_id" id="" class="form-control">
@@ -65,8 +83,8 @@
 
 <br>
 
-        <button type="submit" class="btn btn-primary">Thêm</button>
-        <a href="{{ route('users.index') }}" class="btn btn-danger m-3">Danh sách</a>
+        <button type="submit" class="btn btn-primary">Gửi</button>
+        <a href="{{ route('users.index') }}" class="btn btn-warning my-3 m-3">Trở về</a>
     </form>
 </div>
 @endsection
