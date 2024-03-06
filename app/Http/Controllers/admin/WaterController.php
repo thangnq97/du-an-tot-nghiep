@@ -22,11 +22,10 @@ class WaterController extends Controller
      */
     public function index()
     {
-        // $room = Room::query()->pluck('name','id');
-        // return view(self::PATH_VIEW.__FUNCTION__,compact('room'));
+        $title = 'Quản lí nước';
         $data = Water_usage::query()->with('room')->latest()->paginate(5);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data','title'));
     }
 
     /**
@@ -34,9 +33,10 @@ class WaterController extends Controller
      */
     public function create()
     {
+        $title = 'Quản lí nước';
         $room = Room::query()->pluck('name', 'id');
         $services = Service::query()->pluck('name', 'id');
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'services'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'services','title'));
     }
 
     /**
@@ -64,12 +64,6 @@ class WaterController extends Controller
     );
 
 
-        // dd($request->date_time);
-        // $data = $request->except('img');
-
-        // // $date = "2012-01-05";
-
-
         $year = date('Y', strtotime($request->date_time));
 
         $month = date('n', strtotime($request->date_time));
@@ -87,23 +81,15 @@ class WaterController extends Controller
         return back()->with('msg', 'Lưu thành công');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Water_usage $Water_usage)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+   
+    
     public function edit(String $id)
 
     {
+        $title = 'Quản lí nước';
         $Water_usage = Water_usage::find($id);
         $room = Room::query()->pluck('name', 'id');
-        return view(self::PATH_VIEW . __FUNCTION__, compact('Water_usage', 'room'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('Water_usage', 'room', 'title'));
     }
 
     /**
@@ -134,17 +120,7 @@ class WaterController extends Controller
         $water->update($data);
 
 
-        // if($request->hasFile('img') && Storage::exists('img')){
-        //     Storage::delete($old);
-        // }
         return back()->with('msg', 'sửa thành công');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Water_usage $Water_usage)
-    {
-        //
-    }
 }

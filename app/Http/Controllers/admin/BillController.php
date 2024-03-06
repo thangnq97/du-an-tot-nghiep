@@ -25,13 +25,12 @@ class BillController extends Controller
   
     public function index()
     {
-        // $room = Room::query()->pluck('name','id');
-        // return view(self::PATH_VIEW.__FUNCTION__,compact('room'));
+        $title = 'Quản lí hóa đơn';
         $water = Water_usage::all();
         $bills = Bill::query()->with('room')->latest()->paginate(5);
         $room = Room::query()->pluck('name','id');
 
-        return view(self::PATH_VIEW.__FUNCTION__,compact('room','bills','water'));
+        return view(self::PATH_VIEW.__FUNCTION__,compact('room','bills','water','title'));
     }
 
     
@@ -152,18 +151,6 @@ class BillController extends Controller
         return redirect()->back();
     }
 
-   
-    public function show(String $id)
-    {
-        $id_detail = $id;
-        
-        $bill_details = Bill_detail::where('bill_id', $id_detail)->get();
-        
-       
-
-        return view(self::PATH_VIEW.__FUNCTION__,compact('bill_details','$used_water','$used_electricity'));
-        
-    }
 
     // view pdf
     public function generatePDF(String $id) {

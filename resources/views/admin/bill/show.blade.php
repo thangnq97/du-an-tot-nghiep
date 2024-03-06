@@ -30,13 +30,14 @@
             border-top: 1px solid #ccc;
         }
         .details {
-            display: flex;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1 1;
             margin-bottom: 10px;
         }
     </style>
 </head>
 <body>
+   
     <div class="container">
         @foreach ($bill_details as $item)
         <div class="item">
@@ -46,8 +47,7 @@
                 <p>Phòng: {{ $item['room_name'] }}</p>
                 <hr>
                 <div class="details">
-                    <p>Tiền phòng</p>
-                    <p>{{ $item['room_price'] }}</p>
+                    <p>Tiền phòng <span style="">{{ $item['room_price'] }}</span></p>
                 </div>
                 <div class="details">
                     <p>Điện (CS cũ: {{ $item['pre_electricity'] }} CS mới: {{ $item['current_electricity'] }} SD: {{ $used_electricity }})</p>
@@ -65,6 +65,8 @@
                     <p>Wifi</p>
                     <p>{{ $item['wifi_price'] }}</p>
                 </div>
+               
+                <hr>
                 <div class="details">
                     <p>Tổng tiền</p>
                     <p>{{ $total_price }}</p>
@@ -72,6 +74,7 @@
             </div>
         </div>
         @endforeach
+
     </div>
 </body>
 </html>
