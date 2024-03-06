@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\WaterController;
 use App\Http\Controllers\admin\BillController;
+use App\Http\Controllers\PDFController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,4 +57,5 @@ Route::resource('waters', WaterController::class);
 Route::get('/bill', [BillController::class,'index'])->name('bill.index');
 Route::post('/bill/demoShow', [BillController::class,'store'])->name('bill.store');
 Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('bill.show');
+Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->name('bill.generatePDF');
 

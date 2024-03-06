@@ -15,16 +15,14 @@ use App\Models\Water_usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BillController extends Controller
 {
 
     const PATH_VIEW = 'admin.bill.';
-    const PATH_UPLOAD = 'admin.water';
 
-    /**
-     * Display a listing of the resource.
-     */
+  
     public function index()
     {
         // $room = Room::query()->pluck('name','id');
@@ -36,20 +34,8 @@ class BillController extends Controller
         return view(self::PATH_VIEW.__FUNCTION__,compact('room','bills','water'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-       
-           
-        // dd($water);
-        // return view(self::PATH_VIEW.__FUNCTION__,compact('room','water'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    
+   
     public function store(Request $request)
     {
        
@@ -63,56 +49,84 @@ class BillController extends Controller
         
 
     //     $bill_room = DB::table('bills')->where('room_id','=',$id)->whereYear('date_time', $year)->whereMonth('date_time', $month)->get()[0];
-    //    dd($bill_room);
-    //    if($bill_room) {
-    //         // return back();
-    //     }
-
+   
         // Tinh tien phong
         $price_room = $room->price;
 
         // Tinh tien dien
-        // if(isset($year,$month)) {
-        //     return back();
-        // }
-        
-        $electricity = DB::table('electricity_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get()[0];
-        $electricity = DB::table('electricity_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get()[0];
+    
+        $electricity = DB::table('electricity_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
+        if(count($electricity)){
+            $electricity = $electricity[0];
+        }else{
+            return back()->with('msg','Tháng này chưa có số nước');
+        } 
         $electricity_service_id = $electricity->service_id;
         $electricity_service = Service::find($electricity_service_id);
         $electricity_price = $electricity_service->price;
+        $electricity_Total = $electricity->used_electricity * $electricity_price;
+        
 
         // Tinh tien nuoc
-        $water = DB::table('water_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get()[0];
+        $water = DB::table('water_usage')->where('room_id','=',$id)->whereYear('date_time', $year )->whereMonth('date_time',$month)->get();
+       
+        if(count($water)){
+            $water = $water[0];
+        }else{
+            return back()->with('msg','Tháng này chưa có số điện');
+        } 
         $water_service_id = $water->service_id;
         $water_service = Service::find($water_service_id);
         $water_price = $water_service->price;
+        $water_Total = $water->used_water * $water_price;
 
+        
         // Tinh tien dich vu
         $room_services = DB::table('room_service')->where('room_id', '=', $id)->get();
+        $array_room = [];
+        $array_member = [];
         $total_service_price = 0;
 
-        foreach ($room_services as $item) {
+          foreach ($room_services as $item) {
+            
             $service = DB::table('services')->where('id', '=', $item->service_id)->get()[0];
+           
+            
             if($service->id == $water_service->id || $service->id == $electricity_service->id) {
                 continue;
             }
+            
             if($service->method == 0) {
-                $total_service_price += $service->price * $room->member_quantity;
+                $key = $service->name;
+                $value = $service->price * $room->member_quantity;
+                array_push($array_member, [$key=>$value]);
+                $garbage_price = ($service->price * $room->member_quantity) ;
+                
+                
             }else {
-                $total_service_price += $service->price;
+                $key = $service->name;
+                $value = $service->price ;
+                array_push($array_room, [$key=>$value]);
+                $wifi_price = $service->price;
+                
             }
-        }
+           
+            }
+            $total_service_price = $electricity_Total + $water_Total +  $garbage_price + $wifi_price ;
+           
+      
+        
+        
 
         // Tong tien
-        $total_price = $price_room + ($water_price * $water->used_water) + ($electricity_price * $electricity->used_electricity) + $total_service_price;
+        $total_price = $price_room + $total_service_price;
         
-        // Them bill
+        // Them hoa don
         $bill = Bill::create(['room_id' => $room->id,
-            'total_price' => $total_price,
-            'remaining_amount' => $total_price,
-            'total_price_service' => $total_service_price,
-            'note' => $request->note,
+            'total_price'           => $total_price,
+            'remaining_amount'      => $total_price,
+            'total_price_service'   => $total_service_price,
+            'note'                  => $request->note,
                             ]);
         // Them bill detail
        // Lấy giá trị ID lớn nhất
@@ -125,47 +139,69 @@ class BillController extends Controller
             'room_price'            => $price_room,
             'date_start'            => $request->date_time, 
             'pre_water'             => $water->pre_water, 
-            'current_water'         => $water->pre_water, 
-            'water_price'           => $service->price,
-            'pre_electricity'       => $water->pre_water, 
-            'current_electricity'   => $water->pre_water,
-            'electricity_price'     => $service->price, 
+            'current_water'         => $water->current_water, 
+            'water_price'           => $water_service->price,
+            'pre_electricity'       => $electricity->pre_electricity, 
+            'current_electricity'   => $electricity->current_electricity,
+            'electricity_price'     => $electricity_service->price, 
+            'wifi_price'            => $wifi_price, 
+            'garbage_price'         => $garbage_price, 
             'total_price_service'   => $bill_detail->total_price_service
         ]);
-// Them bill detail
-        // dd($bill_details);
+        // Them chi tiết hóa đơn
         return redirect()->back();
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show(String $id)
     {
-        // dd($bill_detail);
         $id_detail = $id;
         
         $bill_details = Bill_detail::where('bill_id', $id_detail)->get();
-        // dd($bill_details);
+        
+       
 
-        return view(self::PATH_VIEW.__FUNCTION__,compact('bill_details'));
+        return view(self::PATH_VIEW.__FUNCTION__,compact('bill_details','$used_water','$used_electricity'));
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // view pdf
+    public function generatePDF(String $id) {
+        $id_detail = $id;
+        $bill_details = Bill_detail::where('bill_id', $id_detail)->get();
+       
+        $used_water = 0;
+        $used_electricity = 0;
     
-    public function update(Request $request, string $id)
-    {
-      
-    }
+       
+    
+        foreach ($bill_details as $detail) {
+            $used_water += $detail->current_water - $detail->pre_water;
+            $used_electricity += $detail->current_electricity - $detail->pre_electricity;
+            $water_price = $detail->water_price;
+            $electricity_price =  $detail->electricity_price;
+            $room_price = $detail->room_price;
+            $garbage_price = $detail->garbage_price;
+            $wifi_price = $detail->wifi_price;
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Bill_detail $bill_detail)
-    {
-        //
+        }
+    
+       
+        $water_Total = $used_water * $water_price;
+        $electricity_Total = $used_electricity * $electricity_price;
+        $total_price = $water_Total + $electricity_Total + $room_price + $garbage_price + $wifi_price;
+    
+        $data = $bill_details->toArray();
+    
+        $pdf = Pdf::loadView('admin.bill.show', [
+            'bill_details' => $data,
+            'used_water' => $used_water,
+            'used_electricity' => $used_electricity,
+            'water_Total' => $water_Total,
+            'electricity_Total' => $electricity_Total,
+            'total_price' => $total_price
+        ]);
+    
+        return $pdf->stream('show.pdf');
     }
-
 }

@@ -9,10 +9,15 @@
         </button>
     </div>
     <div class="">
+        {{-- @if (\Session::has('mssg'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong> {{ \Session::get('msg') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif --}}
         {{-- <a href="{{ route('bill.create') }}" class="btn btn-success">Tính tiền</a> --}}
         <!-- Button trigger modal -->
-
-
+       
         <!-- Modal -->
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -88,7 +93,7 @@
                 <td>{{ $item->is_paid }}</td>
 
                 <td>
-                    <a href="{{ route('bill.show',$item->id)}}"   class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
+                    <a href="{{ route('bill.generatePDF',$item)}}"   class="btn btn-success"><i class="fa-solid fa-eye"></i></a>
 
                 </td>
             </tr>

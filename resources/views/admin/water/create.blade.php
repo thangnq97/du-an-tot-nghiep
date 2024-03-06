@@ -13,6 +13,7 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Phòng</label>
             <select name="room_id" id="" class="form-control ">
+                <option selected >-- Chọn số phòng --</option>
                 @foreach ($room as $id => $name)
                 <option value="{{ $id }}">{{ $id }}--{{ $name }}</option>
                 @endforeach
@@ -24,7 +25,7 @@
             <label for="exampleInputPassword1" class="form-label">Cs nước cũ</label>
             <input class="form-control " type="number" id="pre_water" name="pre_water">
             @error('pre_water')
-            <div class="alert alert-danger ">{{ $message }}</div>
+            <div class="text-danger ">{{ $message }}</div>
             @enderror
         </div>
 
@@ -32,7 +33,7 @@
             <label for="exampleInputPassword1" class="form-label">Cs nước mới</label>
             <input class="form-control " type="number" id="current_water" name="current_water">
             @error('current_water')
-            <div class="alert alert-danger ">{{ $message }}</div>
+            <div class="text-danger ">{{ $message }}</div>
             @enderror
         </div>
 
@@ -45,7 +46,7 @@
             <label for="exampleInputPassword1" class="form-label">Ngày tháng</label><br>
             <input type="date" id="" name="date_time" class="form-control ">
             @error('date_time')
-            <div class="alert alert-danger ">{{ $message }}</div>
+            <div class="text-danger ">{{ $message }}</div>
             @enderror
         </div>
 
