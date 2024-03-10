@@ -15,7 +15,8 @@ class AdminHomeController extends Controller
 {
 
     public function index() {
-        return view('admin.account.index');
+        $title = 'Trang chủ';
+        return view('admin.account.index', compact('title'));
     }
 
     public function login() {

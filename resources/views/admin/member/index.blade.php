@@ -1,7 +1,35 @@
-@extends('layouts.admin.layout')
+@extends('admin.Room.layout');
 
-@section('content')
-    <h2 class="my-4">Thông tin thành viên phòng {{ $room->name }}</h2>
+@section('room_content')
+    <div class="my-3">
+        @if (session()->has('success'))
+            <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+            >
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+                <strong>{{ session()->get('success') }}</strong>
+            </div>
+            
+            <script>
+                var alertList = document.querySelectorAll(".alert");
+                alertList.forEach(function (alert) {
+                    new bootstrap.Alert(alert);
+                });
+            </script>
+            
+        @endif
+    </div>
+    <div class="m-3 d-flex justify-content-end">
+        <div>
+            <a href="{{ route('admin.member.create', ['room'=>$room->id]) }}" class="btn btn-primary">Thêm mới</a>
+        </div>
+    </div>
     <table class="table table-tripped">
         <thead>
             <tr>
@@ -11,7 +39,7 @@
                 <th>Căn cước công dân</th>
                 <th>Địa chỉ</th>
                 <th>
-                    <a href="{{ route('admin.member.create', ['room'=>$room->id]) }}" class="btn btn-primary">Thêm mới</a>
+                    
                 </th>
             </tr>
         </thead>
@@ -25,29 +53,18 @@
                     <td>{{ $member->address }}</td>
                     <td>
                         <form action="{{ route('admin.member.destroy', ['room'=>$room->id, 'id'=>$member->id]) }}" method="POST" id="form">
-                            <a href="{{ route('admin.member.edit', ['room'=>$room->id, 'id'=>$member->id]) }}" class="btn btn-success">Sửa</a>
+                            <a href="{{ route('admin.member.edit', ['room'=>$room->id, 'id'=>$member->id]) }}" class="btn btn-success button-action">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
                             @csrf
                             @method('DELETE')
-                            <input type="submit" class="btn btn-danger" value="Xóa">
+                            <button class="btn btn-danger button-action" type="submit"
+                                    onclick="return confirm('Bạn có muốn xóa không?')">
+                                    <i class="fa-solid fa-trash-can"></i></button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-@endsection
-
-@section('script')
-    <script>
-        const form = document.querySelector('#form');
-
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const check = confirm('Bạn có chắc chắn muốn xóa không?');
-
-            if(check) {
-                form.submit();
-            }
-        })
-    </script>
 @endsection
