@@ -30,15 +30,20 @@
         @endif
     </div>
     <div class="m-3 d-flex justify-content-end">
-        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-            Tạo mới
-        </button>
+        @if ( count($contract) )
+            <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
+                Phụ lục
+            </button>
+        @else
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
+                Tạo mới
+            </button>
+        @endif
     </div>
     <table class="table table-tripped">
         <thead>
             <tr>
                 <th>Ngày tạo hợp đồng</th>
-                <th>Ngày kết thúc hợp đồng</th>
                 <th>Thời hạn hợp đồng(tháng)</th>
                 <th></th>
             </tr>
@@ -47,7 +52,6 @@
             @foreach ($contract as $item)
                 <tr>
                     <td>{{ $item->started_at }}</td>
-                    <td>{{ $item->ended_at }}</td>
                     <td>{{ $item->month_quantity }}</td>
                     <td>
                         <form action="" method="POST">
@@ -65,6 +69,9 @@
         <tbody>
         </tbody>
     </table>
+    @if (count($))
+        
+    @endif
 
     <!-- Modal trigger button -->
 

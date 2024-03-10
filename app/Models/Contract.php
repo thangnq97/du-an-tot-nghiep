@@ -11,5 +11,5 @@ class Contract extends Model
 
     protected $table = 'contracts';
 
-    protected $fillable = ['month_quantity', 'started_at', 'ended_at', 'room_id'];
+    protected $fillable = ['month_quantity', 'started_at', 'room_id'];
 }

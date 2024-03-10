@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
             $table->date('started_at');
-            $table->date('ended_at');
             $table->tinyInteger('month_quantity');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

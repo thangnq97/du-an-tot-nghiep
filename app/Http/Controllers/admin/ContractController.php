@@ -16,12 +16,16 @@ class ContractController extends Controller
         $title = 'Quản lí phòng';
         $sub_title = 'contract';
         $room = Room::find($id);
+        $contract_extension = [];
         if(!$room) {
             return redirect()->route('admin.index');
         }
-        $contract = DB::table('contracts')->where('room_id', '=', $id)->where('ended_at', '>=', now())->get();
+        $contract = DB::table('contracts')->where('room_id', '=', $id)->where('is_active', '=', true)->get();
+        if(count($contract)) {
+            $contract_extension = DB::table('extension_contracts')->where('contract_id', '=', $contract[0])->get();
+        }
 
-        return view('admin.contract.index', compact('title', 'sub_title', 'room', 'contract'));
+        return view('admin.contract.index', compact('title', 'sub_title', 'room', 'contract', 'contract_extension'));
     }
 
     public function store(Request $request, string $id) {
@@ -32,23 +36,12 @@ class ContractController extends Controller
         }
         $month_quantity = $request->month_quantity;
 
-        $day = date('d', strtotime($request->started_at));
-        $month = date('n', strtotime($request->started_at));
-        $year = date('Y', strtotime($request->started_at));
-
-        if($month + $month_quantity > 12) {
-            $month = ($month + $month_quantity) % 12;
-            $year += floor(($month + $month_quantity) / 12);
-        }else {
-            $month += $month_quantity;
-        }
-
-        $time = $year . '-' . $month . '-' . $day;
-        $ended_at = new Carbon($time);
+        // $day = date('d', strtotime($request->started_at));
+        // $month = date('n', strtotime($request->started_at));
+        // $year = date('Y', strtotime($request->started_at));
 
         Contract::create([
             'room_id' => $id,
-            'ended_at' => $ended_at,
             'started_at' => $request->started_at,
             'month_quantity' => $month_quantity
         ]);
@@ -65,7 +58,7 @@ class ContractController extends Controller
             'contract' => $contract
         ];
 
-        $pdf = Pdf::loadView('admin.pdf.contract_extension', $data);
+        $pdf = Pdf::loadView('admin.pdf.contract', $data);
         return $pdf->stream('hopdong.pdf');
     }
 }
