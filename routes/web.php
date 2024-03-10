@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\InteriorsController;
 use App\Http\Controllers\admin\RoominteriorController;
 use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\admin\user_information;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,3 +37,5 @@ Route::resource('interiors',InteriorsController::class);
 Route::resource('users',UsersController::class);
 //  Roominterior
 Route::resource('Roominterior', RoominteriorController::class);
+//user_information
+Route::resource('user_information', user_information::class);

@@ -13,7 +13,7 @@ class Interior extends Model
 
     protected $fillable = [
         'name',
-
+        'quantitys',
 
     ];
 }

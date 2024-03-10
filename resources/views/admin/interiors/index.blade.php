@@ -18,16 +18,20 @@
             <tr>
                 <th scope="col">id</th>
                 <th scope="col">Tên nội thất</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Số lượng còn lại</th>
                 <th scope="col">Hoạt động</th>
 
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $e)
+            @foreach ($interiors as $e)
 
             <tr>
                 <td>{{ $e->id }}</td>
                 <td>{{ $e->name }}</td>
+                <td>{{ $e->quantitys }}</td>
+                <td>{{ $e->remainingQuantity }}</td>
                 <td>
                     <div class="action-button">
                         <form action="{{ route('interiors.destroy',$e) }}" method="POST">

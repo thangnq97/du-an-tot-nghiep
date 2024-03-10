@@ -5,8 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Interior;
-
+use App\Models\Room_interior;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class InteriorsController extends Controller
@@ -18,9 +19,16 @@ class InteriorsController extends Controller
     const PATH_UPLOAD = 'admin.interiors';
     public function index()
     {
-        $data = Interior::query()->latest()->paginate(5);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        $interiors = Interior::query()->latest()->paginate(5);
+
+        $interiors->each(function ($interior) {
+            $usedQuantity = Room_interior::where('interior_id', $interior->id)->sum('quantity');
+            $interior->remainingQuantity = $interior->quantitys - $usedQuantity;
+        });
+
+        return view(self::PATH_VIEW . __FUNCTION__, ['interiors' => $interiors]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -38,8 +46,7 @@ class InteriorsController extends Controller
         $data = $request->except('image');
         $request->validate([
             'name' => 'required|unique:interiors|max:50',
-
-
+            'quantitys' => 'required',
 
         ]);
 
@@ -73,8 +80,8 @@ class InteriorsController extends Controller
     {
         $interior= Interior::find($id);
         $request->validate([
-            'name' => 'required|unique:interiors|max:50',
-
+            'name' => 'required|max:50',
+            'quantitys' => 'required',
 
         ]);
 

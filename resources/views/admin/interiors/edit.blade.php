@@ -36,6 +36,12 @@
                 <input type="text" name="name" id="name" class="form-control " value="{{ $interior->name }}">
             </div>
 
+            <div class="mb-3">
+                <label for="quantitys">Số lượng</label>
+                <p></p>
+                <input type="text" name="quantitys" id="quantitys" class="form-control " value="{{ $interior->quantitys }}">                
+            </div>
+
             <br><br>
             
             <button type="submit" class="btn btn-primary ">Gửi </button>

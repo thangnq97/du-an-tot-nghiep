@@ -78,7 +78,7 @@
                         <div class="form-group mb-3">
                             <label >Mô tả</label>
                             <p></p>
-                            <textarea name="description" id="" cols="30" rows="10" class="form-control" value="{{ $room_interior->description }}"></textarea>
+                            <textarea name="description"  cols="30" rows="10" class="form-control" value="{{ $room_interior->description }}"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Gửi </button>

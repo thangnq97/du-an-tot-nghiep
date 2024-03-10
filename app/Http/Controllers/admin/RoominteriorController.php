@@ -40,10 +40,18 @@ class RoominteriorController extends Controller
             ],
             'status' => 'required|numeric|between:50,100',
             'price' => 'required|numeric|gt:1000',
-            'quantity' => 'required|numeric',
-
+            'quantity' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    $interior = Interior::find($request->input('interior_id'));
+                    if ($interior && $value > $interior->quantitys) {
+                        $fail('Số lượng bị vượt quá so với số lượng thực vui lòng kiểm tra lại');
+                    }
+                },
+            ],
         ]);
-
+    
         Room_interior::create($request->all());
         return back()->with('msg', 'Thêm Thành Công');
     }
@@ -69,7 +77,16 @@ class RoominteriorController extends Controller
             ],
             'status' => 'required|numeric|between:50,100',
             'price' => 'required|numeric|gt:1000',
-            'quantity' => 'required|numeric',
+            'quantity' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) use ($request) {
+                    $interior = Interior::find($request->input('interior_id'));
+                    if ($interior && $value > $interior->quantitys) {
+                        $fail('Số lượng bị vượt quá so với số lượng thực vui lòng kiểm tra lại');
+                    }
+                },
+            ],
 
         ]);
 
