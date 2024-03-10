@@ -1,7 +1,30 @@
-@extends('layouts.admin.layout')
+@extends('admin.Room.layout')
 
-@section('content')
-    <h2 class="my-4">Sửa thông tin thành viên phòng {{ $room->name }}</h2>
+@section('room_content')
+    <div class="my-3">
+        @if (session()->has('success'))
+            <div
+                class="alert alert-success alert-dismissible fade show"
+                role="alert"
+            >
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                ></button>
+                <strong>{{ session()->get('success') }}</strong>
+            </div>
+            
+            <script>
+                var alertList = document.querySelectorAll(".alert");
+                alertList.forEach(function (alert) {
+                    new bootstrap.Alert(alert);
+                });
+            </script>
+            
+        @endif
+    </div>
     <form action="{{ route('admin.member.update', ['room'=>$room->id, 'id'=>$user->id]) }}" method="POST" class="w-50">
         @csrf
         @method('PUT')
