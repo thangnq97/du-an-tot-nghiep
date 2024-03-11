@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('sex');
             $table->string('year');
             $table->string('license_plates');
-            $table->text('note');            
+            $table->text('note')->nullable();            
             $table->timestamps();
         });
     }

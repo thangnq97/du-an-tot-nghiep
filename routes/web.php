@@ -6,7 +6,7 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\InteriorsController;
 use App\Http\Controllers\admin\RoominteriorController;
 use App\Http\Controllers\admin\UsersController;
-use App\Http\Controllers\admin\user_information;
+use App\Http\Controllers\admin\user_informationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +33,7 @@ Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room
 //tùng
 //  interiors
 Route::resource('interiors',InteriorsController::class);
-//  sers
-Route::resource('users',UsersController::class);
 //  Roominterior
 Route::resource('Roominterior', RoominteriorController::class);
 //user_information
-Route::resource('user_information', user_information::class);
+Route::resource('user_information', user_informationController::class);

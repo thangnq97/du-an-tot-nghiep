@@ -17,8 +17,5 @@ class user_information extends Model
     {
         return $this->belongsTo(Users::class);
     }
-    public function room()
-    {
-        return $this->belongsTo(Room::class);
-    }
+  
 }

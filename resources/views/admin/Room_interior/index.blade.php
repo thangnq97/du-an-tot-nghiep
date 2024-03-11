@@ -14,7 +14,7 @@
 
 <div class="bg-light">
     <div class="action-room">
-        <a href="{{ route('Roominterior.create') }}" class="btn btn-primary m-2  ">Thêm</a>
+        <a href="{{ route('Roominterior.create') }}" class="btn btn-primary m-2  ">Thêm chi tiết</a>
     </div>
 
     <br>

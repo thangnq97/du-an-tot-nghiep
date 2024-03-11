@@ -9,10 +9,11 @@
 <h1>Danh Sách Nội Thất</h1>
 
 <div class="bg-light">
-
-    <a href="{{ route('interiors.create') }}" class="btn btn-primary room-button "> Thêm nội thất</a>
-    <a href="{{ route('Roominterior.index') }}" class="btn btn-info m-3">Chi tiết</a>
-
+<div class="action-room">
+    <a href="{{ route('interiors.create') }}" class="btn btn-primary "> Thêm nội thất</a>
+   
+    <a href="{{ route('Roominterior.index') }}" class="btn btn-info ">Chi tiết</a>
+    </div>
     <table class="table">
         <thead>
             <tr>

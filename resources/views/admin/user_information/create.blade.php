@@ -22,69 +22,53 @@
     </div>
     <br>
     <div class="card-body">
-    <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('user_information.store') }}" method="POST" enctype="multipart/form-data">
 
         @csrf
 
 
         <div class="form-group mb-3">
-        <label for="name">Tên Khách</label>
+        <label>Tên Khách</label>
         <p></p>
-        <input type="text" name="name" id="name" class="form-control ">
+        <select name="user_id" id="" class="form-control">
+            @foreach ($users as $id => $name)
+            <option value="{{ $id }}">{{ $name }}</option>
+            @endforeach
+        </select>
+        </div>    
+
+        <div class="form-group mb-3">            
+        <label for="name">Giới tính</label>
+        <p></p>
+        <input type="text" name="sex" id="sex" class="form-control ">
+        </div>
+
+        <div class="form-group mb-3">
+        <label for="name">Năm sinh</label>
+        <p></p>
+        <input type="text" name="year" id="year" class="form-control ">
         </div>
 
 
         <div class="form-group mb-3">
-            <label>Tên phòng</label>
-            <p></p>
-            <select name="room_id" id="" class="form-control">
-                @foreach ($rooms as $id => $name)
-                <option value="{{ $id }}">{{ $name }}</option>
-                @endforeach
-            </select>
+        <label for="name">Biển số xe</label>
+        <p></p>
+        <input type="text" name="license_plates" id="license_plates" class="form-control ">
         </div>
 
         <div class="form-group mb-3">
-            
-        <label for="name">email</label>
         <p></p>
-<input type="text" name="email" id="email" class="form-control ">
-</div>
-
-<div class="form-group mb-3">
-<label for="name">Số điện thoại</label>
-<p></p>
-<input type="text" name="phone" id="phone" class="form-control ">
-</div>
+        <label for="name">Ghi chú</label>
+        <p></p>        
+        <textarea name="note" id="note" cols="30" rows="10" class="form-control"></textarea>
+        </div>
 
 
-<div class="form-group mb-3">
-<label for="name">cccd</label>
-<p></p>
-<input type="text" name="cccd" id="cccd" class="form-control ">
-</div>
-
-<div class="form-group mb-3">
-    <p></p>
-<label for="name">Địa chỉ</label>
-<p></p>
-<input type="text" name="address" id="address" class="form-control ">
-</div>
-
-<div class="form-group mb-3">
-    <label>Vai trò</label>
-    <p></p>
-    <select name="role_id" id="" class="form-control">
-        @foreach ($role as $id => $name)
-        <option value="{{ $id }}">{{ $name }}</option>
-        @endforeach
-    </select>
-</div>
 
 <br>
 
         <button type="submit" class="btn btn-primary">Gửi</button>
-        <a href="{{ route('users.index') }}" class="btn btn-warning my-3 m-3">Trở về</a>
+        <a href="{{ route('user_information.index') }}" class="btn btn-warning my-3 m-3">Trở về</a>
     </form>
 </div>
 @endsection
