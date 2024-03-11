@@ -14,6 +14,14 @@
         </ul>
         @endif
     </div> --}}
+    <div>
+        @if(\Session::has('msg'))
+        <div class="alert alert-success   alert-dismissible fade show" role="alert">
+            <strong> {{ \Session::get('msg') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
+    </div>
     <form action="{{ route('electric.store') }}" method="POST" enctype="multipart/form-data" class="form-control">
         @csrf
             <div class="mb-3">
@@ -58,7 +66,15 @@
                  @enderror
             </div>
            
-            
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Dịch vụ</label>
+                <select name="service_id" id="" class="form-control ">
+                    <option selected >-- Chọn dịch vụ --</option>
+                    @foreach ($services as $id => $name)
+                    <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
             
             <a href="{{ route('electric.index') }}" class="btn btn-warning ">Quay lại</a>
             <button type="submit" class="btn btn-primary  ">Thêm</button>
