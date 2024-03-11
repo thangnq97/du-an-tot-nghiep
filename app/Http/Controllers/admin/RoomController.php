@@ -127,7 +127,7 @@ class RoomController extends Controller
         $title = 'Quản lí phòng';
         $service = Service::all();
         $service_id = Room_service::query()->where('room_id', '=', $room->id)->get();
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'service', 'service_id', 'title', 'sub_title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'service', 'service_id', 'title'));
     }
     public function store_service(Request $request, Room $room)
     {
