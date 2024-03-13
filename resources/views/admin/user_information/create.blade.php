@@ -37,11 +37,17 @@
         </select>
         </div>    
 
-        <div class="form-group mb-3">            
-        <label for="name">Giới tính</label>
-        <p></p>
-        <input type="text" name="sex" id="sex" class="form-control ">
+        <div class="form-group">
+            <label for="">Giới tính</label> 
+            <p></p>
+            <input type="radio" name="sex" id="status-1" value="0">
+            <label for="">Nam </label> 
+
+            <input type="radio" name="sex" id="status-2" value="1" >
+            <label for=""> Nữ</label>
         </div>
+
+       <br>
 
         <div class="form-group mb-3">
         <label for="name">Năm sinh</label>

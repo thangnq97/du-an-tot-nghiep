@@ -32,16 +32,23 @@
         <p></p>
         <select name="user_id" id="" class="form-control">
         @foreach ($users as $id => $name)
-        <option value="{{ $id }}"@if ($user_information->room_id == $id) selected @endif>{{ $name }}</option>
+        <option value="{{ $id }}"@if ($user_information->user_id == $id) selected @endif>{{ $name }}</option>
          @endforeach
         </select>
         </div>    
 
-        <div class="form-group mb-3">            
-        <label for="name">Giới tính</label>
-        <p></p>
-        <input type="text" name="sex" id="sex" class="form-control " value="{{ $user_information->sex }}">
+        <div class="form-group">
+            <label for="">Giới tính</label> 
+            <p></p>
+            <input type="radio" name="sex" id="status-1"  @if ($user_information->sex == 0) checked @endif id="status-1"
+                value="0">
+            <label for="">Nam </label> 
+
+            <input type="radio" name="sex" id="status-2"  @if ($user_information->sex == 1) checked @endif id="status-2"
+                value="1" >
+            <label for=""> Nữ</label>
         </div>
+
 
         <div class="form-group mb-3">
         <label for="name">Năm sinh</label>

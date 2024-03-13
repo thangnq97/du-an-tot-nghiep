@@ -32,8 +32,8 @@
             <tr> 
 
                 <td>{{ $u->user->name }}</td>
-                <td>{{ $u->user->room->name }}</td>
-                <td>{{ $u->sex }}</td>
+                <td>{{ $u->user->room->name }}</td>               
+                <td>{{ $u->sex ? 'Nữ' : 'Nam' }}</td>
                 <td>{{ $u->year }}</td>
                 <td>{{ $u->user->phone }}</td>
                 <td>{{ $u->user->email }}</td>                

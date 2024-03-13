@@ -29,16 +29,18 @@ class user_informationController extends Controller
     {
 
         $request->validate([
+           
             'user_id' => [
                 'required',
-                Rule::exists('users', 'id')->where(function ($query) {
-                    return $query->whereNotIn('id', [auth()->id()]);
-                }),
-                Rule::unique('user_information', 'user_id')->where(function ($query) {
-                    return $query->whereNotIn('user_id', [auth()->id()]);
-                })
+                Rule::exists('users', 'id')
             ],
-           
+            'year' => [
+                'required',
+                'integer',
+                'digits:4',
+                'gte:' . (date('Y') - 100),  // Giới hạn năm sinh từ 100 năm trước đến năm hiện tại
+                'lte:' . date('Y'),           // Giới hạn năm sinh không vượt quá năm hiện tại
+            ],
             
         ]);
 

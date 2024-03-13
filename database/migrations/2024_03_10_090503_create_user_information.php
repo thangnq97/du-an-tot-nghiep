@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_information', function (Blueprint $table) {
             $table->id();
-            $table->string('sex');
+            $table->string('sex')->default(true);
             $table->string('year');
             $table->string('license_plates');
             $table->text('note')->nullable();            
