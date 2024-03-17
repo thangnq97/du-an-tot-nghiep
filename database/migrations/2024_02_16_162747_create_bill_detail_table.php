@@ -25,6 +25,10 @@ return new class extends Migration
             $table->integer('total_price_service');
             $table->integer('garbage_price')->nullable();
             $table->integer('wifi_price')->nullable();
+            $table->integer('money_wifi')->nullable();
+            $table->integer('money_garbage')->nullable();
+            $table->integer('number_member')->nullable();
+            
             
             $table->timestamps();
         });

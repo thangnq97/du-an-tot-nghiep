@@ -58,4 +58,6 @@ Route::get('/bill', [BillController::class,'index'])->name('bill.index');
 Route::post('/bill/demoShow', [BillController::class,'store'])->name('bill.store');
 Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('bill.show');
 Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->name('bill.generatePDF');
+Route::get('/bill/{id}/edit', [BillController::class, 'edit'])->name('bill.edit');
+Route::put('/bill/{id}/update', [BillController::class, 'update'])->name('bill.update');
 
