@@ -26,7 +26,7 @@
         <thead>
             <tr>
                 <!-- {{-- <th scope="col">#</th> --}} -->
-                <th scope="col">Ảnh </th>
+                <th scope="col">Ảnh đại diện </th>
                 <th scope="col">Tên khách </th>
                 <th scope="col">Phòng đã ở</th>
                 <th scope="col">Giới tính</th>
