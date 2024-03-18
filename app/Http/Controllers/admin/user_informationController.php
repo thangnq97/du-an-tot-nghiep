@@ -6,16 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\user_information;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class user_informationController extends Controller
 {
     const PATH_VIEW = 'admin.user_information.';
     const PATH_UPLOAD = 'admin.user_information';
-    public function index()
+    public function index(Request $request)
     {
-        $user_information = user_information::query()->latest()->paginate(5);
+        
+        $query = user_information::with('user')->latest();
+
+        // Xử lý tìm kiếm
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->whereHas('user', function ($q) use ($searchTerm) {
+                $q->where('name', 'LIKE', '%' . $searchTerm . '%');
+            });
+        }
+
+        $user_information = $query->paginate(5);
         return view(self::PATH_VIEW . __FUNCTION__, compact('user_information'));
+    
     }
 
     public function create()
@@ -44,7 +57,7 @@ class user_informationController extends Controller
             
         ]);
 
-
+        
         user_information::create($request->all());
         return back()->with('msg', 'Thêm Thành Công');
     }

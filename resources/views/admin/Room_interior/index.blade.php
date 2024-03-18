@@ -12,13 +12,25 @@
 
 <br>
 
-<div class="bg-light">
-    <div class="action-room">
-        <a href="{{ route('Roominterior.create') }}" class="btn btn-primary m-2  ">Thêm chi tiết</a>
+<div class="bg-light  ms-auto">
+    <div class=" action-room me-3 ">
+    <a href="{{ route('interiors.index') }}" class="btn btn-primary mx-2 mt-3 "> Quay lại</a>
+        <a href="{{ route('Roominterior.create') }}" class="btn btn-primary mt-3  ">Thêm chi tiết</a>
     </div>
 
-    <br>
-    <br>
+    
+    
+
+    <form action="{{ route('Roominterior.index') }}" method="GET" class="mb-4 bg-light me-auto ms-3" novalidate>
+  @csrf
+  <div class="col-md-2 me-3">
+    <input type="text" name="search" class="form-control" placeholder="Tìm theo tên nội thất" value="{{ htmlspecialchars(request('search')) }}">
+    <p></p>
+    <button type="submit" class="btn btn-primary">Tìm</button>
+  </div>
+</form>
+
+        
 
     <table class="table">
         <thead>

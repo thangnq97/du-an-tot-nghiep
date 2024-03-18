@@ -14,9 +14,19 @@ class RoominteriorController extends Controller
     const PATH_VIEW = 'admin.Room_interior.';
     const PATH_UPLOAD = 'admin.Room_interior';
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = Room_interior::with('interior')->latest()->paginate(5);
+        $query = Room_interior::with('interior')->latest();
+    
+        // Xử lý tìm kiếm
+        if ($request->has('search')) {
+            $searchTerm = $request->input('search');
+            $query->whereHas('interior', function ($q) use ($searchTerm) {
+                $q->where('name', 'LIKE', '%' . $searchTerm . '%');
+            });
+        }
+    
+        $data = $query->paginate(5);
         return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
     }
 
