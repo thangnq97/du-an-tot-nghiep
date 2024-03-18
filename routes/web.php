@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\ElectricController;
+use App\Http\Controllers\user\BillUserController;
+use App\Models\Bill;
 use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,3 +56,6 @@ Route::resource('service', ServiceController::class);
 //DUNG
 // Route::get('/electric', [ElectricController::class,'index']);
 Route::resource('/electric', ElectricController::class);
+Route::resource('/user_bill', BillUserController::class);
+// Route::get('user_bill/{id}/bill_user', [BillUserController::class, 'index'])->name('user.index');
+
