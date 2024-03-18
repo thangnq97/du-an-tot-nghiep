@@ -47,7 +47,7 @@
                 <td>{{ $u->user->name }}</td>
                 <td>{{ $u->user->room->name }}</td>               
                 <td>{{ $u->sex ? 'Nữ' : 'Nam' }}</td>
-                <td>{{ $u->year }}</td>
+                <td>{{ $u->year ? date('d-m-Y', strtotime($u->year)) : ''  }}</td>
                 <td>{{ $u->user->phone }}</td>
                 <td>{{ $u->user->email }}</td>                
                 <td>{{ $u->user->cccd }}</td>

@@ -49,10 +49,10 @@
 
        <br>
 
-        <div class="form-group mb-3">
-        <label for="name">Năm sinh</label>
+        <div class="form-group mb-3">       
+        <label for="birthday">Ngày sinh:</label>
         <p></p>
-        <input type="text" name="year" id="year" class="form-control ">
+        <input type="date" id="year" name="year" class="form-control ">
         </div>
 
 

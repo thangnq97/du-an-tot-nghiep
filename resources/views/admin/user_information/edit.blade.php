@@ -50,12 +50,13 @@
         </div>
 
 
-        <div class="form-group mb-3">
-        <label for="name">Năm sinh</label>
-        <p></p>
-        <input type="text" name="year" id="year" class="form-control " value="{{ $user_information->year }}">
-        </div>
+        
 
+        <div class="form-group mb-3">       
+        <label for="birthday">Ngày sinh:</label>
+        <p></p>
+        <input type="date" id="year" name="year" class="form-control "value="{{ $user_information->year }}">
+        </div>
 
         <div class="form-group mb-3">
         <label for="name">Biển số xe</label>
