@@ -112,18 +112,17 @@ class BillController extends Controller
                 $wifi_price = $price_wifi;
             }
         }
-        // foreach ($array_member as $item) {
+        // dd($array_member);
+        foreach ($array_member as $item) {
+            
+            foreach ($item as $key => $value) {
+               
+            }    
+        }
+        // dd($array_member[]); 
 
-        //     foreach ($item as $key => $value) {
-        //         var_dump($key,$value);
-        //     }    
-        // }die; 
-
-
+        // Tổng tiền dịch vụ
         $total_service_price = $electricity_Total + $water_Total +  $garbage_price + $wifi_price;
-
-
-
 
 
         // Tong tien
@@ -141,7 +140,7 @@ class BillController extends Controller
         // Lấy giá trị ID lớn nhất
         $maxId = DB::table('bills')->max('id');
         $bill_detail = DB::table('bills')->where('id', $maxId)->get()[0];
-        // dd($bill_detail->total_price_service);
+        
         $bill_details = Bill_detail::create([
             'room_id' => $room->id,
             'bill_id'               => $bill_detail->id,
@@ -160,7 +159,6 @@ class BillController extends Controller
             'money_wifi'            => $price_wifi,
             'money_garbage'         => $price_garbage,
             'number_member'         => $number_member,
-            
 
         ]);
         // Them chi tiết hóa đơn

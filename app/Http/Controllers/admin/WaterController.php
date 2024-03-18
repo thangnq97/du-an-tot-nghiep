@@ -71,7 +71,7 @@ class WaterController extends Controller
         // if($request->date_time == )
         $water_usage = DB::table('water_usage')->where('room_id', '=', $request->room_id)->whereYear('date_time', $year)->whereMonth('date_time', $month)->get();
         if (count($water_usage)) {
-            return back()->with('msg', 'đã nhập số điện ngày này');
+            return back()->with('msg', 'đã nhập số điện tháng này');
         }
         $data = $request->all();
         // if ($request->hasFile('img')) {

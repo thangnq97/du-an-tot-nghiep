@@ -51,7 +51,7 @@
             /* wkhtmltopdf uses this one */
             justify-content: center;
         }
-        .details>div {
+        .details div {
             -webkit-box-flex: 1;
             -webkit-flex: 1;
             flex: 1;
@@ -71,7 +71,7 @@
                     <p>Phòng: {{ $item['room_name'] }}</p>
                     <hr>
                     <div class="details">
-                        <p style="padding-left: 100px">Tiền phòng <span>{{ $item['room_price'] }}</span></p>
+                        <p>Tiền phòng <span>{{ $item['room_price'] }}</span></p>
                     </div>
 
                     <div class="details" style="display: flex">

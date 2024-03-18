@@ -24,51 +24,7 @@
         </div>
         @endif
 
-
-
-        <!-- Button trigger modal -->
-
-        <!-- form thu tiền -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h2 class="text-center ">Thu tiền</h2>
-                        <form action="{{ route('bill.store') }}" method="POST" enctype="multipart/form-data"
-                            class="row">
-                            @method('PUT')
-                            @csrf
-
-                            <div>
-
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Ngày/tháng</label>
-                                    <input class="form-control " type="date" id="pre_water" name="date_time" value="">
-
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="exampleInputEmail1" class="form-label">Số tiền</label>
-                                    <input class="form-control " type="number" id="pre_water" name="date_time" value="">
-
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Trở về</button>
-                                <button type="submit" class="btn btn-success">Thu</button>
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal -->
+        <!-- Tính tiền -->
 
         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
