@@ -7,6 +7,10 @@ use App\Http\Controllers\admin\ServiceController;
 use App\Http\Controllers\admin\WaterController;
 use App\Http\Controllers\admin\BillController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\admin\ElectricController;
+use App\Http\Controllers\user\BillUserController;
+use App\Models\Bill;
+use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,4 +66,11 @@ Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->n
 Route::get('/bill/{id}/edit', [BillController::class, 'edit'])->name('bill.edit');
 Route::put('/bill/{id}/update', [BillController::class, 'update'])->name('bill.update');
 Route::delete('/bill/{id}/delete', [BillController::class, 'destroy'])->name('bill.destroy');
+
+
+//DUNG
+// Route::get('/electric', [ElectricController::class,'index']);
+Route::resource('/electric', ElectricController::class);
+Route::resource('/user_bill', BillUserController::class);
+// Route::get('user_bill/{id}/bill_user', [BillUserController::class, 'index'])->name('user.index');
 
