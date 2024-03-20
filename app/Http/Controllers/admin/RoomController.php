@@ -6,31 +6,79 @@ use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\Room_service;
 use App\Models\Service;
+use App\Models\User;
+use Dotenv\Util\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
 {
     //
-    const PATHVIEW = "admin.room.";
+    const PATH_VIEW = "admin.room.";
+    const PATH_UPLOAD = 'user';
     public function index()
     {
         $data = Room::query()->paginate();
         $title = 'Quản lí phòng';
 
-        return view(self::PATHVIEW . __FUNCTION__, compact('data', 'title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title'));
     }
     public function create()
     {
         $title = 'Quản lí phòng';
-        return view(self::PATHVIEW . __FUNCTION__, compact('title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title'));
     }
-    public function createPeople()
+    public function create_People(Room $room)
     {
         $title = 'Quản lí phòng';
-        return view(self::PATHVIEW . __FUNCTION__, compact('title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title', 'room'));
     }
-    public function storePeople()
+    public function store_People(Request $request, string $id)
     {
+        $room = Room::find($id);
+        if (!$room) {
+            return redirect()->route('admin.index');
+        }
+
+        $request->validate(
+            [
+                'name' => 'required|max:255',
+                'email' => 'unique:users|required|email',
+                'password' => 'required',
+                'phone' => 'unique:users|required',
+                'cccd' => 'unique:users|required',
+                'address' => 'required',
+                'avatar' => 'extensions:jpg,png,JPEG|max:1024',
+            ],
+            [
+                'name.required' => 'Không được để trống tên',
+                'name.max' => 'độ dài ko quá 255 kí tự',
+                'email.required' => 'Không được để trống email',
+                'email.email' => 'Bạn nhập phải là địa chỉ email hợp lệ',
+                'email.unique' => 'Email này đã được sử dụng',
+                'password.required' => 'Không được để trống mật khẩu',
+                'phone.required' => 'Không được để trống Số điện thoại',
+                'phone.unique' => 'Số điện thoại này đã được sử dụng',
+                'cccd.required' => 'Không được để trống chứng minh nhân dân',
+                'cccd.unique' => 'Chứng minh nhân dân này đã được sử dụng',
+                'address.required' => 'Không được để trống địa chỉ',
+                'avatar.extensions' => 'Bạn chọn tệp không phải là ảnh'
+            ]
+        );
+
+        if ($room->member_quantity + 1 > $room->member_maximum) {
+            return back()->with('err', 'Phòng đã đầy');
+        }
+        $user = $request->except('avatar');
+        $user = User::create($request->all());
+        $user->room_id = $id;
+        $user->save();
+        if ($request->hasFile('avatar')) {
+            $user['avatar'] = Storage::put(self::PATH_UPLOAD, $request->file('avatar'));
+        }
+        $room->member_quantity += 1;
+        $room->save();
+        return redirect()->back()->with('msg', 'Thêm mới thành công');
     }
     public function store(Request $request)
     {
@@ -40,7 +88,7 @@ class RoomController extends Controller
                 'member_maximum' => 'required',
                 'price' => 'required',
                 'width' => 'required',
-                'height' => 'required',
+                'length' => 'required',
             ],
             [
                 'name.required' => 'Không được để trống tên',
@@ -48,7 +96,7 @@ class RoomController extends Controller
                 'member_maximum' => 'Không được để trống số lượng người giới hạn',
                 'price.required' => 'Không được để trống giá phòng',
                 'width.required' => 'Không được để trống chiều rộng',
-                'height.required' => 'Không được để trống chiều dài'
+                'length.required' => 'Không được để trống chiều dài'
             ]
         );
         $data = $request->all();
@@ -60,26 +108,26 @@ class RoomController extends Controller
         $sub_title = "service";
         $title = 'Quản lí phòng';
         $room_service = Room_service::query()->where('room_id', '=', $room->id)->get();
-        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'room_service', 'title', 'sub_title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'room_service', 'title', 'sub_title'));
     }
     public function show_user(Room $room)
     {
         $sub_title = "user";
         $title = 'Quản lí phòng';
-        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room', 'sub_title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title', 'room', 'sub_title'));
     }
     public function show_interior(Room $room)
     {
         $sub_title = "interior";
         $title = 'Quản lí phòng';
-        return view(self::PATHVIEW . __FUNCTION__, compact('title', 'room', 'sub_title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title', 'room', 'sub_title'));
     }
     public function create_service(Room $room)
     {
         $title = 'Quản lí phòng';
         $service = Service::all();
         $service_id = Room_service::query()->where('room_id', '=', $room->id)->get();
-        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'service', 'service_id', 'title', 'sub_title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'service', 'service_id', 'title'));
     }
     public function store_service(Request $request, Room $room)
     {
@@ -91,13 +139,13 @@ class RoomController extends Controller
     public function edit(Room $room)
     {
         $title = 'Quản lí phòng';
-        return view(self::PATHVIEW . __FUNCTION__, compact('room', 'title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'title'));
     }
     public function update(Request $request, Room $room)
     {
         $data = $request->all();
         $room->update($data);
-        return back()->with('msg', 'Sửa phòng thành công');
+        return redirect()->route('room.index');
     }
     public function destroy(Room $room)
     {
