@@ -36,8 +36,8 @@ return [
             'url' => env('APP_URL') . '/upload',
             'visibility' => 'public',
             'throw' => false,
-        ],
-
+        ], 
+        
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
