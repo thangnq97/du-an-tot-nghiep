@@ -27,7 +27,7 @@
                 <tr>
                     {{-- <th scope="row">{{ $query->id }}</th> --}}
                     <td>{{ $query->name }}</td>
-                    <td>{{ number_format($query->price) }}</td>
+                    <td class="text-danger">{{ number_format($query->price) }} VNĐ</td>
                     <td>{{ $query->method ? 'Số đồng hồ' : 'Số người' }}</td>
                     <td> 
                         <div class="action-button" >

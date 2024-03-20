@@ -38,7 +38,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-layout-dashboard"></i>
+                                    <i class="fa-solid fa-house"></i>
+                                     {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Trang chủ</span>
                             </a>
@@ -55,7 +56,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('service.index') }}" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-alert-circle"></i>
+                                    <i class="fa-solid fa-wifi"></i>
+                                    {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí dịch vụ</span>
                             </a>
@@ -63,21 +65,27 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="{{ route('electric.index') }}" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-alert-circle"></i>
-                                </span>
+                                                      <i class="fa-solid fa-bolt"></i>
+                                                    {{-- sửa lại icon của menu --}}
+                </span>
                                 <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí nước')
+                            active
+                        @endif" href="{{ route('waters.index') }}" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-cards"></i>
+                                    <i class="fa-solid fa-water"></i>
+                                    {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí nước</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí hóa đơn')
+                            active
+                        @endif" href="{{ route('bill.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
@@ -88,7 +96,8 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-file-description"></i>
+                                    <i class="fa-solid fa-file-contract"></i>
+                                    {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí hợp đồng</span>
                             </a>
@@ -97,31 +106,24 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                                    <i class="ti ti-file-description"></i>
+                                    <i class="fa-solid fa-money-bill"></i>
+                                 {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí giao dịch</span>
                             </a>
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
-<span>
-                                    <i class="ti ti-file-description"></i>
+                            <a class="sidebar-link @if ($title === 'Quản lí cơ sở vật chất')
+                            active
+                        @endif" href="ui-contact.html" aria-expanded="false">
+                                <span>
+                                    <i class="fa-brands fa-intercom"></i>
+                                    {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
                         </li>
-
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-file-description"></i>
-                                </span>
-                                <span class="hide-menu">Thống kê</span>
-                            </a>
-                        </li>
-
 
 
                         <!-- End Sidebar navigation -->

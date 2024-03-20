@@ -35,11 +35,6 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="member_quantity" class="form-label">Số lượng người</label>
-            <input value="{{ $room->member_quantity }}" type="text" class="form-control" id="name"
-                name="member_quantity">
-        </div>
-        <div class="mb-3">
             <label for="member_maximum" class="form-label">Số lượng người giới hạn</label>
             <input value="{{ $room->member_maximum }}" type="text" class="form-control" id="name"
                 name="member_maximum">

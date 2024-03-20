@@ -13,11 +13,13 @@ class ServiceController extends Controller
     public function index()
     {
         $data = Service::query()->paginate();
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        $title = 'Quản lí dịch vụ';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title'));
     }
     public function create()
     {
-        return view(self::PATH_VIEW . __FUNCTION__);
+        $title = 'Quản lí dịch vụ';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title'));
     }
     public function store(Request $request)
     {
@@ -37,7 +39,8 @@ class ServiceController extends Controller
     }
     public function edit(Service $service)
     {
-        return view(self::PATH_VIEW . __FUNCTION__, compact('service'));
+        $title = 'Quản lí dịch vụ';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('service', 'title'));
     }
     public function update(Request $request, Service $service)
     {
