@@ -129,16 +129,6 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
-                                <span>
-                                    <i class="ti ti-file-description"></i>
-                                </span>
-                                <span class="hide-menu">Thống kê</span>
-                            </a>
-                        </li>
-
-
 
                         <!-- End Sidebar navigation -->
             </div>
