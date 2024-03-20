@@ -60,4 +60,5 @@ Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('bill
 Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->name('bill.generatePDF');
 Route::get('/bill/{id}/edit', [BillController::class, 'edit'])->name('bill.edit');
 Route::put('/bill/{id}/update', [BillController::class, 'update'])->name('bill.update');
+Route::delete('/bill/{id}/delete', [BillController::class, 'destroy'])->name('bill.destroy');
 

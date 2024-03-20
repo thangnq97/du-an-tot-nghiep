@@ -92,14 +92,18 @@ class BillController extends Controller
 
             $service = DB::table('services')->where('id', '=', $item->service_id)->get()[0];
 
-
+            // var_dump($service);
+            // echo "<pre>";
+            // die;
+            
             if ($service->id == $water_service->id || $service->id == $electricity_service->id) {
                 continue;
             }
-
+            
             if ($service->method == 0) {
                 $key = $service->name;
                 $price_garbage = $service->price;
+                // dd($price_garbage);
                 $number_member = $room->member_quantity;
                 $value = $price_garbage * $number_member;
                 array_push($array_member, [$key => $value]);
@@ -124,9 +128,9 @@ class BillController extends Controller
         // Tổng tiền dịch vụ
         $total_service_price = $electricity_Total + $water_Total +  $garbage_price + $wifi_price;
 
-
         // Tong tien
         $total_price = $price_room + $total_service_price;
+
         // Them hoa don
         $bill = Bill::create([
             'room_id' => $room->id,
@@ -136,6 +140,7 @@ class BillController extends Controller
             'date_time'             => $request->date_time,
             'note'                  => $request->note,
         ]);
+
         // Them bill detail
         // Lấy giá trị ID lớn nhất
         $maxId = DB::table('bills')->max('id');
@@ -216,8 +221,27 @@ class BillController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request->validate(
+            [
+                'date_time' => 'required|date',
+                'paid_amount' => 'required|numeric|min:1',
+               
+            ],
+            [
+                'date_time.required' => 'Không được để trống',
+                'paid_amount.required' => ' Không được để trống số tiền',
+                'paid_amount.numeric' => 'Kiểu dữ liệu là dạng số',
+                'paid_amount.min' => 'Giá trị phải lớn hơn 0',
+            ]
 
+        );
+
+      
+        
         $bill = Bill::find($id);
+        if($request->date_time != $bill->date_time) {
+            return back()->with('date_time','dữ liệu phải bằng dữ liệu ban đầu');
+        }
         $paid_amount = $bill->paid_amount + $request->paid_amount;
         $reamaining_amount = ($bill->total_price) - ($paid_amount);
         
@@ -229,8 +253,6 @@ class BillController extends Controller
         } else {
             $is_paid = 0;
         }
-        
-        // dd($is_paid);
 
         $data = [
             'room_id' => $request->room_id,
@@ -246,5 +268,10 @@ class BillController extends Controller
 
 
         return back()->with('msg', 'Thu thành công');
+    }
+    public function destroy(String $id){
+        $bill = Bill::find($id);
+        $bill->delete();
+        return back()->with('msg','Xóa thành công');
     }
 }

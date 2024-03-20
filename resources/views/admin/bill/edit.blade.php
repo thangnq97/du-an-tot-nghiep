@@ -19,36 +19,45 @@
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Ngày/tháng</label>
                 <input type="date" class="form-control" id="exampleInputEmail1" name="date_time" aria-describedby="emailHelp" value="{{ $bill->date_time }}">
+                @error('date_time')
+                    <div class="text-danger ">{{ $message }}</div>
+                @enderror
+                @if (\Session::has('date_time'))
+                    <p class="text-danger"> {{ \Session::get('date_time') }}</p>
+                @endif
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Số tiền</label>
                 <input type="text" class="form-control"  id="pay_1" name="paid_amount" value="{{ $bill->paid_amount }}">
+                @error('paid_amount')
+                    <div class="text-danger ">{{ $message }}</div>
+                @enderror
             </div>
 
             <div hidden class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Tổng tiền</label>
-                <input type="text" class="form-control"  id="pay2" name="total_price" value="{{ $bill->total_price }}">
+                <input type="number" class="form-control"  id="pay2" name="total_price" value="{{ $bill->total_price }}">
             </div>
 
             <div hidden class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Số tiền còn thiếu</label>
-                <input type="text" class="form-control"  id="result" name="remaining_amount" value="{{ $bill->remaining_amount }}">
+                <input type="number" class="form-control"  id="result" name="remaining_amount" value="{{ $bill->remaining_amount }}">
             </div>
 
             <div  hidden class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Trạng thái</label>
-                <input type="text" class="form-control"  id="exampleInputPassword1" name="is_paid" value="{{ $bill->is_paid }}" >
+                <input type="number" class="form-control"  id="exampleInputPassword1" name="is_paid" value="{{ $bill->is_paid }}" >
             </div>
             
 
             <div  hidden class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Tổng tiền dịch vụ</label>
-                <input type="text" class="form-control"  id="exampleInputPassword1" name="total_price_service" value="{{ $bill->total_price_service }}">
+                <input type="number" class="form-control"  id="exampleInputPassword1" name="total_price_service" value="{{ $bill->total_price_service }}">
             </div>
 
             <div  hidden class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Phòng</label>
-                <input type="text" class="form-control"  id="exampleInputPassword1" name="room_id" value="{{ $bill->room_id }}">
+                <input type="number" class="form-control"  id="exampleInputPassword1" name="room_id" value="{{ $bill->room_id }}">
             </div>
 
             <div>

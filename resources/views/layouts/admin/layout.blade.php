@@ -78,7 +78,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí nước')
                             active
-                        @endif" href="./ui-PayBill.html" aria-expanded="false">
+                        @endif" href="{{ route('waters.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-cards"></i>
                                 </span>
@@ -88,7 +88,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí hóa đơn')
                             active
-                        @endif" href="./ui-TransactionHistory.html" aria-expanded="false">
+                        @endif" href="{{ route('bill.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>

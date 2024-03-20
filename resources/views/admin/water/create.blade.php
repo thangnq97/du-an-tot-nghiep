@@ -1,8 +1,9 @@
 @extends('layouts.admin.layout')
 @section('content')
 <div>
+    <h2 class="text-center">Thêm chỉ số điện</h2>
     @if(\Session::has('msg'))
-    <div class="alert alert-success   alert-dismissible fade show" role="alert">
+    <div class="alert alert-danger   alert-dismissible fade show" role="alert">
         <strong> {{ \Session::get('msg') }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
