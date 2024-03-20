@@ -9,7 +9,6 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/Logo.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -36,7 +35,9 @@
                             <span class="hide-menu">Home</span>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Trang chủ')
+                                active
+                            @endif" href="./index.html" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-house"></i>
                                      {{-- sửa lại icon của menu --}}
@@ -46,15 +47,19 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('room.index') }}" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí phòng')
+                            active
+                        @endif" href="{{ route('room.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>
-<span class="hide-menu">Quản lí phòng</span>
+                                <span class="hide-menu">Quản lí phòng</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('service.index') }}" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí dịch vụ')
+                            active
+                        @endif" href="{{ route('service.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-wifi"></i>
                                     {{-- sửa lại icon của menu --}}
@@ -63,7 +68,9 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('electric.index') }}" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí điện')
+                            active
+                        @endif" href="./ui-bill.html" aria-expanded="false">
                                 <span>
                                                       <i class="fa-solid fa-bolt"></i>
                                                     {{-- sửa lại icon của menu --}}
@@ -94,7 +101,9 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí hợp đồng')
+                            active
+                        @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-file-contract"></i>
                                     {{-- sửa lại icon của menu --}}
@@ -104,7 +113,9 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="ui-contact.html" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Quản lí giao dịch')
+                            active
+                        @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-money-bill"></i>
                                  {{-- sửa lại icon của menu --}}
@@ -163,7 +174,7 @@
                                     aria-labelledby="drop2">
                                     <div class="message-body">
                                         <a href="authentication-MyInformation.html"
-class="d-flex align-items-center gap-2 dropdown-item">
+                                            class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Thông tin cá nhân</p>
                                         </a>
