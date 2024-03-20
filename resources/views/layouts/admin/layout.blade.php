@@ -70,15 +70,15 @@
                             active
                         @endif" href="./ui-bill.html" aria-expanded="false">
                                 <span>
-                  <i class="ti ti-alert-circle"></i>
-                </span>
+                                    <i class="ti ti-alert-circle"></i>
+                                </span>
                                 <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí nước')
                             active
-                        @endif" href="./ui-PayBill.html" aria-expanded="false">
+                        @endif" href="{{ route('waters.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-cards"></i>
                                 </span>
@@ -88,7 +88,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí hóa đơn')
                             active
-                        @endif" href="./ui-TransactionHistory.html" aria-expanded="false">
+                        @endif" href="{{ route('bill.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>
@@ -128,6 +128,8 @@
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
                         </li>
+
+
                         <!-- End Sidebar navigation -->
             </div>
             <!-- End Sidebar scroll-->
@@ -185,9 +187,11 @@
                 </nav>
             </header>
             <!--  Header End -->
+
             <div class="container-fluid">
                 @yield('content')
             </div>
+
         </div>
     </div>
     <script src="{{ asset('assets/libs/jquery/dist/jquery.min.js') }} "></script>
