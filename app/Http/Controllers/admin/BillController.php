@@ -37,6 +37,13 @@ class BillController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'date_time'=> 'required',
+        ],
+        [
+            'date_time.required' => 'Không được để trống',
+        ]
+    );
 
         $id = $request->room_id;
         $room = Room::find($id);
@@ -60,7 +67,7 @@ class BillController extends Controller
         if (count($electricity)) {
             $electricity = $electricity[0];
         } else {
-            return back()->with('msg', 'Tháng này chưa có số điện');
+            return back()->with('msc', 'Tháng này chưa có số điện');
         }
         $electricity_service_id = $electricity->service_id;
         $electricity_service = Service::find($electricity_service_id);
@@ -74,7 +81,7 @@ class BillController extends Controller
         if (count($water)) {
             $water = $water[0];
         } else {
-            return back()->with('msg', 'Tháng này chưa có số nước');
+            return back()->with('msc', 'Tháng này chưa có số nước');
         }
         $water_service_id = $water->service_id;
         $water_service = Service::find($water_service_id);
@@ -102,8 +109,8 @@ class BillController extends Controller
             
             if ($service->method == 0) {
                 $key = $service->name;
+                
                 $price_garbage = $service->price;
-                // dd($price_garbage);
                 $number_member = $room->member_quantity;
                 $value = $price_garbage * $number_member;
                 array_push($array_member, [$key => $value]);
@@ -116,18 +123,22 @@ class BillController extends Controller
                 $wifi_price = $price_wifi;
             }
         }
-        // dd($array_member);
-        foreach ($array_member as $item) {
+        // foreach ($array_member as $item) {
             
-            foreach ($item as $key => $value) {
-               
-            }    
-        }
-        // dd($array_member[]); 
+        //     foreach ($item as $key => $value) {
+        //         if ($key === 'xe') { // Kiểm tra nếu tên dịch vụ là 'xe'
+        //            $moto = $key;
+        //            $money_moto = $value;
+        //            $price_moto = $service->price;
+                  
+        //         }
+        //     }
+        // }
+         
 
         // Tổng tiền dịch vụ
-        $total_service_price = $electricity_Total + $water_Total +  $garbage_price + $wifi_price;
-
+        $total_service_price = $electricity_Total + $water_Total +  $garbage_price + $wifi_price ;
+        
         // Tong tien
         $total_price = $price_room + $total_service_price;
 
@@ -272,6 +283,6 @@ class BillController extends Controller
     public function destroy(String $id){
         $bill = Bill::find($id);
         $bill->delete();
-        return back()->with('msg','Xóa thành công');
+        return back()->with('msc','Xóa thành công');
     }
 }

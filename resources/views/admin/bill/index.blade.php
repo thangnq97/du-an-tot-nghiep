@@ -13,8 +13,8 @@
         </div>
         <div class="">
             @if (\Session::has('msc'))
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong> {{ \Session::get('msg') }}</strong>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong> {{ \Session::get('msc') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
@@ -55,7 +55,9 @@
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Ngày/tháng</label>
                                         <input class="form-control " type="date" id="pre_water" name="date_time">
-
+                                        @error('date_time')
+                                            <p class="text-danger">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-3">

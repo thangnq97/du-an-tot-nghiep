@@ -71,6 +71,11 @@
                         <p style="padding-left: 540px">{{ $item['wifi_price'] }}</p>
                     </div>
 
+                     
+                    <div class="details">
+                        <p>Xe (Giá: {{ $item['money_wifi'] }})</p>
+                        <p style="padding-left: 540px">{{ $item['wifi_price'] }}</p>
+                    </div>
                     <hr>
                     <div class="details">
                         <p>Tổng tiền</p>

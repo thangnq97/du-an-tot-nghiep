@@ -29,7 +29,6 @@ return new class extends Migration
             $table->integer('money_garbage')->nullable();
             $table->integer('number_member')->nullable();
             
-            
             $table->timestamps();
         });
     }
