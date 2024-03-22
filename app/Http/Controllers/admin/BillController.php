@@ -236,12 +236,9 @@ class BillController extends Controller
     {
         $request->validate(
             [
-                // 'date_time' => 'required|date',
                 'paid_amount' => 'required|numeric|min:1',
-
             ],
-            [
-                // 'date_time.required' => 'Không được để trống',
+            [      
                 'paid_amount.required' => ' Không được để trống số tiền',
                 'paid_amount.numeric' => 'Kiểu dữ liệu là dạng số',
                 'paid_amount.min' => 'Giá trị phải lớn hơn 0',
@@ -252,13 +249,11 @@ class BillController extends Controller
 
 
         $bill = Bill::find($id);
-        // if($request->date_time != $bill->date_time) {
-        //     return back()->with('date_time','dữ liệu phải bằng dữ liệu ban đầu');
-        // }
+        
         $paid_amount = $bill->paid_amount + $request->paid_amount;
         $reamaining_amount = ($bill->total_price) - ($paid_amount);
 
-        if ($paid_amount > $request->total_price) {
+        if ($paid_amount > $bill->total_price) {
             return back()->with('msc', 'Quá số tiền cần thu');
         }
         if ($paid_amount == $bill->total_price) {
@@ -268,10 +263,10 @@ class BillController extends Controller
         }
 
         $data = [
-            'room_id' => $request->room_id,
-            'total_price' => $request->total_price,
+            'room_id' => $bill->room_id,
+            'total_price' => $bill->total_price,
             'remaining_amount' => $reamaining_amount,
-            'total_price_service' => $request->total_price_service,
+            'total_price_service' => $bill->total_price_service,
             'date_time' => $bill->date_time,
             'paid_amount' => $paid_amount,
             'is_paid' =>  $is_paid,
@@ -283,6 +278,7 @@ class BillController extends Controller
 
         return back()->with('msg', 'Thu thành công');
     }
+    //Xóa dữ liệu bảng bill theo id
     public function destroy(String $id)
     {
         $bill = Bill::find($id);
