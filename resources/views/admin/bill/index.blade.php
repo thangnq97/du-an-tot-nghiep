@@ -87,6 +87,7 @@
                         <th>Tổng tiền</th>
                         <th>Số tiền đã trả</th>
                         <th>Còn thiếu</th>
+                        <th>Ghi chú</th>
                         <th>Trạng thái</th>
                         <th></th>
 
@@ -101,6 +102,7 @@
                             <td>{{ $item->total_price }}</td>
                             <td>{{ $item->paid_amount }}</td>
                             <td>{{ $item->remaining_amount }}</td>
+                            <td>{{ $item->note }}</td>
                             <td>
                                 @if ($item->is_paid == 1)
                                     <p class="btn btn-success"><i class="fa-solid fa-money-bill-1-wave"></i></p>
@@ -111,12 +113,12 @@
 
                             <td>
                                 <form action="{{ route('bill.destroy', $item) }}" method="POST">
-                                <a  href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
-                                        class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
+                                            class="fa-solid fa-eye"></i></a>
 
-                                <a href="{{ route('bill.edit', $item) }}" class="btn btn-primary"><i
-                                        class="fa-solid fa-money-bill-1-wave"></i></a>
-                               
+                                    <a href="{{ route('bill.edit', $item) }}" class="btn btn-primary"><i
+                                            class="fa-solid fa-money-bill-1-wave"></i></a>
+
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger button-action" type="submit"
