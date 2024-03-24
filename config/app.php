@@ -4,6 +4,17 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
 return [
+    // pdf
+    'providers' => [
+        // ...
+        Barryvdh\DomPDF\ServiceProvider::class,
+    ],
+    
+    'aliases' => [
+        // ...
+        'PDF' => Facade::class,
+    ],
+
 
     /*
     |--------------------------------------------------------------------------

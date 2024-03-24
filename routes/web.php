@@ -5,6 +5,13 @@ use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
+use App\Http\Controllers\admin\WaterController;
+use App\Http\Controllers\admin\BillController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\admin\ElectricController;
+use App\Http\Controllers\user\BillUserController;
+use App\Models\Bill;
+use Illuminate\Routing\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,7 +41,8 @@ Route::prefix('room/')->group(function () {
     Route::get('{room}/show_interior', [RoomController::class, 'show_interior'])->name('room.show_interior');
     Route::get('{room}/create_service', [RoomController::class, 'create_service'])->name('room.create_service');
     Route::post('{room}/store_service', [RoomController::class, 'store_service'])->name('room.store_service');
-    Route::get('createpeople', [RoomController::class, 'createPeople'])->name('room.createpeople');
+    Route::get('{room}/create_people', [RoomController::class, 'create_People'])->name('room.create_people');
+    Route::post('{room}/store_people', [RoomController::class, 'store_People'])->name('room.store_people');
     Route::post('store', [RoomController::class, 'store'])->name('room.store');
     Route::get('{room}/edit', [RoomController::class, 'edit'])->name('room.edit');
     Route::put('{room}', [RoomController::class, 'update'])->name('room.update');
@@ -57,3 +65,20 @@ Route::prefix('room/')->group(function () {
 //Hoi
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
 Route::resource('service', ServiceController::class);
+//Dinh
+Route::resource('waters', WaterController::class);
+Route::get('/bill', [BillController::class,'index'])->name('bill.index');
+Route::post('/bill/demoShow', [BillController::class,'store'])->name('bill.store');
+Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('bill.show');
+Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->name('bill.generatePDF');
+Route::get('/bill/{id}/edit', [BillController::class, 'edit'])->name('bill.edit');
+Route::put('/bill/{id}/update', [BillController::class, 'update'])->name('bill.update');
+Route::delete('/bill/{id}/delete', [BillController::class, 'destroy'])->name('bill.destroy');
+
+
+//DUNG
+// Route::get('/electric', [ElectricController::class,'index']);
+Route::resource('/electric', ElectricController::class);
+Route::resource('/user_bill', BillUserController::class);
+// Route::get('user_bill/{id}/bill_user', [BillUserController::class, 'index'])->name('user.index');
+
