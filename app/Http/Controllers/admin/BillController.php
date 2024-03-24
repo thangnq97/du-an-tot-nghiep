@@ -23,14 +23,29 @@ class BillController extends Controller
     const PATH_VIEW = 'admin.bill.';
 
 
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Quản lí hóa đơn';
         $water = Water_usage::all();
-        $bills = Bill::query()->with('room')->latest()->paginate(5);
         $room = Room::query()->pluck('name', 'id');
+        $bills = Bill::query()->with('room')->latest()->paginate(5);
+        $date_bill = Bill::query()->with('room')->latest()->paginate(5);
+        $room_id = $request->room;
+        $date_time = $request->date_time;
+        // dd($date_time);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'bills', 'water', 'title'));
+        $billByRoom = DB::table('bills')->where('room_id', $room_id)->get();
+        $billByDateTime = DB::table('bills')->where('date_time', $date_time)->get();
+
+        if ($billByRoom->isNotEmpty()) {
+            $bills = Bill::query()->with('room')->where('room_id', $room_id)->latest()->paginate(5);
+        } elseif ($billByDateTime->isNotEmpty()) {
+            $bills = Bill::query()->with('room')->where('date_time', $date_time)->paginate(5);
+        } else {
+            $bills = Bill::query()->with('room')->latest()->paginate(5);
+        }
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'bills', 'water', 'title','date_bill'));
     }
 
 
@@ -238,7 +253,7 @@ class BillController extends Controller
             [
                 'paid_amount' => 'required|numeric|min:1',
             ],
-            [      
+            [
                 'paid_amount.required' => ' Không được để trống số tiền',
                 'paid_amount.numeric' => 'Kiểu dữ liệu là dạng số',
                 'paid_amount.min' => 'Giá trị phải lớn hơn 0',
@@ -249,7 +264,7 @@ class BillController extends Controller
 
 
         $bill = Bill::find($id);
-        
+
         $paid_amount = $bill->paid_amount + $request->paid_amount;
         $reamaining_amount = ($bill->total_price) - ($paid_amount);
 
@@ -285,4 +300,7 @@ class BillController extends Controller
         $bill->delete();
         return back()->with('msc', 'Xóa thành công');
     }
+
+    // lọc dữ liệu
+
 }

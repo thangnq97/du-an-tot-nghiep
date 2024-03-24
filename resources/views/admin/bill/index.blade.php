@@ -78,7 +78,36 @@
                 </div>
             </div>
 
+            {{-- Lọc dữ liệu --}}
+            <form action="{{ route('bill.index') }}" method="GET">
+                @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
+            
+                <div class="row align-items-center">
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
+                            <option selected disabled>--Chọn phòng--</option>
+                            @foreach ($room as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select" name="date_time" id="room2"> <!-- Đặt tên cho trường select -->
+                            <option selected disabled>--Ngày/tháng--</option>
+                            @foreach ($date_bill as $bill_search)
+                                <option>{{ $bill_search->date_time }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            
+                    <div class="col-md-4 mb-2">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                    </div>
+                </div>
+            </form>
 
+            {{-- Hiển thị danh sách bill --}}
             <table class="table table-striped">
                 <thead>
                     <tr>
