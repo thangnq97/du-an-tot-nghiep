@@ -36,8 +36,9 @@ class BillController extends Controller
 
         $billByRoom = DB::table('bills')->where('room_id', $room_id)->get();
         $billByDateTime = DB::table('bills')->where('date_time', $date_time)->get();
-
-        if ($billByRoom->isNotEmpty()) {
+        if ($billByRoom->isNotEmpty() && $billByRoom->isNotEmpty()) {
+            $bills = Bill::query()->with('room')->where('room_id', $room_id)->where('date_time', $date_time)->latest()->paginate(5);
+        } elseif ($billByRoom->isNotEmpty()) {
             $bills = Bill::query()->with('room')->where('room_id', $room_id)->latest()->paginate(5);
         } elseif ($billByDateTime->isNotEmpty()) {
             $bills = Bill::query()->with('room')->where('date_time', $date_time)->paginate(5);
@@ -45,7 +46,7 @@ class BillController extends Controller
             $bills = Bill::query()->with('room')->latest()->paginate(5);
         }
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'bills', 'water', 'title','date_bill'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'bills', 'water', 'title', 'date_bill'));
     }
 
 
