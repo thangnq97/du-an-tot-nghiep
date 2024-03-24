@@ -10,13 +10,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Charts\RoomChart;
+use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 
 class AdminHomeController extends Controller
 {
 
-    public function index() {
+    public function index(RoomChart $roomChart) {
+        $chart = $roomChart->build();
         $title = 'Trang chủ';
-        return view('admin.account.index', compact('title'));
+
+        $chart_options = [
+            'chart_title' => 'Doanh thu',
+            'report_type' => 'group_by_date',
+            'model' => 'App\Models\Bill',
+            'group_by_field' => 'created_at',
+            'group_by_period' => 'month',
+            'aggregate_function' => 'sum',
+            'aggregate_field' => 'total_price',
+            'chart_type' => 'bar',
+        ];
+        $chart1 = new LaravelChart($chart_options);
+        return view('admin.account.index', compact('title', 'chart', 'chart1'));
     }
 
     public function login() {

@@ -49,7 +49,10 @@ Route::prefix('room/')->group(function () {
     Route::delete('/{room}/{id}/delete_member', [UserController::class, 'destroy'])->name('admin.member.destroy');
     Route::get('/{room}/contract', [ContractController::class, 'index'])->name('admin.room.contract');
     Route::post('/{room}/contract', [ContractController::class, 'store'])->name('admin.contract.store');
+    Route::get('/{room}/extension', [ContractController::class, 'createExtensionContract'])->name('admin.create.extension.contract');
     Route::get('/{room}/{contract}', [ContractController::class, 'viewContract'])->name('admin.contract.view');
+    Route::post('/{room}/contract/extension', [ContractController::class, 'extension'])->name('admin.extension.contract.store');
+    Route::get('/{room}/extension/{extension_contract}', [ContractController::class, 'viewExtensionContract'])->name('admin.extension.contract.view');
 });
 //Hoi
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      

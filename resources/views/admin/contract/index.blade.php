@@ -1,76 +1,70 @@
 @extends('admin.Room.layout');
 
 @section('room_content')
-    <div class="my-3">
-        @if (session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{ session()->get('success') }}</strong>
-            </div>
-
-            <script>
-                var alertList = document.querySelectorAll(".alert");
-                alertList.forEach(function(alert) {
-                    new bootstrap.Alert(alert);
-                });
-            </script>
-        @endif
-        @if (session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <strong>{{ session()->get('error') }}</strong>
-            </div>
-
-            <script>
-                var alertList = document.querySelectorAll(".alert");
-                alertList.forEach(function(alert) {
-                    new bootstrap.Alert(alert);
-                });
-            </script>
-        @endif
-    </div>
+    @include('layouts.admin.alert')
     <div class="m-3 d-flex justify-content-end">
         @if ( count($contract) )
-            <button type="button" class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
-                Phụ lục
-            </button>
+            <a href="{{ route('admin.create.extension.contract', ['room' => $room->id]) }}" class="btn btn-success">Phụ lục</a>
         @else
-            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId">
+            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modalId1">
                 Tạo mới
             </button>
         @endif
     </div>
-    <table class="table table-tripped">
-        <thead>
-            <tr>
-                <th>Ngày tạo hợp đồng</th>
-                <th>Thời hạn hợp đồng(tháng)</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($contract as $item)
+    @if (count($contract))
+        <table class="table table-tripped">
+            <thead>
                 <tr>
-                    <td>{{ $item->started_at }}</td>
-                    <td>{{ $item->month_quantity }}</td>
-                    <td>
-                        <form action="" method="POST">
-                            <a href="{{ route('admin.contract.view', ['room'=>$room->id, 'contract'=>$item->id]) }}" class="btn btn-success button-action"><i class="fa-solid fa-eye"></i></a>
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-danger button-action" type="submit"
-                                onclick="return confirm('Bạn có muốn xóa không?')">
-                                <i class="fa-solid fa-trash-can"></i></button>
-                        </form>
-                    </td>
+                    <th>Ngày tạo hợp đồng</th>
+                    <th>Thời hạn hợp đồng(tháng)</th>
+                    <th></th>
                 </tr>
-            @endforeach
-        </tbody>
-        <tbody>
-        </tbody>
-    </table>
-    @if (count($))
-        
+            </thead>
+            <tbody>
+                @foreach ($contract as $item)
+                    <tr>
+                        <td>{{ $item->started_at }}</td>
+                        <td>{{ $item->month_quantity }}</td>
+                        <td>
+                            <form action="" method="POST">
+                                <a href="{{ route('admin.contract.view', ['room'=>$room->id, 'contract'=>$item->id]) }}" class="btn btn-success button-action"><i class="fa-solid fa-eye"></i></a>
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn btn-danger button-action" type="submit"
+                                    onclick="return confirm('Bạn có muốn xóa không?')">
+                                    <i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+            <tbody>
+            </tbody>
+        </table>
+    @endif
+    @if (count($contract_extension))
+        <hr style="margin-top: 100px"> 
+        <h4 class="" style="">Phụ lục hợp đồng</h4>
+        <table class="table table-tripped my-4">
+            <thead>
+                <tr>
+                    <th>Ngày tạo</th>
+                    <th>Thời hạn</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($contract_extension as $item)
+                    <tr>
+                        <td>{{ $item->started_at }}</td>
+                        <td>{{ $item->month_quantity }}</td>
+                        <td>
+                            <a href="{{ route('admin.extension.contract.view', ['room'=>$room->id, 'extension_contract'=>$item->id]) }}" class="btn btn-success button-action"><i class="fa-solid fa-eye"></i></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
     @endif
 
     <!-- Modal trigger button -->
@@ -78,11 +72,11 @@
 
     <!-- Modal Body -->
     <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-    <div class="modal fade" id="modalId" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
+    <div class="modal fade" id="modalId1" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
         aria-labelledby="modalTitleId" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
             <div class="modal-content">
-                <form action="{{ route('admin.contract.store', ['room'=>$room->id]) }}" method="POST" id="form">
+                <form action="{{ route('admin.contract.store', ['room'=>$room->id]) }}" method="POST" id="form1">
                     @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalTitleId">
@@ -114,15 +108,15 @@
 
     <!-- Optional: Place to the bottom of scripts -->
     <script>
-        const myModal = new bootstrap.Modal(
-            document.getElementById("modalId"),
+        const myModal1 = new bootstrap.Modal(
+            document.getElementById("modalId1"),
             options,
         );
     </script>
     <script>
         const started_at = document.getElementById("started_at");
         const month_quantity = document.getElementById("month_quantity");
-        const form = document.getElementById("form");
+        const form = document.getElementById("form1");
         const close = document.querySelectorAll(".close");
 
         form.addEventListener('submit', (e) => {

@@ -26,33 +26,48 @@
         <br>
         <h3 class="mt-3 text-center ">HỢP ĐỒNG THUÊ NHÀ</h3>
         <!-- <br> -->
-        <p class="text-end ">Hôm nay, ngày 19 tháng 1 năm 2024</p>
+        <p class="text-end ">Hôm nay, {{ $contract->started_at }}</p>
         <br>
-        <p>Tại: ..............................</p>
+        <p>Tại: Trịnh Văn Bô</p>
         <!-- <strong>Chúng tôi gồm: </strong> -->
         <h5>Chúng tôi gồm: </h5>
         <h4>BÊN A(BÊN CHO THUÊ): </h4>
-        <p>Ông(bà):...................</p>
-        <p>Số CMND:.......................... Ngày cấp:.............. Nơi cấp:.............</p>
-        <p>HKTT:........................</p>
-        <p>Số điện thoại:..............</p>
+        <p>Ông(bà): {{ $owner->name }}
+        <p>Số CMND: {{ $owner->cccd }}</p>
+        <p>HKTT: {{ $owner->address }}</p>
+        <p>Số điện thoại: {{ $owner->phone }}</p>
         
         <h4>BÊN B(BÊN THUÊ NHÀ): </h4>
-        <p>Ông(bà):...................</p>
-        <p>Số CMND:.......................... Ngày cấp:.............. Nơi cấp:.............</p>
-        <p>HKTT:........................</p>
-        <p>Số điện thoại:..............</p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Ông(bà)</th>
+                    <th>Số CMND</th>
+                    <th>Hộ khẩu thường trú</th>
+                    <th>Số điện thoại</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($members as $item)
+                    <tr>
+                        <td>{{ $item->name }}</td>
+                        <td>{{ $item->cccd }}</td>
+                        <td>{{ $item->address }}</td>
+                        <td>{{ $item->phone }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
         <P>Cùng thỏa thuận giao kết với các nội dung sau đây: </P>
 
         <h4>ĐIỀU 1: Thời hạn thuê</h3>
-        <p>Bên A đồng ý cho bên B thuê được thuê để..........</p>
-        <p>Căn nhà............</p>
-        <p class="mx-3">- Tổng diện tích sử dụng.....</p>
-        <p class="mx-3">- Kể từ ngày... tháng... năm....</p>
+        <p>Bên A đồng ý cho bên B thuê được thuê để sử dụng</p>
+        <p>Phòng {{ $room->name }}</p>
+        <p class="mx-3">- Tổng diện tích sử dụng {{ $room->width * $room->length }}</p>
+        <p class="mx-3">- Kể từ {{ $contract->started_at }}</p>
 
         <h4>ĐIỀU 2: Gía cho thuê</h3>
-        <p class="mx-3">1. Gía thuê nhà là: ...............</p>
-        <p class="mx-3">(bằng chữ:...........................................................................................................)</p>
+        <p class="mx-3">1. Gía thuê nhà là: {{ $room->price }}</p>
         <p class="mx-3">2. Bên B trả tiền thuê nhà cho bên A bằng tiền Việt Nam Đồng theo định kỳ một tháng một lần</p>
         <p class="mx-3">3. Nếu việc giao và nhận số tiền nêu trên do hai bên tự thực hiện và chịu trách nhiệm trước pháp luật. </p>
 
