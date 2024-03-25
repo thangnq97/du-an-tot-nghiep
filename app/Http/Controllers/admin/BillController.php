@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Validation\Rule;
 
 class BillController extends Controller
 {
@@ -56,9 +57,15 @@ class BillController extends Controller
         $request->validate(
             [
                 'date_time' => 'required',
+                'room_id' => [
+                    'required',
+                    Rule::exists('room_id','id')
+                ]
+               
             ],
             [
                 'date_time.required' => 'Không được để trống',
+                'room_id.required'  => 'Không được để trống'
             ]
         );
 

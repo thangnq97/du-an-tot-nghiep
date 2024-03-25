@@ -10,6 +10,7 @@ use App\Models\Water_usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class WaterController extends Controller
 {
@@ -67,11 +68,18 @@ class WaterController extends Controller
     {
         $validated = $request->validate(
             [
-            'room_id' => 'required',
+            'room_id' => [
+                'required',
+                Rule::exists('room_id','id')
+            ],
             'pre_water' => 'required|numeric',
             'current_water' => 'required|numeric|gt:pre_water',
             'date_time' => 'required|date',
-            'service_id' => 'required'
+            
+            'service_id' => [
+                'required',
+                Rule::exists('service_id','id')
+            ],
             ],
             [
                 'room_id.required' => 'Không được để trống',

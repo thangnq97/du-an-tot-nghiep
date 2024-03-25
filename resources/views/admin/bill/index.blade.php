@@ -45,11 +45,15 @@
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Phòng</label>
                                         <select name="room_id" id="" class="form-control ">
+                                            <option value="" selected disabled>--Tên phòng--</option>
                                             @foreach ($room as $id => $name)
                                                 <option value="{{ $id }}">{{ $id }}--{{ $name }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @error('room_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                     </div>
 
                                     <div class="mb-3">

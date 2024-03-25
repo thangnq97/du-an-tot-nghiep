@@ -18,8 +18,10 @@
         </a>
         
     </div>
+
+    {{-- lọc giá trị --}}
     <form action="{{ route('waters.index') }}" method="GET">
-        @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
+        @csrf 
     
         <div class="row align-items-center">
             <div class="col-md-4 mb-2">

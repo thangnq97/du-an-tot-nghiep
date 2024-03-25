@@ -25,7 +25,9 @@
                 <option value="{{ $id }}">{{ $id }}--{{ $name }}</option>
                 @endforeach
             </select>
-
+            @error('pre_water')
+            <div class="text-danger ">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -65,6 +67,9 @@
                 <option value="{{ $id }}">{{ $name }}</option>
                 @endforeach
             </select>
+            @error('pre_water')
+            <div class="text-danger ">{{ $message }}</div>
+            @enderror
         </div>
 </div>
 <a class="btn btn-warning" href="{{ route('waters.index') }}">Trở về</a>
