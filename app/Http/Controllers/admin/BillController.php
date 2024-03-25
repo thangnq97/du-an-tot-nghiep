@@ -37,12 +37,13 @@ class BillController extends Controller
 
         $billByRoom = DB::table('bills')->where('room_id', $room_id)->get();
         $billByDateTime = DB::table('bills')->where('date_time', $date_time)->get();
-        if ($billByRoom->isNotEmpty() && $billByRoom->isNotEmpty()) {
+        
+        if ($billByRoom->isNotEmpty() && $billByDateTime->isNotEmpty()) {
             $bills = Bill::query()->with('room')->where('room_id', $room_id)->where('date_time', $date_time)->latest()->paginate(5);
         } elseif ($billByRoom->isNotEmpty()) {
             $bills = Bill::query()->with('room')->where('room_id', $room_id)->latest()->paginate(5);
         } elseif ($billByDateTime->isNotEmpty()) {
-            $bills = Bill::query()->with('room')->where('date_time', $date_time)->paginate(5);
+            $bills = Bill::query()->with('room')->where('date_time', $date_time)->latest()->paginate(5);
         } else {
             $bills = Bill::query()->with('room')->latest()->paginate(5);
         }
@@ -54,20 +55,7 @@ class BillController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'date_time' => 'required',
-                'room_id' => [
-                    'required',
-                    Rule::exists('room_id','id')
-                ]
-               
-            ],
-            [
-                'date_time.required' => 'Không được để trống',
-                'room_id.required'  => 'Không được để trống'
-            ]
-        );
+    
 
         $id = $request->room_id;
         $room = Room::find($id);
