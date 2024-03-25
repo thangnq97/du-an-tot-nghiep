@@ -34,16 +34,24 @@
                 <label for="name">Tên nội thất</label>
                 <p></p>
                 <input type="text" name="name" id="name" class="form-control " value="{{ $interior->name }}">
+                <p></p>
+                @error('name')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <div class="mb-3">
                 <label for="quantitys">Số lượng</label>
                 <p></p>
-                <input type="text" name="quantitys" id="quantitys" class="form-control " value="{{ $interior->quantitys }}">                
+                <input type="text" name="quantitys" id="quantitys" class="form-control " value="{{ $interior->quantitys }}">
+                <p></p>
+                @error('quantitys')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <br><br>
-            
+
             <button type="submit" class="btn btn-primary ">Gửi </button>
             <a href="{{ route('interiors.index') }}" class="btn btn-warning my-3 m-3">Trở về</a>
         </form>

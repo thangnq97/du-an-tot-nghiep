@@ -20,15 +20,17 @@ class InteriorsController extends Controller
     public function index()
     {
         $interiors = Interior::query()->latest()->paginate(5);
+        foreach ($interiors as $item) {
+            $id = $item->id;
+            $room_interior = DB::table('room_interior')->where('interior_id', $id)->sum('quantity');
+            
+            $item->remainingQuantity = $item->quantitys - $room_interior;
+         
+        };
 
-        $interiors->each(function ($interior) {
-            $usedQuantity = Room_interior::where('interior_id', $interior->id)->sum('quantity');
-            $interior->remainingQuantity = $interior->quantitys - $usedQuantity;
-        });
-
-        return view(self::PATH_VIEW . __FUNCTION__, ['interiors' => $interiors]);
+        return view(self::PATH_VIEW . __FUNCTION__,compact('interiors'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -44,11 +46,22 @@ class InteriorsController extends Controller
     public function store(Request $request)
     {
         $data = $request->except('image');
-        $request->validate([
-            'name' => 'required|unique:interiors|max:50',
-            'quantitys' => 'required',
+        $request->validate(
+            [
+                'name' => 'required|unique:interiors|max:50',
+                'quantitys' => 'required',
 
-        ]);
+            ],
+            [
+                'quantity.required' => 'không được để trống',
+                'name.required' => 'không được để trống',
+                'name.unique' => 'Nội thất này đã có',
+                'name.max' => 'Không được vượt quá 50 ký tự',
+
+
+
+            ]
+        );
 
 
 
@@ -69,8 +82,8 @@ class InteriorsController extends Controller
      */
     public function edit(string $id)
     {
-        $interior= Interior::find($id);
-        return view(self::PATH_VIEW.__FUNCTION__,compact('interior'));
+        $interior = Interior::find($id);
+        return view(self::PATH_VIEW . __FUNCTION__, compact('interior'));
     }
 
     /**
@@ -78,12 +91,23 @@ class InteriorsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $interior= Interior::find($id);
-        $request->validate([
-            'name' => 'required|max:50',
-            'quantitys' => 'required',
+        $interior = Interior::find($id);
+        $request->validate(
+            [
+                'name' => 'required|max:50',
+                'quantitys' => 'required',
 
-        ]);
+            ],
+            [
+                'quantitys.required' => 'không được để trống',
+                'name.required' => 'không được để trống',
+                'name.unique' => 'Nội thất này đã có',
+                'name.max' => 'Không được vượt quá 50 ký tự',
+
+
+
+            ]
+        );
 
         $interior->update($request->all());
 
@@ -96,7 +120,7 @@ class InteriorsController extends Controller
      */
     public function destroy(string $id)
     {
-        $interior= Interior::find($id);
+        $interior = Interior::find($id);
         $interior->delete();
         return back()->with('msg', 'Xóa Thành Công');
     }

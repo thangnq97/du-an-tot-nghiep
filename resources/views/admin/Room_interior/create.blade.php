@@ -7,15 +7,7 @@
     {{ Session::get('msg') }}
 </div>
 @endif
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+
 
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -31,10 +23,15 @@
                 <label>Tên phòng</label>
                 <p></p>
                 <select name="room_id" id="" class="form-control">
+                    <option value="" selected disabled>--Tên phòng-</option>
                     @foreach ($rooms as $id => $name)
                     <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
+                <p></p>
+                @error('room_id')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <br>
@@ -43,10 +40,15 @@
                 <label>Tên nội thất</label>
                 <p></p>
                 <select name="interior_id" id="" class="form-control">
+                    <option value="" selected disabled>--Tên nôị thất-</option>
                     @foreach ($interiors as $id => $name)
                     <option value="{{ $id }}">{{ $name }}</option>
                     @endforeach
                 </select>
+                <p></p>
+                @error('interior_id')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <br>
@@ -55,14 +57,21 @@
                 <label>Số lượng (chiếc, cái)</label>
                 <p></p>
                 <input type="text" class="form-control" placeholder="Số lượng" name="quantity">
+                <p></p>
+                @error('quantity')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <br>
 
             <div class="form-group mb-3">
                 <label>Giá (VND)</label>
-                <p class="text-danger ">*Lớn hơn 1000 VND</p>
                 <input type="text" class="form-control" placeholder="Giá" name="price">
+                <p></p>
+                @error('price')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <br>
@@ -71,6 +80,10 @@
                 <label>Tình trạng (%)</label>
                 <p></p>
                 <input type="text" class="form-control" placeholder="Tình trạng " name="status">
+                <p></p>
+                @error('status')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <br>
@@ -79,11 +92,15 @@
                 <label>Mô tả</label>
                 <p></p>
                 <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
+                <p></p>
+                @error('description')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
 
             <button type="submit" class="btn btn-primary">Gửi</button>
             <a href="{{ route('Roominterior.index') }}" class="btn btn-warning my-3 m-3">Trở về</a>
-            
+
         </form>
 
     </div>

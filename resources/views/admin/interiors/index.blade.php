@@ -32,7 +32,9 @@
                 <td>{{ $e->id }}</td>
                 <td>{{ $e->name }}</td>
                 <td>{{ $e->quantitys }}</td>
-                <td>{{ $e->remainingQuantity }}</td>
+                <td>
+                {{ $e->remainingQuantity }}
+                </td>
                 <td>
                     <div class="action-button">
                         <form action="{{ route('interiors.destroy',$e) }}" method="POST">

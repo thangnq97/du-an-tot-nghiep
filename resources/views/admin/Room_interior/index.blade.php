@@ -21,14 +21,41 @@
     
     
 
-    <form action="{{ route('Roominterior.index') }}" method="GET" class="mb-4 bg-light me-auto ms-3" novalidate>
+    <!-- <form action="{{ route('Roominterior.index') }}" method="GET" class="mb-4 bg-light me-auto ms-3" novalidate>
   @csrf
   <div class="col-md-2 me-3">
     <input type="text" name="search" class="form-control" placeholder="Tìm theo tên nội thất" value="{{ htmlspecialchars(request('search')) }}">
     <p></p>
     <button type="submit" class="btn btn-primary">Tìm</button>
   </div>
-</form>
+</form> -->
+<form action="{{ route('Roominterior.index') }}" method="GET">
+        @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
+    
+        <div class="row align-items-center">
+            <div class="col-md-4 mb-2">
+                <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
+                    <option selected disabled>--Chọn phòng--</option>
+                    @foreach ($room as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
+          
+            <div class="col-md-4 mb-2">
+                <select class="form-select" name="interior" id="room2"> <!-- Đặt tên cho trường select -->
+                    <option selected disabled>--Tên nội thất--</option>
+                    @foreach ($interiors as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
+    
+            <div class="col-md-4 mb-2">
+                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
 
         
 
@@ -46,7 +73,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($data as $item)
+            @foreach ($Room_interiors as $item)
             {{-- @dd($item->toArray()) --}}
 
             <tr>
