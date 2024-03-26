@@ -60,13 +60,13 @@ class user_informationController extends Controller
     //     User::create($request->all());
     //     return back()->with('msg', 'Thêm Thành Công');
     // }
-    // public function edit(string $id)
-    // {
+    public function edit(string $id)
+    {
 
-    //     $users = User::latest()->pluck('name', 'id')->all();
-    //     $user_information = User::find($id);
-    //     return view(self::PATH_VIEW . __FUNCTION__, compact('users', 'user_information'));
-    // }
+        $users = User::latest()->pluck('name', 'id')->all();
+        $user_information = User::find($id);
+        return view(self::PATH_VIEW . __FUNCTION__, compact('users', 'user_information'));
+    }
     // public function update(Request $request, string $id)
     // {
     //     $user_information = User::find($id);

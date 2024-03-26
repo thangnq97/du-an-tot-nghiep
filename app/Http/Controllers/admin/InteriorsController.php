@@ -49,7 +49,7 @@ class InteriorsController extends Controller
         $request->validate(
             [
                 'name' => 'required|unique:interiors|max:50',
-                'quantitys' => 'required',
+                'quantitys' => 'required|numeric',
 
             ],
             [
@@ -57,6 +57,7 @@ class InteriorsController extends Controller
                 'name.required' => 'không được để trống',
                 'name.unique' => 'Nội thất này đã có',
                 'name.max' => 'Không được vượt quá 50 ký tự',
+                'quantitys.numeric' => 'Phải là dạng số',
 
 
 

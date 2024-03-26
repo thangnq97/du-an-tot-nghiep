@@ -45,13 +45,13 @@
                 <td>{{ $u->password }}</td>   
                 <td>{{ $u->cccd }}</td>
                 <td>{{ $u->address }}</td> 
-                <td>
+                <!-- <td>
 
                 <div class="action-button" >
                 <a href="{{route('user_information.edit',['user_information'=>$u->id]) }}" class="btn btn-success button-action mx-2"><i class="fa-regular fa-pen-to-square"></i></a>
                    
                     </div>
-                </td>
+                </td> -->
             </tr>
             @endforeach
         </tbody>

@@ -140,6 +140,7 @@ class RoominteriorController extends Controller
             'quantity.required' => 'không được để trống',
             'status.required' => 'không được để trống',
             'status.numeric' => 'Phải là dạng số',
+            'quantity.numeric' => 'Phải là dạng số',
             'status.between' => 'Lớn hơn 50% và nhỏ hơn hoặc bằng 100%',
             'price.required' => 'không được để trống',
             'price.numeric' => 'Phải là dạng số',
