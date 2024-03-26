@@ -13,7 +13,7 @@ use Illuminate\Validation\Rule;
 class RoominteriorController extends Controller
 {
     const PATH_VIEW = 'admin.Room_interior.';
-    const PATH_UPLOAD = 'admin.Room_interior';
+    const PATH_UPLOAD = 'admin.Room_interior'; 
 
     public function index(Request $request)
     {

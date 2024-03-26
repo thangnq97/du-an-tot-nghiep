@@ -13,7 +13,7 @@ class RoomController extends Controller
     public function index()
     {
         $data = Room::query()->paginate();
-
+ 
         return view(self::PATHVIEW . __FUNCTION__, compact('data'));
     }
     public function create()

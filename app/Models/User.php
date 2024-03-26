@@ -4,23 +4,20 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Users extends Authenticatable
+class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable,SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $delete = ['deleted_at'];
-    protected $fillable = ['role_id', 'room_id', 'name', 'email', 'phone', 'cccd', 'address'];
+    protected $fillable = ['token', 'role_id', 'room_id', 'name', 'email', 'password', 'phone', 'cccd', 'address', 'avatar'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -41,16 +38,12 @@ class Users extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
     public function room()
     {
         return $this->belongsTo(Room::class);
     }
-    public function userInformation()
-{
-    return $this->hasMany(user_information::class);
-}
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

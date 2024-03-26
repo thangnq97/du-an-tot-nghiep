@@ -15,7 +15,7 @@ class ServiceController extends Controller
         $data = Service::query()->paginate();
         return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
     }
-    public function create()
+    public function create() 
     {
         return view(self::PATH_VIEW . __FUNCTION__);
     }
