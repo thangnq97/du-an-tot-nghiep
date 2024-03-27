@@ -16,7 +16,37 @@
         <a href="{{ route('waters.create') }}" class="btn  btn-primary ">
             <div>Thêm số nước</div>
         </a>
+        
     </div>
+
+    {{-- lọc giá trị --}}
+    <form action="{{ route('waters.index') }}" method="GET">
+        @csrf 
+    
+        <div class="row align-items-center">
+            <div class="col-md-4 mb-2">
+                <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
+                    <option selected disabled>--Chọn phòng--</option>
+                    @foreach ($room as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
+          
+            <div class="col-md-4 mb-2">
+                <select class="form-select" name="date_time" id="room2"> <!-- Đặt tên cho trường select -->
+                    <option selected disabled>--Ngày/tháng--</option>
+                    @foreach ($water_date as $bill_search)
+                        <option>{{ $bill_search->date_time }}</option>
+                    @endforeach
+                </select>
+            </div>
+    
+            <div class="col-md-4 mb-2">
+                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>

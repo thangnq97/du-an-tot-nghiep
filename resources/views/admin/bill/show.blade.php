@@ -60,22 +60,15 @@
                             {{ $used_water }}, Giá: {{ $item['water_price'] }})</p>
                         <p style="padding-left: 310px">{{ $water_Total }}</p>
                     </div>
-
+                   
                     <div class="details">
-                        <p>Rác(ND: {{ $item['number_member'] }}, Giá: {{ $item['money_garbage'] }})</p>
-                        <p style="padding-left: 510px">{{ $item['garbage_price'] }}</p>
-                    </div>
-                    
-                    <div class="details">
-                        <p>Wifi(Giá: {{ $item['money_wifi'] }})</p>
-                        <p style="padding-left: 540px">{{ $item['wifi_price'] }}</p>
+                        {!! $item['description_room'] !!}
                     </div>
 
-                     
                     <div class="details">
-                        <p>Xe (Giá: {{ $item['money_wifi'] }})</p>
-                        <p style="padding-left: 540px">{{ $item['wifi_price'] }}</p>
+                        {!! $item['description'] !!}
                     </div>
+                   
                     <hr>
                     <div class="details">
                         <p>Tổng tiền</p>

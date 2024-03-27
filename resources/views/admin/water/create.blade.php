@@ -3,8 +3,14 @@
 <div>
     <h2 class="text-center">Thêm chỉ số điện</h2>
     @if(\Session::has('msg'))
-    <div class="alert alert-danger   alert-dismissible fade show" role="alert">
+    <div class="alert alert-success  alert-dismissible fade show" role="alert">
         <strong> {{ \Session::get('msg') }}</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    @if(\Session::has('msc'))
+    <div class="alert alert-danger   alert-dismissible fade show" role="alert">
+        <strong> {{ \Session::get('msc') }}</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
@@ -14,12 +20,14 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Phòng</label>
             <select name="room_id" id="" class="form-control ">
-                <option selected >-- Chọn số phòng --</option>
+                <option selected disabled>-- Chọn số phòng --</option>
                 @foreach ($room as $id => $name)
                 <option value="{{ $id }}">{{ $id }}--{{ $name }}</option>
                 @endforeach
             </select>
-
+            @error('pre_water')
+            <div class="text-danger ">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -54,11 +62,14 @@
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Dịch vụ</label>
             <select name="service_id" id="" class="form-control ">
-                <option selected >-- Chọn dịch vụ --</option>
+                <option selected disabled>-- Chọn dịch vụ --</option>
                 @foreach ($services as $id => $name)
                 <option value="{{ $id }}">{{ $name }}</option>
                 @endforeach
             </select>
+            @error('pre_water')
+            <div class="text-danger ">{{ $message }}</div>
+            @enderror
         </div>
 </div>
 <a class="btn btn-warning" href="{{ route('waters.index') }}">Trở về</a>

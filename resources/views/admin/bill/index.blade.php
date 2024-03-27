@@ -45,11 +45,15 @@
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Phòng</label>
                                         <select name="room_id" id="" class="form-control ">
+                                            <option value="" selected disabled>--Tên phòng--</option>
                                             @foreach ($room as $id => $name)
                                                 <option value="{{ $id }}">{{ $id }}--{{ $name }}
                                                 </option>
                                             @endforeach
                                         </select>
+                                        @error('room_id')
+                                        <p class="text-danger">{{ $message }}</p>
+                                    @enderror
                                     </div>
 
                                     <div class="mb-3">
@@ -78,7 +82,36 @@
                 </div>
             </div>
 
+            {{-- Lọc dữ liệu --}}
+            <form action="{{ route('bill.index') }}" method="GET">
+                @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
+            
+                <div class="row align-items-center">
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
+                            <option selected disabled>--Chọn phòng--</option>
+                            @foreach ($room as $id => $name)
+                                <option value="{{ $id }}">{{ $name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                  
+                    <div class="col-md-4 mb-2">
+                        <select class="form-select" name="date_time" id="room2"> <!-- Đặt tên cho trường select -->
+                            <option selected disabled>--Ngày/tháng--</option>
+                            @foreach ($date_bill as $bill_search)
+                                <option>{{ $bill_search->date_time }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+            
+                    <div class="col-md-4 mb-2">
+                        <button type="submit" class="btn btn-success">Tìm kiếm</button>
+                    </div>
+                </div>
+            </form>
 
+            {{-- Hiển thị danh sách bill --}}
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -87,6 +120,7 @@
                         <th>Tổng tiền</th>
                         <th>Số tiền đã trả</th>
                         <th>Còn thiếu</th>
+                        <th>Ghi chú</th>
                         <th>Trạng thái</th>
                         <th></th>
 
@@ -101,6 +135,7 @@
                             <td>{{ $item->total_price }}</td>
                             <td>{{ $item->paid_amount }}</td>
                             <td>{{ $item->remaining_amount }}</td>
+                            <td>{{ $item->note }}</td>
                             <td>
                                 @if ($item->is_paid == 1)
                                     <p class="btn btn-success"><i class="fa-solid fa-money-bill-1-wave"></i></p>
@@ -111,12 +146,12 @@
 
                             <td>
                                 <form action="{{ route('bill.destroy', $item) }}" method="POST">
-                                <a  href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
-                                        class="fa-solid fa-eye"></i></a>
+                                    <a href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
+                                            class="fa-solid fa-eye"></i></a>
 
-                                <a href="{{ route('bill.edit', $item) }}" class="btn btn-primary"><i
-                                        class="fa-solid fa-money-bill-1-wave"></i></a>
-                               
+                                    <a href="{{ route('bill.edit', $item) }}" class="btn btn-primary"><i
+                                            class="fa-solid fa-money-bill-1-wave"></i></a>
+
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger button-action" type="submit"
