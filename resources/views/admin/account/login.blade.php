@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in</title>
+    <title>CodeFlow | Log in</title>
 
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 
     <link rel="stylesheet" href="{{asset('login_assets/plugins/fontawesome-free/css/all.min.css')}}">
-
+    <link rel="shortcut icon" type="image/png" href="{{ asset('assets/images/logos/Logo.png') }}" />
     <link rel="stylesheet" href="{{asset('login_assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
 
     <link rel="stylesheet" href="{{asset('login_assets/dist/css/adminlte.min.css?v=3.2.0')}}">
@@ -84,12 +84,12 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>Admin </b>login</a>
+            <a href="../../index2.html"><b>CodeFlow </b></a>
         </div>
 
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Đăng nhập để bắt đầu</p>
                 <form action="" method="post">
                     @csrf
                     <div class="input-group mb-3">
@@ -124,7 +124,7 @@
                             <div class="icheck-primary">
                                 <input type="checkbox" id="remember">
                                 <label for="remember">
-                                    Remember Me
+                                    Ghi nhớ đăng nhập
                                 </label>
                             </div>
                         </div>
@@ -136,20 +136,17 @@
                     </div>
                 </form>
                 <div class="social-auth-links text-center mb-3">
-                    <p>- OR -</p>
+                    <p>- HOẶC -</p>
                     <a href="#" class="btn btn-block btn-primary">
-                        <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+                        <i class="fab fa-facebook mr-2"></i> Đăng nhập bằng Facebook
                     </a>
                     <a href="#" class="btn btn-block btn-danger">
-                        <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                        <i class="fab fa-google-plus mr-2"></i> Đăng nhập bằng Google+
                     </a>
                 </div>
 
-                <p class="mb-1">
-                    <a href="forgot-password.html">I forgot my password</a>
-                </p>
                 <p class="mb-0">
-                    <a href="{{ route('admin.register') }}" class="text-center">Register a new admin</a>
+                    <a href="{{ route('admin.register') }}" class="text-center">Quên mật khẩu</a>
                 </p>
             </div>
 
