@@ -16,13 +16,15 @@ class UserController extends Controller
     public function index(string $id)
     {
         $room = Room::find($id);
+        $title = 'Quản lí phòng';
+        $sub_title = 'user';
 
         if(!$room) {
             return redirect()->route('admin.index');
         }
 
         $members = DB::table('users')->where('room_id', '=', $id)->orderByDesc('id')->get();
-        return view('admin.member.index', compact('members', 'room'));
+        return view('admin.member.index', compact('members', 'room', 'sub_title', 'title'));
     }
 
     /**
@@ -31,12 +33,14 @@ class UserController extends Controller
     public function create(string $id)
     {
         $room = Room::find($id);
+        $title = 'Quản lí phòng';
+        $sub_title = 'user';
 
         if(!$room) {
             return redirect()->route('admin.index');
         }
 
-        return view('admin.member.create', compact('room'));
+        return view('admin.member.create', compact('room', 'title', 'sub_title'));
     }
 
     /**
@@ -57,12 +61,19 @@ class UserController extends Controller
             'phone' => 'required',
             'cccd' => 'required',
             'address' => 'required',
+        ], [
+            'name.required' => 'Tên không được để trống',
+            'email.required' => 'Email không được để trống',
+            'password.required' => 'Mật khẩu không được để trống',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'cccd.required' => 'Căn cước công dân không được để trống',
+            'address.required' => 'Địa chỉ không được để trống',
         ]);
 
         $user = User::create($request->all());
         $user->room_id = $id;
         $user->save();
-        return redirect()->back()->with('message', 'Thêm mới thành công');
+        return redirect()->back()->with('success', 'Thêm mới thành công');
     }
 
     /**
@@ -80,12 +91,14 @@ class UserController extends Controller
     {
         $room = Room::find($room);
         $user = User::find($id);
+        $title = 'Quản lí phòng';
+        $sub_title = 'user';
 
         if(!$room || !$user) {
             return redirect()->route('admin.index');
         }
 
-        return view('admin.member.edit', compact('room', 'user'));
+        return view('admin.member.edit', compact('room', 'user', 'title', 'sub_title'));
     }
 
     /**
@@ -108,10 +121,17 @@ class UserController extends Controller
             'phone' => 'required',
             'cccd' => 'required',
             'address' => 'required',
+        ], [
+            'name.required' => 'Tên không được để trống',
+            'email.required' => 'Email không được để trống',
+            'password.required' => 'Mật khẩu không được để trống',
+            'phone.required' => 'Số điện thoại không được để trống',
+            'cccd.required' => 'Căn cước công dân không được để trống',
+            'address.required' => 'Địa chỉ không được để trống',
         ]);
 
         $user->update($request->all());
-        return redirect()->back()->with('message', 'Sửa thông tin thành công');
+        return redirect()->back()->with('success', 'Sửa thông tin thành công');
     }
 
     /**
@@ -127,6 +147,6 @@ class UserController extends Controller
         }
 
         $user->delete();
-        return redirect()->route('admin.member.index')->with('message', 'Xóa thành công');
+        return redirect()->route('admin.member.index', ['room' => $room->id])->with('success', 'Xóa thành công');
     }
 }

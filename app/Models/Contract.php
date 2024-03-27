@@ -10,4 +10,6 @@ class Contract extends Model
     use HasFactory;
 
     protected $table = 'contracts';
+
+    protected $fillable = ['month_quantity', 'started_at', 'room_id'];
 }
