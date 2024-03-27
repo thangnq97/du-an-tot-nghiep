@@ -28,7 +28,7 @@
                             <h6 class="card-text text-room "> Giá tiền : <span
                                     class="text-danger">{{ number_format($query->price) }} VNĐ</span></h6>
                             <div class="action-button">
-                                <a href="{{ route('admin.member.index', ['room' => $query->id]) }}"
+                                <a @if ($query->member_quantity <= 0) hidden @endif href="{{ route('admin.member.index', ['room' => $query->id]) }}"
                                     class="btn btn-info button-action"><i class="fa-solid fa-eye"></i></a>
                                 <a href="{{ route('room.edit', $query) }}" class="btn btn-success button-action">
                                     <i class="fa-regular fa-pen-to-square"></i></a>
