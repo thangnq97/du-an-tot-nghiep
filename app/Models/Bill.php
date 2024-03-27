@@ -12,7 +12,7 @@ class Bill extends Model
     protected $table = 'bills';
 
 
-    protected $fillable = ['room_id', 'total_price', 'remaining_amount', 'total_price_service', 'note', 'date_time', 'paid_amount','is_paid'];
+    protected $fillable = ['room_id', 'total_price', 'remaining_amount', 'total_price_service', 'note', 'date_time', 'paid_amount','is_paid','note','payment_method_id'];
 
     public function room(){
         return $this->belongsTo(\App\Models\Room::class);

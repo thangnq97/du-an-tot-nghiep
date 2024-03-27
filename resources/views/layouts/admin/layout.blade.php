@@ -128,12 +128,23 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí cơ sở vật chất')
                             active
-                        @endif" href="ui-contact.html" aria-expanded="false">
+                        @endif" href="{{route('interiors.index')}}" aria-expanded="false">
                                 <span>
                                     <i class="fa-brands fa-intercom"></i>
                                     {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link @if ($title === 'Danh sách khách hàng')
+                            active
+                        @endif" href="{{route('user_information.index')}}" aria-expanded="false">
+                                <span>
+                                    <i class="fa-brands fa-intercom"></i>
+                                    {{-- sửa lại icon của menu --}}
+                                </span>
+                                <span class="hide-menu">Danh sách khách hàng</span>
                             </a>
                         </li>
 
