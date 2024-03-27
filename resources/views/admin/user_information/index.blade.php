@@ -27,11 +27,9 @@
                 <th scope="col">Tên khách </th>
                 <th scope="col">Phòng đã ở</th>               
                 <th scope="col">Số điện thoại</th>               
-                <th scope="col">email</th>
-                <th scope="col">password</th>  
-                <th scope="col">cccd</th>
-                <th scope="col">Địa chỉ</th>   
-                <th scope="col">Hành động</th>
+                <th scope="col">Email</th>               
+                <th scope="col">Căn cước công dân</th>
+                <th scope="col">Địa chỉ</th>                
             </tr>
         </thead>
         <tbody>
@@ -41,8 +39,7 @@
                 <td>{{ $u->name }}</td>
                 <td>{{ $u->room->name }}</td>
                 <td>{{ $u->phone }}</td>
-                <td>{{ $u->email }}</td>
-                <td>{{ $u->password }}</td>   
+                <td>{{ $u->email }}</td>                 
                 <td>{{ $u->cccd }}</td>
                 <td>{{ $u->address }}</td> 
                 <!-- <td>
