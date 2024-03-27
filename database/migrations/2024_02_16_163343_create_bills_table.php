@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('remaining_amount');
             $table->integer('total_price_service');
             $table->date('date_time');
-            $table->integer('payment_method_id')->nullable();
             $table->string('note', 255)->nullable();
             $table->timestamps();
         });

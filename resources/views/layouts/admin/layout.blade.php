@@ -101,17 +101,6 @@
                             </a>
                         </li>
 
-                        <li class="sidebar-item">
-                            <a class="sidebar-link @if ($title === 'Quản lí hợp đồng')
-                            active
-                        @endif" href="" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-file-contract"></i>
-                                    {{-- sửa lại icon của menu --}}
-                                </span>
-                                <span class="hide-menu">Quản lí hợp đồng</span>
-                            </a>
-                        </li>
 
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí giao dịch')
