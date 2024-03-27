@@ -80,5 +80,6 @@ Route::delete('/bill/{id}/delete', [BillController::class, 'destroy'])->name('bi
 // Route::get('/electric', [ElectricController::class,'index']);
 Route::resource('/electric', ElectricController::class);
 Route::resource('/user_bill', BillUserController::class);
+Route::get('/bill/{id}/generate-pdf', [BillUserController::class, 'generatePDF'])->name('bill.generatePDF');
 // Route::get('user_bill/{id}/bill_user', [BillUserController::class, 'index'])->name('user.index');
 
