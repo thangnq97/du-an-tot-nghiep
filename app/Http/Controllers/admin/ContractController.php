@@ -54,7 +54,7 @@ class ContractController extends Controller
         $room = Room::find($room_id);
         $contract = Contract::find($id);
         $owner = DB::table('users')->where('role_id', '=', 1)->get();
-        $members = DB::table('users')->where('room_id', '=', $room->id)->get();
+        $members = DB::table('users')->where('room_id', '=', $room->id)->where('is_active', '=', 1)->get();
 
         if(count($owner)) {
             $owner = $owner[0];
@@ -99,7 +99,7 @@ class ContractController extends Controller
         if(count($owner)) {
             $owner = $owner[0];
         }
-        $members = DB::table('users')->where('room_id', '=', $room->id)->get();
+        $members = DB::table('users')->where('room_id', '=', $room->id)->where('is_active', '=', 1)->get();
 
         $data = [
             'room' => $room,

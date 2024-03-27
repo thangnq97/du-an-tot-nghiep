@@ -9,7 +9,19 @@
         </div>
         <div class="col-7">
             <div class="p-6 bg-white rounded shadow">
-                <h1>{{ $chart1->options['chart_title'] }}</h1>
+                <div class="d-flex justify-content-between">
+                    <h1>{{ $chart1->options['chart_title'] }}</h1>
+                    <div class="d-flex gap-2">
+                        <form action="">
+                            <input type="hidden" name="filter" value="month">
+                            <button class="btn btn-dark">Tháng</button>
+                        </form>
+                        <form action="">
+                            <input type="hidden" name="filter" value="year">
+                            <button class="btn btn-dark">Năm</button>
+                        </form>
+                    </div>
+                </div>
                                 {!! $chart1->renderHtml() !!}
             </div>
         </div>
