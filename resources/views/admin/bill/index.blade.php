@@ -82,7 +82,7 @@
             <form action="{{ route('bill.index') }}" method="GET">
                 @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
             
-                <div class="row align-items-center">
+                <div class="row align-items-center mx-1">
                     <div class="col-md-4 mb-2">
                         <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
                             <option selected disabled>--Chọn phòng--</option>
@@ -127,10 +127,10 @@
                     @foreach ($bills as $item)
                         <tr>
                             <td>{{ $item->room->name }}</td>
-                            <td>{{ $item->total_price_service }}</td>
-                            <td>{{ $item->total_price }}</td>
-                            <td>{{ $item->paid_amount }}</td>
-                            <td>{{ $item->remaining_amount }}</td>
+                            <td>{{ number_format($item->total_price_service) }} VNĐ</td>
+                            <td>{{ number_format($item->total_price) }} VNĐ</td>
+                            <td>{{ number_format($item->paid_amount) }} VNĐ</td>
+                            <td>{{ number_format($item->remaining_amount) }} VNĐ</td>
                             <td>{{ $item->note }}</td>
                             <td>
                                 @if ($item->is_paid == 1)

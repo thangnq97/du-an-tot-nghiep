@@ -71,7 +71,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí điện')
                             active
-                        @endif" href="./ui-bill.html" aria-expanded="false">
+                        @endif" href="{{ route('electric.index') }}" aria-expanded="false">
                                 <span>
                                                       <i class="fa-solid fa-bolt"></i>
                                                     {{-- sửa lại icon của menu --}}

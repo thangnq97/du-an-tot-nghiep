@@ -138,7 +138,8 @@ class BillController extends Controller
             foreach ($item as $key => $value) {
                 $sevice_price = $value;
 
-                $description_room .=  '<p>' . $key . ' (Giá: ' . $sevice_price . ')' . '</p>' . '<p style="padding-left: 535px">' . $value . '</p>';
+                $description_room .=  '<p>' . $key . ' (Giá: ' . $sevice_price . ')' . '</p>' . '<p style="padding-left: 500px">' . $value . '</p>';
+                // dd($description_room);
             }
         }
 
@@ -281,7 +282,7 @@ class BillController extends Controller
             'date_time' => $bill->date_time,
             'paid_amount' => $paid_amount,
             'is_paid' =>  $is_paid,
-            'payment_method_id' =>  $request->payment_method_id
+            // 'payment_method_id' =>  $request->payment_method_id
         ];
 
         $bill->update($data);

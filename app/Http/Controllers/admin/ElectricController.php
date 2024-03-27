@@ -18,18 +18,21 @@ class ElectricController extends Controller
 
     public function index()
     {
+        $title = 'Quản lí điện';
         $data = Electricity_usage::query()->latest()->paginate(5);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data','title'));
     }
     public function create()
     {
+        $title = 'Quản lí điện';
         $rooms = Room::query()->pluck('name', 'id');
         $services = Service::query()->pluck('name', 'id');
         // dd($services);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('rooms', 'services'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('rooms', 'services','title'));
     }
     public function store(Request $request)
     {
+       
         $validated = $request->validate(
             [
                 'room_id' => 'required',
@@ -49,7 +52,7 @@ class ElectricController extends Controller
 
             ],
         );
-
+       
         $year = date('Y', strtotime($request->date_time));
 
         $month = date('n', strtotime($request->date_time));

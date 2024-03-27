@@ -32,9 +32,9 @@
 
             <tr>
                 <td>{{ $item->room->name }}</td>
-                <td>{{ $item->pre_electricity }}</td>
-                <td>{{ $item->current_electricity }}</td>
-                <td>{{ $item->used_electricity }}</td>
+                <td>{{ number_format($item->pre_electricity )}}</td>
+                <td>{{ number_format($item->current_electricity )}}</td>
+                <td>{{ number_format($item->used_electricity )}}</td>
                 <td>{{ $item->date_time }}</td>
                 <td>
                     <a href="{{ route('electric.edit', $item) }}" class="btn btn-success "><i class="fa-regular fa-pen-to-square"></i>
