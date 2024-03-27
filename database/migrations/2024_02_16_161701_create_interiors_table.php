@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('interiors', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->tinyInteger('quantitys')->default('0');
             $table->timestamps();
         });
     }

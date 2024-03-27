@@ -1,5 +1,6 @@
 <?php
 
+
 use App\Http\Controllers\admin\AdminHomeController;
 use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\admin\UserController;
@@ -12,6 +13,10 @@ use App\Http\Controllers\admin\ElectricController;
 use App\Http\Controllers\user\BillUserController;
 use App\Models\Bill;
 use Illuminate\Routing\ViewController;
+use App\Http\Controllers\admin\InteriorsController;
+use App\Http\Controllers\admin\RoominteriorController;
+use App\Http\Controllers\admin\UsersController;
+use App\Http\Controllers\admin\user_informationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,3 +89,21 @@ Route::resource('/user_bill', BillUserController::class);
 Route::get('/bill/{id}/generate-pdf', [BillUserController::class, 'generatePDF'])->name('bill.generatePDF');
 // Route::get('user_bill/{id}/bill_user', [BillUserController::class, 'index'])->name('user.index');
 
+
+
+Route::get('view', function (){
+    return view("layouts.admin.layout");
+});
+
+Route::resource('room' , RoomController::class);
+Route::resource('service' , ServiceController::class);
+Route::get('createpeople', [RoomController::class , 'createPeople'])->name('room.createpeople');
+
+
+//tùng
+//  interiors
+Route::resource('interiors',InteriorsController::class);
+//  Roominterior
+Route::resource('Roominterior', RoominteriorController::class);
+//user_information
+Route::resource('user_information', user_informationController::class);
