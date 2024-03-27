@@ -16,16 +16,22 @@ use LaravelDaily\LaravelCharts\Classes\LaravelChart;
 class AdminHomeController extends Controller
 {
 
-    public function index(RoomChart $roomChart) {
+    public function index(Request $request, RoomChart $roomChart) {
         $chart = $roomChart->build();
         $title = 'Trang chủ';
+        $filter = '';
+        if($request->filter) {
+            $filter = $request->filter;
+        }else {
+            $filter = 'month';
+        }
 
         $chart_options = [
             'chart_title' => 'Doanh thu',
             'report_type' => 'group_by_date',
             'model' => 'App\Models\Bill',
             'group_by_field' => 'created_at',
-            'group_by_period' => 'month',
+            'group_by_period' => $filter,
             'aggregate_function' => 'sum',
             'aggregate_field' => 'total_price',
             'chart_type' => 'bar',
@@ -35,6 +41,12 @@ class AdminHomeController extends Controller
     }
 
     public function login() {
+        if(Auth::user()) {
+            if(Auth::user()->role_id == 1) {
+                return redirect()->route('admin.index');
+            }
+            return redirect()->route('user.index');
+        }
         return view('admin.account.login');
     }
 
@@ -42,10 +54,17 @@ class AdminHomeController extends Controller
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
+        ],[
+            'email.required' => 'Không được để trống email',
+            'email.email' => 'Bạn nhập phải là địa chỉ email hợp lệ',
+            'password.required' => 'Không được để trống mật khẩu',
         ]);
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role_id' => 1])) {
-            return redirect()->route('admin.index');
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if(Auth::user()->role_id == 1) {
+                return redirect()->route('admin.index');
+            }
+            return redirect()->route('user.index');
         }
 
         return redirect()->back()->with('no', 'Sai tài khoản hoặc mật khẩu');
