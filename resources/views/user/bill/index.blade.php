@@ -161,10 +161,10 @@
                                 <a  href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
                                         class="fa-solid fa-eye"></i></a>
 
-                                {{-- <a href="{{ route('bill.edit', $item) }}" class="btn btn-primary"><i
+                                <a href="" class="btn btn-primary"><i
                                         class="fa-solid fa-money-bill-1-wave"></i></a>
                                
-                                    @csrf
+                                    {{-- @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger button-action" type="submit"
                                         onclick="return confirm('Bạn có muốn xóa không')">
