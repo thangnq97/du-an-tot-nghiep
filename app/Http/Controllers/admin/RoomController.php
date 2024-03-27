@@ -77,6 +77,7 @@ class RoomController extends Controller
             $user['avatar'] = Storage::put(self::PATH_UPLOAD, $request->file('avatar'));
         }
         $room->member_quantity += 1;
+        $room->status = 1;
         $room->save();
         return redirect()->back()->with('msg', 'Thêm mới thành công');
     }
