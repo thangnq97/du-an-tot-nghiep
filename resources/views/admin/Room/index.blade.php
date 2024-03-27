@@ -17,8 +17,7 @@
                     <div class="card card-room " style="width: 15rem;">
                         <div @if ($query->member_quantity > 0) style="background-color : #b5dceb" @endif class="card-body">
                             <h4 class="card-title"><i class="fa-solid fa-house"> {{ $query->name }}</i></h4>
-                            <h6><a @if ($query->member_quantity > 0) style = " visibility:hidden" @endif
-                                    href="{{ route('room.create_people', $query) }}" class="btn btn-primary text-room ">Thêm
+                            <h6><a href="{{ route('room.create_people', $query) }}" class="btn btn-primary text-room ">Thêm
                                     Khách</a>
                             </h6>
                             <h6 class="card-text text-room">Số lượng : {{ $query->member_quantity }}</h6>

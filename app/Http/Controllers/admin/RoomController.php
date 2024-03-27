@@ -69,13 +69,9 @@ class RoomController extends Controller
         if ($room->member_quantity + 1 > $room->member_maximum) {
             return back()->with('err', 'Phòng đã đầy');
         }
-        $user = $request->except('avatar');
         $user = User::create($request->all());
         $user->room_id = $id;
         $user->save();
-        if ($request->hasFile('avatar')) {
-            $user['avatar'] = Storage::put(self::PATH_UPLOAD, $request->file('avatar'));
-        }
         $room->member_quantity += 1;
         $room->status = 1;
         $room->save();

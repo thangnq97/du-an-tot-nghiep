@@ -26,10 +26,6 @@
             <label for="price" class="form-label">Giá Phòng</label>
             <input type="number" class="form-control" id="price" name="price">
         </div>
-        {{-- <div class="mb-3">
-            <label for="member_maximum" class="form-label">Số lượng người</label>
-            <input type="text" class="form-control" id="name" name="member_maximum">
-        </div> --}}
         <div class="mb-3">
             <label for="member_maximum" class="form-label">Số lượng người giới hạn</label>
             <input type="text" class="form-control" id="name" name="member_maximum">

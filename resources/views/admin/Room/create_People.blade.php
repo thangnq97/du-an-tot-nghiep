@@ -45,10 +45,6 @@
             <label for="member_maximum" class="form-label">Địa chỉ</label>
             <input type="text" class="form-control" id="name" name="address">
         </div>
-        <div class="mb-3">
-            <label for="member_maximum" class="form-label">Ảnh</label>
-            <input type="file" class="form-control" id="name" name="avatar" >
-        </div>
         <button type="submit" class="btn btn-primary">Submit</button>
         <a href="{{ route('room.index') }}" class="btn btn-warning my-3">Trở về</a>
     </form>
