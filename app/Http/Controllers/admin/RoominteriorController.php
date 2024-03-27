@@ -44,16 +44,17 @@ class RoominteriorController extends Controller
         //     $q->where('name', 'LIKE', '%' . $searchTerm . '%');
         // });
 
+        $title = 'Quản lí cơ sở vật chất';
 
-
-        return view(self::PATH_VIEW . __FUNCTION__, compact('Room_interiors', 'room', 'interiors'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('Room_interiors', 'room', 'interiors','title'));
     }
 
     public function create()
     {
         $interiors = Interior::latest()->pluck('name', 'id')->all();
         $rooms = Room::latest()->pluck('name', 'id')->all();
-        return view(self::PATH_VIEW . __FUNCTION__, compact('interiors', 'rooms'));
+        $title = 'Quản lí cơ sở vật chất';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('interiors', 'rooms','title'));
     }
 
     public function store(Request $request)

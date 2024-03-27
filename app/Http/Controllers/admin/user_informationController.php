@@ -17,7 +17,7 @@ class user_informationController extends Controller
     public function index(Request $request)
     {
         $query = User::query()->latest();
-
+        $title = 'Danh sách khách hàng';
         // Handle search
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
@@ -25,7 +25,7 @@ class user_informationController extends Controller
         }
 
         $users = $query->paginate(5);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('users'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('users','title'));
     }
 
     // public function create()

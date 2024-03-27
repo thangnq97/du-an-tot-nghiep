@@ -20,6 +20,7 @@ class InteriorsController extends Controller
     public function index()
     {
         $interiors = Interior::query()->latest()->paginate(5);
+        $title = 'Quản lí cơ sở vật chất';
         foreach ($interiors as $item) {
             $id = $item->id;
             $room_interior = DB::table('room_interior')->where('interior_id', $id)->sum('quantity');
@@ -27,8 +28,8 @@ class InteriorsController extends Controller
             $item->remainingQuantity = $item->quantitys - $room_interior;
          
         };
-
-        return view(self::PATH_VIEW . __FUNCTION__,compact('interiors'));
+        
+        return view(self::PATH_VIEW . __FUNCTION__,compact('interiors','title'));
     }
 
 

@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="{{ asset('assets/css/styles.min.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 </head>
 
 <body>
@@ -130,7 +128,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí cơ sở vật chất')
                             active
-                        @endif" href="ui-contact.html" aria-expanded="false">
+                        @endif" href="{{route('interiors.index')}}" aria-expanded="false">
                                 <span>
                                     <i class="fa-brands fa-intercom"></i>
                                     {{-- sửa lại icon của menu --}}
@@ -138,22 +136,15 @@
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
                         </li>
-
                         <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('user_information.index') }}" aria-expanded="false">
+                            <a class="sidebar-link @if ($title === 'Danh sách khách hàng')
+                            active
+                        @endif" href="{{route('user_information.index')}}" aria-expanded="false">
                                 <span>
-                                    <i class="bi bi-person-circle"></i>
+                                    <i class="fa-brands fa-intercom"></i>
+                                    {{-- sửa lại icon của menu --}}
                                 </span>
-                                <span class="hide-menu">Quản lí Khách Hàng</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" href="{{ route('user_information.index') }}" aria-expanded="false">
-                                <span>
-                                    <i class="bi bi-person-circle"></i>
-                                </span>
-                                <span class="hide-menu">Quản lí Khách Hàng</span>
+                                <span class="hide-menu">Danh sách khách hàng</span>
                             </a>
                         </li>
 
