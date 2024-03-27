@@ -25,9 +25,9 @@ class WaterController extends Controller
     {
         $title = 'Quản lí nước';
         $room = Room::query()->pluck('name', 'id');
-        $data = Water_usage::query()->with('room')->orderBy('id','DESC')->paginate(5);
-        $water_date = Water_usage::query()->with('room')->orderBy('id','DESC')->paginate(5);
-        
+        $data = Water_usage::query()->with('room')->orderBy('id', 'DESC')->paginate(5);
+        $water_date = Water_usage::query()->with('room')->orderBy('id', 'DESC')->paginate(5);
+
         $room_id = $request->room;
         $date_time = $request->date_time;
         // dd($date_time);
@@ -44,10 +44,10 @@ class WaterController extends Controller
         } else {
             $data = Water_usage::query()->with('room')->latest()->paginate(5);
         }
-        
-       
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data','title','room','water_date'));
+
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title', 'room', 'water_date'));
     }
 
     /**
@@ -58,7 +58,7 @@ class WaterController extends Controller
         $title = 'Quản lí nước';
         $room = Room::query()->pluck('name', 'id');
         $services = Service::query()->pluck('name', 'id');
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'services','title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'services', 'title'));
     }
 
     /**
@@ -68,18 +68,17 @@ class WaterController extends Controller
     {
         $validated = $request->validate(
             [
-            'room_id' => [
-                'required',
-                Rule::exists('room_id','id')
-            ],
-            'pre_water' => 'required|numeric',
-            'current_water' => 'required|numeric|gt:pre_water',
-            'date_time' => 'required|date',
-            
-            'service_id' => [
-                'required',
-                Rule::exists('service_id','id')
-            ],
+                'room_id' => [
+                    'required',
+                ],
+                'pre_water' => 'required|numeric',
+                'current_water' => 'required|numeric|gt:pre_water',
+                'date_time' => 'required|date',
+
+                'service_id' => [
+                    'required',
+
+                ],
             ],
             [
                 'room_id.required' => 'Không được để trống',
@@ -90,9 +89,9 @@ class WaterController extends Controller
                 'date_time.current_water' => 'Phải là dạng số',
                 'date_time.date' => 'Vui lòng nhập đúng định dạng',
                 'current_water.gt' => 'Chỉ số mới phải lớn hơn chỉ số cũ',
-                
+
             ]
-    );
+        );
 
 
         $year = date('Y', strtotime($request->date_time));
@@ -112,8 +111,8 @@ class WaterController extends Controller
         return back()->with('msg', 'Lưu thành công');
     }
 
-   
-    
+
+
     public function edit(String $id)
 
     {
@@ -153,5 +152,4 @@ class WaterController extends Controller
 
         return back()->with('msg', 'sửa thành công');
     }
-
 }
