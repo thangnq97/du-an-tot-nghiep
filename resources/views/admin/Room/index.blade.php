@@ -19,17 +19,19 @@
                     <div class="card card-room " style="width: 15rem;">
                         <div @if ($query->member_quantity > 0) style="background-color : #b5dceb" @endif class="card-body">
                             <h4 class="card-title"><i class="fa-solid fa-house"> {{ $query->name }}</i></h4>
-                            <h6><a @if ($query->member_quantity > 0)
-                                style = " visibility:hidden"
-                            @endif href="{{ route('room.create_people', $query) }}" class="btn btn-primary text-room ">Thêm Khách</a>
+                            <h6><a @if ($query->member_quantity > 0) style = " visibility:hidden" @endif
+                                    href="{{ route('room.create_people', $query) }}" class="btn btn-primary text-room ">Thêm
+                                    Khách</a>
                             </h6>
                             <h6 class="card-text text-room">Số lượng : {{ $query->member_quantity }}</h6>
                             <h6 class="card-text text-room"> Số lượng giới hạn : {{ $query->member_maximum }}</h6>
                             <h6 class="card-text text-room "> Giá tiền : <span
                                     class="text-danger">{{ number_format($query->price) }} VNĐ</span></h6>
                             <div class="action-button">
-                                <a @if ($query->member_quantity <= 0) hidden @endif href="{{ route('admin.member.index', ['room' => $query->id]) }}"
-                                    class="btn btn-info button-action"><i class="fa-solid fa-eye"></i></a>
+                                @if($query->member_quantity > 0)
+                                    <a href="{{ route('admin.member.index', ['room' => $query->id]) }}"
+                                        class="btn btn-info button-action"><i class="fa-solid fa-eye"></i></a>
+                                @endif
                                 <a href="{{ route('room.edit', $query) }}" class="btn btn-success button-action">
                                     <i class="fa-regular fa-pen-to-square"></i></a>
                                 <form action="{{ route('room.destroy', $query) }}" method="POST">
