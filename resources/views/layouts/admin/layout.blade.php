@@ -104,7 +104,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí hợp đồng')
                             active
-                        @endif" href="ui-contact.html" aria-expanded="false">
+                        @endif" href="" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-file-contract"></i>
                                     {{-- sửa lại icon của menu --}}
