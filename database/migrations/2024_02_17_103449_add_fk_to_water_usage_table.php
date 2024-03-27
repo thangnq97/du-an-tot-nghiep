@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('water_usage', function (Blueprint $table) {
             $table->foreignId('room_id')->constrained('rooms')->cascadeOnDelete();
+            $table->foreignId('service_id')->constrained('services')->cascadeOnDelete();
         });
     }
 
@@ -22,7 +23,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('water_usage', function (Blueprint $table) {
-            
+
         });
     }
 };

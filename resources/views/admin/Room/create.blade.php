@@ -14,7 +14,9 @@
                 </ul>
             </div>
         @endif
-    <form action="{{ route('room.store') }}" method="POST">
+        <h1>Thêm phòng</h1>
+        <hr>
+    <form action="{{ route('room.store') }}" method="POST" style="width: 80%; margin: auto">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Tên phòng</label>
@@ -23,13 +25,6 @@
         <div class="mb-3">
             <label for="price" class="form-label">Giá Phòng</label>
             <input type="number" class="form-control" id="price" name="price">
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Trạng thái</label>
-            <select class="form-control" name="status" id="">
-                <option value="0">Đang thuê</option>
-                <option value="1">Đang trống</option>
-            </select>
         </div>
         {{-- <div class="mb-3">
             <label for="member_maximum" class="form-label">Số lượng người</label>
@@ -52,5 +47,6 @@
             <textarea name="description" id="" cols="30" rows="10" class="form-control"></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
+        <a href="{{ route('room.index') }}" class="btn btn-warning my-3">Trở về</a>
     </form>
 @endsection

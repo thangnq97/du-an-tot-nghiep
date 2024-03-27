@@ -7,8 +7,9 @@
     @endif
     <h1>Quản lí dịch vụ</h1>
     <hr>
+    <div class="bg-light">
     <div class="action-room">
-        <a href="{{ route('service.create') }}" class="btn btn-primary ">Thêm dịch vụ</a>
+        <a href="{{ route('service.create') }}" class="btn btn-primary m-2">Thêm dịch vụ</a>
     </div>
     <table class="table">
         <thead>
@@ -26,7 +27,7 @@
                 <tr>
                     {{-- <th scope="row">{{ $query->id }}</th> --}}
                     <td>{{ $query->name }}</td>
-                    <td>{{ number_format($query->price) }}</td>
+                    <td class="text-danger">{{ number_format($query->price) }} VNĐ</td>
                     <td>{{ $query->method ? 'Số đồng hồ' : 'Số người' }}</td>
                     <td>
                         <div class="action-button" >
@@ -46,5 +47,6 @@
             @endforeach
         </tbody>
     </table>
+</div>
 @endsection
 <script></script>

@@ -11,5 +11,7 @@ class Bill_detail extends Model
 
     protected $table = 'bill_detail';
 
-    protected $fillable = ['bill_id', 'email', 'name', 'room_name', 'room_price', 'date_start', 'date_end', 'pre_water', 'current_water', 'water_price', 'pre_electricity', 'current_electricity', 'electricity_price', 'total_price_service'];
+    protected $fillable = ['bill_id', 'email', 'name', 'room_name', 'room_price', 'date_start', 'pre_water', 'current_water', 'water_price', 'pre_electricity', 'current_electricity', 'electricity_price',
+     'total_price_service','number_member','description','description_room'];
+    
 }

@@ -14,7 +14,9 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('room.update', $room) }}" method="POST">
+    <h1>Sửa thông tin phòng</h1>
+    <hr>
+    <form action="{{ route('room.update', $room) }}" method="POST" style="width: 80%; margin: auto">
         @csrf
         @method('PUT')
         <div class="mb-3">
@@ -31,11 +33,6 @@
                 <option @if ($room->status == 0) selected @endif value="0">Đang thuê</option>
                 <option @if ($room->status == 1) selected @endif value="1">Đang trống</option>
             </select>
-        </div>
-        <div class="mb-3">
-            <label for="member_quantity" class="form-label">Số lượng người</label>
-            <input value="{{ $room->member_quantity }}" type="text" class="form-control" id="name"
-                name="member_quantity">
         </div>
         <div class="mb-3">
             <label for="member_maximum" class="form-label">Số lượng người giới hạn</label>
@@ -56,5 +53,6 @@
                 class="form-control">{{ $room->description }}</textarea>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
+        <a href="{{ route('room.index') }}" class="btn btn-warning my-3">Trở về</a>
     </form>
 @endsection

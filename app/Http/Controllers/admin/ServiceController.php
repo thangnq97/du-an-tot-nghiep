@@ -13,26 +13,34 @@ class ServiceController extends Controller
     public function index()
     {
         $data = Service::query()->paginate();
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        $title = 'Quản lí dịch vụ';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title'));
     }
     public function create() 
     {
-        return view(self::PATH_VIEW . __FUNCTION__);
+        $title = 'Quản lí dịch vụ';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('title'));
     }
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'price' => 'required',
-            'method' => 'required',
-        ]);
+        $request->validate(
+            [
+                'name' => 'required',
+                'price' => 'required',
+            ],
+            [
+                'name.required' => 'Không được để trống tên',
+                'price.required' => 'Không được để trống giá',
+            ]
+        );
         $data = $request->all();
         Service::query()->create($data);
         return back()->with('msg', 'Thêm dịch vụ thành công');
     }
     public function edit(Service $service)
     {
-        return view(self::PATH_VIEW . __FUNCTION__, compact('service'));
+        $title = 'Quản lí dịch vụ';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('service', 'title'));
     }
     public function update(Request $request, Service $service)
     {

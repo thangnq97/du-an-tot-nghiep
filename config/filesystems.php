@@ -32,22 +32,16 @@ return [
 
         'local' => [
             'driver' => 'local',
-            'root' => storage_path('app'),
-            'throw' => false,
-        ],
-
-        'local2' => [
-            'driver' => 'local',
             'root' => public_path('upload'),
-            'url' => env('APP_URL').'/upload',     
+            'url' => env('APP_URL') . '/upload',
+            'visibility' => 'public',
             'throw' => false,
-        ],
-
-
+        ], 
+        
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
-            'url' => env('APP_URL').'/storage',
+            'url' => env('APP_URL') . '/storage',
             'visibility' => 'public',
             'throw' => false,
         ],
