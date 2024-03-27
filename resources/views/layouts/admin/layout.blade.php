@@ -38,7 +38,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Trang chủ')
                                 active
-                            @endif" href="./index.html" aria-expanded="false">
+                            @endif" href="{{ route('admin.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-house"></i>
                                      {{-- sửa lại icon của menu --}}
