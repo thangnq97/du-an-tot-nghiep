@@ -5,11 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Contract extends Model
+class BillUser extends Model
 {
     use HasFactory;
-
-    protected $table = 'contracts';
-
-    protected $fillable = ['month_quantity', 'started_at', 'room_id'];
 }

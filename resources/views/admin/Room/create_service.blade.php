@@ -29,6 +29,6 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
-        <a href="{{ route('room.show', ['room' => $room->id]) }}" class="btn btn-danger ">quay lại</a>
+        <a href="{{ route('room.show_service', ['room' => $room->id]) }}" class="btn btn-danger ">quay lại</a>
     </form>
 @endsection
