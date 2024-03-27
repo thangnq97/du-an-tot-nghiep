@@ -1,7 +1,7 @@
 @extends('layouts.admin.layout')
 @section('content')
 <div>
-    <h2 class="text-center">Thêm chỉ số điện</h2>
+    <h2 class="text-center">Thêm chỉ số Nước</h2>
     @if(\Session::has('msg'))
     <div class="alert alert-success  alert-dismissible fade show" role="alert">
         <strong> {{ \Session::get('msg') }}</strong>

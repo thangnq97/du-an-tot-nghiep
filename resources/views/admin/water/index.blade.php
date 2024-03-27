@@ -62,9 +62,9 @@
 
             <tr>
                 <td>{{ $item->room->name }}</td>
-                <td>{{ $item->pre_water }}</td>
-                <td>{{ $item->current_water }}</td>
-                <td>{{ $item->used_water }}</td>
+                <td>{{ number_format($item->pre_water) }}</td>
+                <td>{{ number_format($item->current_water) }}</td>
+                <td>{{ number_format($item->used_water) }}</td>
                 <td>{{ $item->date_time }}</td>
                 <td>
                     <a href="{{ route('waters.edit',$item->id) }}" class="btn  btn-success"><i class="fa-regular fa-pen-to-square"></i></a>

@@ -29,7 +29,7 @@
 
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Số tiền</label>
-                <input type="text" class="form-control"  id="pay_1" name="paid_amount" value="{{ $bill->paid_amount }}">
+                <input type="text" class="form-control"  id="pay_1" name="paid_amount" value="{{ number_format($bill->paid_amount) }}">
                 @error('paid_amount')
                     <div class="text-danger ">{{ $message }}</div>
                 @enderror
@@ -37,7 +37,7 @@
             
             <div  hidden class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Phương thức thanh toán</label>
-                <input type="number" class="form-control"  id="exampleInputPassword1" name="payment_method_id" value="1">
+                <input type="number" class="form-control"  id="exampleInputPassword1" name="payment_method_id">
             </div>
 
             <div>

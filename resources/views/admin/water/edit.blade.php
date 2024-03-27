@@ -1,6 +1,6 @@
 @extends('layouts.admin.layout')
 @section('content')
-    <h2 class="text-center ">Sửa số điện</h2>
+    <h2 class="text-center ">Sửa số Nước</h2>
     @if (\Session::has('msg'))
         <div class="alert alert-success    alert-dismissible fade show" role="alert">
             <strong> {{ \Session::get('msg') }}</strong>

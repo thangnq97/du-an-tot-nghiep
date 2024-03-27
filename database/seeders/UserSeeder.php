@@ -36,8 +36,8 @@ class UserSeeder extends Seeder
                 'name' => 'Nguyễn Văn B',
                 'email' => 'user@gmail.com',
                 'password' => Hash::make('1234'),
-                'phone' => '012345678',
-                'cccd' => '0123456789',
+                'phone' => '0123456789',
+                'cccd' => '01234567890',
                 'address' => 'Hà Nội',
                 'avatar' => null,
                 'is_active' => true
