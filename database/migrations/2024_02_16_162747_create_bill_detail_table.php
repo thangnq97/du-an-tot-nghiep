@@ -23,11 +23,9 @@ return new class extends Migration
             $table->integer('current_electricity');
             $table->integer('electricity_price');
             $table->integer('total_price_service');
-            $table->integer('garbage_price')->nullable();
-            $table->integer('wifi_price')->nullable();
-            $table->integer('money_wifi')->nullable();
-            $table->integer('money_garbage')->nullable();
-            $table->integer('number_member')->nullable();
+            $table->text('description');
+            $table->text('description_room');
+            $table->integer('number_member');
             
             $table->timestamps();
         });

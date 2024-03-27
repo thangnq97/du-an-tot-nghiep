@@ -16,7 +16,37 @@
         <a href="{{ route('waters.create') }}" class="btn  btn-primary ">
             <div>Thêm số nước</div>
         </a>
+        
     </div>
+
+    {{-- lọc giá trị --}}
+    <form action="{{ route('waters.index') }}" method="GET">
+        @csrf 
+    
+        <div class="row align-items-center">
+            <div class="col-md-4 mb-2">
+                <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
+                    <option selected disabled>--Chọn phòng--</option>
+                    @foreach ($room as $id => $name)
+                        <option value="{{ $id }}">{{ $name }}</option>
+                    @endforeach
+                </select>
+            </div>
+          
+            <div class="col-md-4 mb-2">
+                <select class="form-select" name="date_time" id="room2"> <!-- Đặt tên cho trường select -->
+                    <option selected disabled>--Ngày/tháng--</option>
+                    @foreach ($water_date as $bill_search)
+                        <option>{{ $bill_search->date_time }}</option>
+                    @endforeach
+                </select>
+            </div>
+    
+            <div class="col-md-4 mb-2">
+                <button type="submit" class="btn btn-success">Tìm kiếm</button>
+            </div>
+        </div>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -32,9 +62,9 @@
 
             <tr>
                 <td>{{ $item->room->name }}</td>
-                <td>{{ $item->pre_water }}</td>
-                <td>{{ $item->current_water }}</td>
-                <td>{{ $item->used_water }}</td>
+                <td>{{ number_format($item->pre_water) }}</td>
+                <td>{{ number_format($item->current_water) }}</td>
+                <td>{{ number_format($item->used_water) }}</td>
                 <td>{{ $item->date_time }}</td>
                 <td>
                     <a href="{{ route('waters.edit',$item->id) }}" class="btn  btn-success"><i class="fa-regular fa-pen-to-square"></i></a>

@@ -10,6 +10,7 @@ use App\Models\Water_usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class WaterController extends Controller
 {
@@ -20,12 +21,33 @@ class WaterController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Quản lí nước';
-        $data = Water_usage::query()->with('room')->latest()->paginate(5);
+        $room = Room::query()->pluck('name', 'id');
+        $data = Water_usage::query()->with('room')->orderBy('id', 'DESC')->paginate(5);
+        $water_date = Water_usage::query()->with('room')->orderBy('id', 'DESC')->paginate(5);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data','title'));
+        $room_id = $request->room;
+        $date_time = $request->date_time;
+        // dd($date_time);
+
+        $WaterByRoom = DB::table('water_usage')->where('room_id', $room_id)->get();
+        $WaterByDateTime = DB::table('water_usage')->where('date_time', $date_time)->get();
+
+        if ($WaterByRoom->isNotEmpty() && $WaterByDateTime->isNotEmpty()) {
+            $data = Water_usage::query()->with('room')->where('room_id', $room_id)->where('date_time', $date_time)->latest()->paginate(5);
+        } elseif ($WaterByRoom->isNotEmpty()) {
+            $data = Water_usage::query()->with('room')->where('room_id', $room_id)->latest()->paginate(5);
+        } elseif ($WaterByDateTime->isNotEmpty()) {
+            $data = Water_usage::query()->with('room')->where('date_time', $date_time)->latest()->paginate(5);
+        } else {
+            $data = Water_usage::query()->with('room')->latest()->paginate(5);
+        }
+
+
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title', 'room', 'water_date'));
     }
 
     /**
@@ -36,7 +58,7 @@ class WaterController extends Controller
         $title = 'Quản lí nước';
         $room = Room::query()->pluck('name', 'id');
         $services = Service::query()->pluck('name', 'id');
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'services','title'));
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'services', 'title'));
     }
 
     /**
@@ -46,11 +68,17 @@ class WaterController extends Controller
     {
         $validated = $request->validate(
             [
-            'room_id' => 'required',
-            'pre_water' => 'required|numeric',
-            'current_water' => 'required|numeric|gt:pre_water',
-            'date_time' => 'required|date',
-            'service_id' => 'required'
+                'room_id' => [
+                    'required',
+                ],
+                'pre_water' => 'required|numeric',
+                'current_water' => 'required|numeric|gt:pre_water',
+                'date_time' => 'required|date',
+
+                'service_id' => [
+                    'required',
+
+                ],
             ],
             [
                 'room_id.required' => 'Không được để trống',
@@ -60,8 +88,10 @@ class WaterController extends Controller
                 'pre_water.numeric' => 'Phải là dạng số',
                 'date_time.current_water' => 'Phải là dạng số',
                 'date_time.date' => 'Vui lòng nhập đúng định dạng',
+                'current_water.gt' => 'Chỉ số mới phải lớn hơn chỉ số cũ',
+
             ]
-    );
+        );
 
 
         $year = date('Y', strtotime($request->date_time));
@@ -71,7 +101,7 @@ class WaterController extends Controller
         // if($request->date_time == )
         $water_usage = DB::table('water_usage')->where('room_id', '=', $request->room_id)->whereYear('date_time', $year)->whereMonth('date_time', $month)->get();
         if (count($water_usage)) {
-            return back()->with('msg', 'đã nhập số điện tháng này');
+            return back()->with('msc', 'đã nhập số điện tháng này');
         }
         $data = $request->all();
         // if ($request->hasFile('img')) {
@@ -81,8 +111,8 @@ class WaterController extends Controller
         return back()->with('msg', 'Lưu thành công');
     }
 
-   
-    
+
+
     public function edit(String $id)
 
     {
@@ -122,5 +152,4 @@ class WaterController extends Controller
 
         return back()->with('msg', 'sửa thành công');
     }
-
 }

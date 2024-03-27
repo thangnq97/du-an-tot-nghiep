@@ -45,7 +45,7 @@ class ElectricController extends Controller
         return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title', 'room', 'electric_date' ));
     }
     public function create()
-    {   
+    {
         $title = 'Quản lí điện';
         $rooms = Room::query()->pluck('name', 'id');
         $services = Service::query()->pluck('name', 'id');
@@ -54,6 +54,7 @@ class ElectricController extends Controller
     }
     public function store(Request $request)
     {
+       
         $validated = $request->validate(
             [
                 'room_id' => 'required',
@@ -73,7 +74,7 @@ class ElectricController extends Controller
 
             ],
         );
-
+       
         $year = date('Y', strtotime($request->date_time));
 
         $month = date('n', strtotime($request->date_time));

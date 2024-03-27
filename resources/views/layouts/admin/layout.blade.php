@@ -100,40 +100,26 @@
                                 <span class="hide-menu">Quản lí hóa đơn</span>
                             </a>
                         </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link @if ($title === 'Quản lí hợp đồng')
-                            active
-                        @endif" href="ui-contact.html" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-file-contract"></i>
-                                    {{-- sửa lại icon của menu --}}
-                                </span>
-                                <span class="hide-menu">Quản lí hợp đồng</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link @if ($title === 'Quản lí giao dịch')
-                            active
-                        @endif" href="ui-contact.html" aria-expanded="false">
-                                <span>
-                                    <i class="fa-solid fa-money-bill"></i>
-                                 {{-- sửa lại icon của menu --}}
-                                </span>
-                                <span class="hide-menu">Quản lí giao dịch</span>
-                            </a>
-                        </li>
-
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí cơ sở vật chất')
                             active
-                        @endif" href="ui-contact.html" aria-expanded="false">
+                        @endif" href="{{route('interiors.index')}}" aria-expanded="false">
                                 <span>
                                     <i class="fa-brands fa-intercom"></i>
                                     {{-- sửa lại icon của menu --}}
                                 </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link @if ($title === 'Danh sách khách hàng')
+                            active
+                        @endif" href="{{route('user_information.index')}}" aria-expanded="false">
+                                <span>
+                                    <i class="fa-solid fa-user"></i>
+                                    {{-- sửa lại icon của menu --}}
+                                </span>
+                                <span class="hide-menu">Danh sách khách hàng</span>
                             </a>
                         </li>
 
@@ -164,11 +150,11 @@
                     </ul>
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-                            <p target="_blank" class="btn btn-primary mt-3">hello ĐVĐ</p>
+                            <p target="_blank" class="btn btn-primary mt-3">{{ Auth::user()->name }}</p>
                             <li class="nav-item dropdown">
                                 <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="{{ asset('assets/images/profile/user-1.jpg') }}" alt=""
+                                    <img src="{{ asset('assets/images/profile/user-1.png') }}" alt=""
                                         width="35" height="35" class="rounded-circle">
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up"
@@ -185,7 +171,7 @@
                                             <p class="mb-0 fs-3">Đổi mật khẩu</p>
                                         </a>
 
-                                        <a href="./authentication-login.html"
+                                        <a href="{{ route('admin.signout') }}"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
                                     </div>
                                 </div>

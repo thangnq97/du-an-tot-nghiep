@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Validation\Rule;
 
 class BillController extends Controller
 {
@@ -23,27 +24,38 @@ class BillController extends Controller
     const PATH_VIEW = 'admin.bill.';
 
 
-    public function index()
+    public function index(Request $request)
     {
         $title = 'Quản lí hóa đơn';
         $water = Water_usage::all();
-        $bills = Bill::query()->with('room')->latest()->paginate(5);
         $room = Room::query()->pluck('name', 'id');
+        $bills = Bill::query()->with('room')->latest()->paginate(5);
+        $date_bill = Bill::query()->with('room')->latest()->paginate(5);
+        $room_id = $request->room;
+        $date_time = $request->date_time;
+        // dd($date_time);
 
-        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'bills', 'water', 'title'));
+        $billByRoom = DB::table('bills')->where('room_id', $room_id)->get();
+        $billByDateTime = DB::table('bills')->where('date_time', $date_time)->get();
+        
+        if ($billByRoom->isNotEmpty() && $billByDateTime->isNotEmpty()) {
+            $bills = Bill::query()->with('room')->where('room_id', $room_id)->where('date_time', $date_time)->latest()->paginate(5);
+        } elseif ($billByRoom->isNotEmpty()) {
+            $bills = Bill::query()->with('room')->where('room_id', $room_id)->latest()->paginate(5);
+        } elseif ($billByDateTime->isNotEmpty()) {
+            $bills = Bill::query()->with('room')->where('date_time', $date_time)->latest()->paginate(5);
+        } else {
+            $bills = Bill::query()->with('room')->latest()->paginate(5);
+        }
+
+        return view(self::PATH_VIEW . __FUNCTION__, compact('room', 'bills', 'water', 'title', 'date_bill'));
     }
 
 
 
     public function store(Request $request)
     {
-        $request->validate([
-            'date_time'=> 'required',
-        ],
-        [
-            'date_time.required' => 'Không được để trống',
-        ]
-    );
+    
 
         $id = $request->room_id;
         $room = Room::find($id);
@@ -63,7 +75,7 @@ class BillController extends Controller
         // Tinh tien dien
 
         $electricity = DB::table('electricity_usage')->where('room_id', $id)->whereYear('date_time', $year)->whereMonth('date_time', '=', $month)->get();
-        // dd($electricity);
+
         if (count($electricity)) {
             $electricity = $electricity[0];
         } else {
@@ -93,54 +105,57 @@ class BillController extends Controller
         $room_services = DB::table('room_service')->where('room_id', '=', $id)->get();
         $array_room = [];
         $array_member = [];
-        $total_service_price = 0;
+        $total_member_service_price = 0;
+        $total_room_service_price = 0;
+        $description = "";
+        $description_room = "";
 
         foreach ($room_services as $item) {
 
-            $service = DB::table('services')->where('id', '=', $item->service_id)->get()[0];
+            $service = DB::table('services')->where('id', '=', $item->service_id)->first();
 
-            // var_dump($service);
-            // echo "<pre>";
-            // die;
-            
             if ($service->id == $water_service->id || $service->id == $electricity_service->id) {
                 continue;
             }
-            
+
             if ($service->method == 0) {
                 $key = $service->name;
-                
-                $price_garbage = $service->price;
-                $number_member = $room->member_quantity;
-                $value = $price_garbage * $number_member;
+
+                $value = $service->price  * $room->member_quantity;
                 array_push($array_member, [$key => $value]);
-                $garbage_price = ($price_garbage * $room->member_quantity);
+                $total_member_service_price += $value;  // Chỉ cộng giá dịch vụ một lần
+
             } else {
                 $key = $service->name;
-                $price_wifi = $service->price;
-                $value = $price_wifi;
+                $value = $service->price;
                 array_push($array_room, [$key => $value]);
-                $wifi_price = $price_wifi;
+                $total_room_service_price += $value;
             }
         }
-        // foreach ($array_member as $item) {
-            
-        //     foreach ($item as $key => $value) {
-        //         if ($key === 'xe') { // Kiểm tra nếu tên dịch vụ là 'xe'
-        //            $moto = $key;
-        //            $money_moto = $value;
-        //            $price_moto = $service->price;
-                  
-        //         }
-        //     }
-        // }
-         
 
-        // Tổng tiền dịch vụ
-        $total_service_price = $electricity_Total + $water_Total +  $garbage_price + $wifi_price ;
-        
+
+        foreach ($array_room as $item) {
+            foreach ($item as $key => $value) {
+                $sevice_price = $value;
+
+                $description_room .=  '<p>' . $key . ' (Giá: ' . $sevice_price . ')' . '</p>' . '<p style="padding-left: 500px">' . $value . '</p>';
+                // dd($description_room);
+            }
+        }
+
+        foreach ($array_member as $item) {
+            foreach ($item as $key => $value) {
+                $sevice_price = $value / $room->member_quantity;
+
+                $description .= '<p>' . $key . ' (Giá: ' . $sevice_price . 'ND: ' . $room->member_quantity . ')' . '</p>' . '<p style="padding-left: 510px">' . $value . '</p>';
+            }
+        }
+
+        // Tổng tiền dịch vụ không thiết yếu
+        $total_service_price = $total_member_service_price + $total_room_service_price;
         // Tong tien
-        $total_price = $price_room + $total_service_price;
+        $total_price = $price_room + $total_member_service_price + $electricity_Total + $water_Total + $total_room_service_price;
+
 
         // Them hoa don
         $bill = Bill::create([
@@ -150,13 +165,14 @@ class BillController extends Controller
             'total_price_service'   => $total_service_price,
             'date_time'             => $request->date_time,
             'note'                  => $request->note,
+            'total_price'           => $total_price,
         ]);
 
         // Them bill detail
         // Lấy giá trị ID lớn nhất
         $maxId = DB::table('bills')->max('id');
         $bill_detail = DB::table('bills')->where('id', $maxId)->get()[0];
-        
+
         $bill_details = Bill_detail::create([
             'room_id' => $room->id,
             'bill_id'               => $bill_detail->id,
@@ -169,12 +185,10 @@ class BillController extends Controller
             'pre_electricity'       => $electricity->pre_electricity,
             'current_electricity'   => $electricity->current_electricity,
             'electricity_price'     => $electricity_service->price,
-            'wifi_price'            => $wifi_price,
-            'garbage_price'         => $garbage_price,
             'total_price_service'   => $bill_detail->total_price_service,
-            'money_wifi'            => $price_wifi,
-            'money_garbage'         => $price_garbage,
-            'number_member'         => $number_member,
+            'number_member'         => $room->member_quantity,
+            'description'           => $description,
+            'description_room'      => $description_room
 
         ]);
         // Them chi tiết hóa đơn
@@ -188,25 +202,24 @@ class BillController extends Controller
         $id_detail = $id;
         $bill_details = Bill_detail::where('bill_id', $id_detail)->get();
 
+
         $used_water = 0;
         $used_electricity = 0;
 
 
 
         foreach ($bill_details as $detail) {
+
+            $total_price  = DB::table('bills')->where('id', $detail->bill_id)->get()[0];
             $used_water += $detail->current_water - $detail->pre_water;
             $used_electricity += $detail->current_electricity - $detail->pre_electricity;
             $water_price = $detail->water_price;
             $electricity_price =  $detail->electricity_price;
-            $room_price = $detail->room_price;
-            $garbage_price = $detail->garbage_price;
-            $wifi_price = $detail->wifi_price;
         }
-
 
         $water_Total = $used_water * $water_price;
         $electricity_Total = $used_electricity * $electricity_price;
-        $total_price = $water_Total + $electricity_Total + $room_price + $garbage_price + $wifi_price;
+
 
         $data = $bill_details->toArray();
 
@@ -216,17 +229,18 @@ class BillController extends Controller
             'used_electricity' => $used_electricity,
             'water_Total' => $water_Total,
             'electricity_Total' => $electricity_Total,
-            'total_price' => $total_price
+            'total_price' => $total_price->total_price
         ]);
 
         return $pdf->stream('show.pdf');
     }
 
+    // Thu tiền offline
     public function edit(string $id)
     {
         $title = 'Quản lí hóa đơn';
         $bill = Bill::find($id);
-        // dd($bill);
+
         return view(self::PATH_VIEW . __FUNCTION__, compact('bill', 'title'));
     }
 
@@ -234,12 +248,9 @@ class BillController extends Controller
     {
         $request->validate(
             [
-                'date_time' => 'required|date',
                 'paid_amount' => 'required|numeric|min:1',
-               
             ],
             [
-                'date_time.required' => 'Không được để trống',
                 'paid_amount.required' => ' Không được để trống số tiền',
                 'paid_amount.numeric' => 'Kiểu dữ liệu là dạng số',
                 'paid_amount.min' => 'Giá trị phải lớn hơn 0',
@@ -247,16 +258,14 @@ class BillController extends Controller
 
         );
 
-      
-        
+
+
         $bill = Bill::find($id);
-        if($request->date_time != $bill->date_time) {
-            return back()->with('date_time','dữ liệu phải bằng dữ liệu ban đầu');
-        }
+
         $paid_amount = $bill->paid_amount + $request->paid_amount;
         $reamaining_amount = ($bill->total_price) - ($paid_amount);
-        
-        if( $paid_amount > $request->total_price  ){
+
+        if ($paid_amount > $bill->total_price) {
             return back()->with('msc', 'Quá số tiền cần thu');
         }
         if ($paid_amount == $bill->total_price) {
@@ -266,13 +275,14 @@ class BillController extends Controller
         }
 
         $data = [
-            'room_id' => $request->room_id,
-            'total_price' => $request->total_price,
+            'room_id' => $bill->room_id,
+            'total_price' => $bill->total_price,
             'remaining_amount' => $reamaining_amount,
-            'total_price_service' => $request->total_price_service,
-            'date_time' => $request->date_time,
+            'total_price_service' => $bill->total_price_service,
+            'date_time' => $bill->date_time,
             'paid_amount' => $paid_amount,
-            'is_paid' =>  $is_paid
+            'is_paid' =>  $is_paid,
+            // 'payment_method_id' =>  $request->payment_method_id
         ];
 
         $bill->update($data);
@@ -280,9 +290,14 @@ class BillController extends Controller
 
         return back()->with('msg', 'Thu thành công');
     }
-    public function destroy(String $id){
+    //Xóa dữ liệu bảng bill theo id
+    public function destroy(String $id)
+    {
         $bill = Bill::find($id);
         $bill->delete();
-        return back()->with('msc','Xóa thành công');
+        return back()->with('msc', 'Xóa thành công');
     }
+
+    // lọc dữ liệu
+
 }
