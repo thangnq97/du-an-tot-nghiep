@@ -16,7 +16,7 @@ class ServiceController extends Controller
         $title = 'Quản lí dịch vụ';
         return view(self::PATH_VIEW . __FUNCTION__, compact('data', 'title'));
     }
-    public function create()
+    public function create() 
     {
         $title = 'Quản lí dịch vụ';
         return view(self::PATH_VIEW . __FUNCTION__, compact('title'));

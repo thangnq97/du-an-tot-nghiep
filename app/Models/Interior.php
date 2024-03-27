@@ -11,5 +11,9 @@ class Interior extends Model
 
     protected $table = 'interiors';
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'name',
+        'quantitys',
+
+    ];
 }

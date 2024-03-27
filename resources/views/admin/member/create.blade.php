@@ -3,41 +3,20 @@
 @section('room_content')
     <div>
         <div class="my-3">
-            @if (session()->has('success'))
-                <div
-                    class="alert alert-success alert-dismissible fade show"
-                    role="alert"
-                >
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"
-                    ></button>
-                    <strong>{{ session()->get('success') }}</strong>
-                </div>
-                
-                <script>
-                    var alertList = document.querySelectorAll(".alert");
-                    alertList.forEach(function (alert) {
-                        new bootstrap.Alert(alert);
-                    });
-                </script>
-                
-            @endif
+            @include('layouts.admin.alert')
         </div>
-        <form action="{{ route('admin.member.store', ['room'=>$room->id]) }}" method="POST" class="w-50">
+        <form class="w-50 container my-4" action="{{ route('admin.member.store', ['room'=>$room->id]) }}" method="POST" class="w-50" enctype="multipart/form-data">
             @csrf
             <div class="my-3">
                 <label for="" class="form-lable">Họ và tên</label>
-                <input type="text" class="form-control" name="name">
+                <input type="text" class="form-control" name="name" value="{{ old('name') }}">
                 @error('name')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
             <div class="my-3">
                 <label for="" class="form-lable">Email</label>
-                <input type="text" class="form-control" name="email">
+                <input type="text" class="form-control" name="email" value="{{ old('email') }}">
                 @error('email')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
@@ -51,21 +30,21 @@
             </div>
             <div class="my-3">
                 <label for="" class="form-lable">Điện thoại</label>
-                <input type="text" class="form-control" name="phone">
+                <input type="text" class="form-control" name="phone" value="{{ old('phone') }}">
                 @error('phone')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
             <div class="my-3">
                 <label for="" class="form-lable">Căn cước công dân</label>
-                <input type="text" class="form-control" name="cccd">
+                <input type="text" class="form-control" name="cccd" value="{{ old('cccd') }}">
                 @error('cccd')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
             </div>
             <div class="my-3">
                 <label for="" class="form-lable">Địa chỉ</label>
-                <input type="text" class="form-control" name="address">
+                <input type="text" class="form-control" name="address" value="{{ old('address') }}">
                 @error('address')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror

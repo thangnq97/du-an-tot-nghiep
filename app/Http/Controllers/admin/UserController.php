@@ -7,9 +7,16 @@ use App\Models\Room;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ActiveMailAdmin;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    const PATH_UPLOAD = 'user';
     /**
      * Display a listing of the resource.
      */
@@ -23,7 +30,7 @@ class UserController extends Controller
             return redirect()->route('admin.index');
         }
 
-        $members = DB::table('users')->where('room_id', '=', $id)->orderByDesc('id')->get();
+        $members = DB::table('users')->where('room_id', '=', $id)->where('is_active', '=', 1)->orderByDesc('id')->get();
         return view('admin.member.index', compact('members', 'room', 'sub_title', 'title'));
     }
 
@@ -50,29 +57,48 @@ class UserController extends Controller
     {
         $room = Room::find($id);
 
-        if(!$room) {
-            return redirect()->route('admin.index');
+        if(!$room || $room->member_quantity >= $room->member_maximum) {
+            return redirect()->back()->with('error', 'Phòng đã đầy');
         }
 
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email',
+            'email' => 'unique:users|required|email',
             'password' => 'required',
-            'phone' => 'required',
-            'cccd' => 'required',
+            'phone' => 'unique:users|required',
+            'cccd' => 'unique:users|required',
             'address' => 'required',
-        ], [
-            'name.required' => 'Tên không được để trống',
-            'email.required' => 'Email không được để trống',
-            'password.required' => 'Mật khẩu không được để trống',
-            'phone.required' => 'Số điện thoại không được để trống',
-            'cccd.required' => 'Căn cước công dân không được để trống',
-            'address.required' => 'Địa chỉ không được để trống',
+        ],
+        [
+            'name.required' => 'Không được để trống tên',
+            'name.max' => 'Độ dài không quá 255 kí tự',
+            'email.required' => 'Không được để trống email',
+            'email.email' => 'Bạn nhập phải là địa chỉ email hợp lệ',
+            'email.unique' => 'Email này đã được sử dụng',
+            'password.required' => 'Không được để trống mật khẩu',
+            'phone.required' => 'Không được để trống Số điện thoại',
+            'phone.unique' => 'Số điện thoại này đã được sử dụng',
+            'cccd.required' => 'Không được để trống chứng minh nhân dân',
+            'cccd.unique' => 'Chứng minh nhân dân này đã được sử dụng',
+            'address.required' => 'Không được để trống địa chỉ',
         ]);
 
+        $token = strtoupper(Str::random(20));
+        $request->merge(['token' => $token, 'password' => Hash::make($request->password)]);
         $user = User::create($request->all());
         $user->room_id = $id;
         $user->save();
+
+        $room->member_quantity += 1;
+        $room->save();
+
+        $mailData = [
+            'id' => $user->id,
+            'name' => $user->name,
+            'token' => $user->token
+        ];
+        Mail::to($user->email)->send(new ActiveMailAdmin($mailData));
+
         return redirect()->back()->with('success', 'Thêm mới thành công');
     }
 
@@ -116,22 +142,41 @@ class UserController extends Controller
 
         $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email',
+            'email' => 'unique:users|required|email',
             'password' => 'required',
-            'phone' => 'required',
-            'cccd' => 'required',
+            'phone' => 'unique:users|required',
+            'cccd' => 'unique:users|required',
             'address' => 'required',
-        ], [
-            'name.required' => 'Tên không được để trống',
-            'email.required' => 'Email không được để trống',
-            'password.required' => 'Mật khẩu không được để trống',
-            'phone.required' => 'Số điện thoại không được để trống',
-            'cccd.required' => 'Căn cước công dân không được để trống',
-            'address.required' => 'Địa chỉ không được để trống',
+        ],
+        [
+            'name.required' => 'Không được để trống tên',
+            'name.max' => 'Độ dài không quá 255 kí tự',
+            'email.required' => 'Không được để trống email',
+            'email.email' => 'Bạn nhập phải là địa chỉ email hợp lệ',
+            'email.unique' => 'Email này đã được sử dụng',
+            'password.required' => 'Không được để trống mật khẩu',
+            'phone.required' => 'Không được để trống Số điện thoại',
+            'phone.unique' => 'Số điện thoại này đã được sử dụng',
+            'cccd.required' => 'Không được để trống chứng minh nhân dân',
+            'cccd.unique' => 'Chứng minh nhân dân này đã được sử dụng',
+            'address.required' => 'Không được để trống địa chỉ',
         ]);
 
+
+        if($request->email === $user->email) {
+            $request->request->remove('email');
+        }
+
+        if($request->cccd === $user->cccd) {
+            $request->request->remove('cccd');
+        }
+
+        if($request->phone === $user->phone) {
+            $request->request->remove('phone');
+        }
+
         $user->update($request->all());
-        return redirect()->back()->with('success', 'Sửa thông tin thành công');
+        return redirect()->route('admin.member.index', ['room' => $room->id])->with('success', 'Sửa thông tin thành công');
     }
 
     /**
@@ -146,7 +191,11 @@ class UserController extends Controller
             return redirect()->route('admin.index');
         }
 
-        $user->delete();
+        File::delete($user->avatar);
+        $user->is_active = 0;
+        $user->save();
+        $room->member_quantity -= 1;
+        $room->save();
         return redirect()->route('admin.member.index', ['room' => $room->id])->with('success', 'Xóa thành công');
     }
 }
