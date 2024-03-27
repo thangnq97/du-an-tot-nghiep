@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contracts', function (Blueprint $table) {
-            $table->id();
-            $table->date('started_at');
-            $table->tinyInteger('month_quantity');
-            $table->boolean('is_active')->default(true);
-            $table->timestamps();
+        Schema::table('extension_contracts', function (Blueprint $table) {
+            $table->foreignId('contract_id')->constrained('contracts')->cascadeOnDelete();
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('contracts');
+        Schema::table('extension_contracts', function (Blueprint $table) {
+            //
+        });
     }
 };

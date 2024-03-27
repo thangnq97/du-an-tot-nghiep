@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminHomeController;
+use App\Http\Controllers\admin\ContractController;
 use App\Http\Controllers\admin\UserController;
 use App\Http\Controllers\admin\RoomController;
 use App\Http\Controllers\admin\ServiceController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //Thang
+Route::get('/', [AdminHomeController::class, 'index'])->name('admin.index');
 Route::get('/login', [AdminHomeController::class, 'login'])->name('admin.login');
 Route::post('/login', [AdminHomeController::class, 'saveLogin']);
 Route::get('/register', [AdminHomeController::class, 'register'])->name('admin.register');
@@ -47,12 +49,18 @@ Route::prefix('room/')->group(function () {
     Route::delete('{room}', [RoomController::class, 'destroy'])->name('room.destroy');
 
     // Thang
-    Route::get('/{room}', [UserController::class, 'index'])->name('admin.member.index');
-    Route::get('/{room}/create', [UserController::class, 'create'])->name('admin.member.create');
-    Route::post('/{room}/store', [UserController::class, 'store'])->name('admin.member.store');
-    Route::get('/{room}/{id}/edit', [UserController::class, 'edit'])->name('admin.member.edit');
-    Route::put('/{room}/{id}/update', [UserController::class, 'update'])->name('admin.member.update');
-    Route::delete('/{room}/{id}/delete', [UserController::class, 'destroy'])->name('admin.member.destroy');
+    Route::get('/{room}/member', [UserController::class, 'index'])->name('admin.member.index');
+    Route::get('/{room}/create_member', [UserController::class, 'create'])->name('admin.member.create');
+    Route::post('/{room}/store_member', [UserController::class, 'store'])->name('admin.member.store');
+    Route::get('/{room}/{id}/edit_member', [UserController::class, 'edit'])->name('admin.member.edit');
+    Route::put('/{room}/{id}/update_member', [UserController::class, 'update'])->name('admin.member.update');
+    Route::delete('/{room}/{id}/delete_member', [UserController::class, 'destroy'])->name('admin.member.destroy');
+    Route::get('/{room}/contract', [ContractController::class, 'index'])->name('admin.room.contract');
+    Route::post('/{room}/contract', [ContractController::class, 'store'])->name('admin.contract.store');
+    Route::get('/{room}/extension', [ContractController::class, 'createExtensionContract'])->name('admin.create.extension.contract');
+    Route::get('/{room}/{contract}', [ContractController::class, 'viewContract'])->name('admin.contract.view');
+    Route::post('/{room}/contract/extension', [ContractController::class, 'extension'])->name('admin.extension.contract.store');
+    Route::get('/{room}/extension/{extension_contract}', [ContractController::class, 'viewExtensionContract'])->name('admin.extension.contract.view');
 });
 //Hoi
 Route::delete('room_service/{room}/', [RoomController::class, 'delete_service'])->name('room.delete_service');      
