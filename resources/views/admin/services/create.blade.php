@@ -27,8 +27,8 @@
         <div class="mb-3">
             <label for="name" class="form-label">Phương thức tính</label>
             <select class="form-control" name="method" id="">
-                <option value="0">Số người</option>
-                <option value="1">Số đồng hồ</option>
+                <option value="0">Theo người</option>
+                <option value="1">Theo Phòng</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
