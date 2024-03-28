@@ -23,7 +23,7 @@
     <form action="{{ route('waters.index') }}" method="GET">
         @csrf 
     
-        <div class="row align-items-center">
+        <div class="row align-items-center mx-1">
             <div class="col-md-4 mb-2">
                 <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
                     <option selected disabled>--Chọn phòng--</option>
