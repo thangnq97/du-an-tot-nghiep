@@ -1,4 +1,4 @@
-@extends('admin.Room.layout');
+@extends('admin.Room.layout')
 
 @section('room_content')
     @include('layouts.admin.alert')

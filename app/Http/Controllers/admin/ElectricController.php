@@ -19,7 +19,8 @@ class ElectricController extends Controller
     public function index()
     {
         $data = Electricity_usage::query()->latest()->paginate(5);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('data'));
+        $title = 'Quản lí điện';
+        return view(self::PATH_VIEW . __FUNCTION__, compact('data','title'));
     }
     public function create()
     {

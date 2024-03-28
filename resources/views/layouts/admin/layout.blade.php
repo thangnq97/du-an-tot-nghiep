@@ -38,7 +38,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Trang chủ')
                                 active
-                            @endif" href="./index.html" aria-expanded="false">
+                            @endif" href="./" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-house"></i>
                                      {{-- sửa lại icon của menu --}}
@@ -71,7 +71,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí điện')
                             active
-                        @endif" href="./ui-bill.html" aria-expanded="false">
+                        @endif" href="{{ route('electric.index') }}" aria-expanded="false">
                                 <span>
                                                       <i class="fa-solid fa-bolt"></i>
                                                     {{-- sửa lại icon của menu --}}
@@ -190,7 +190,7 @@
                                             <i class="ti ti-user fs-6"></i>
                                             <p class="mb-0 fs-3">Thông tin cá nhân</p>
                                         </a>
-                                        <a href="authentication-ChangePassword.html"
+                                        <a href="{{ route('changePassword.index') }}"
                                             class="d-flex align-items-center gap-2 dropdown-item">
                                             <i class="ti ti-mail fs-6"></i>
                                             <p class="mb-0 fs-3">Đổi mật khẩu</p>

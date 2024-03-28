@@ -6,15 +6,17 @@
     {{ Session::get('msg') }}
 </div>
 @endif
+
     <h1>Quản lí Khách</h1>
    
-<div class="bg-light  ms-auto">
-  
-    <form action="{{ route('user_information.index') }}" method="GET" class="mb-4 bg-light me-auto ms-3" novalidate>
+<div class="bg-light  ms-auto my-3">
+  <br>
+    <form action="{{ route('user_information.index') }}" method="GET" class="mb-4 bg-light me-auto ms-3 mx-3" novalidate>
   @csrf
-  <div class="col-md-2 me-3">
-    <input type="text" name="search" class="form-control" placeholder="Tìm theo tên khách" value="{{ htmlspecialchars(request('search')) }}">
+  <div class="col-md-2 me-3 mt-3">
     <p></p>
+    <input type="text" name="search" class="form-control my-3  " placeholder="Tìm theo tên khách" value="{{ htmlspecialchars(request('search')) }}">
+    
     <button type="submit" class="btn btn-primary">Tìm</button>
   </div>
 </form>
@@ -23,7 +25,7 @@
         <thead>
             <tr>
                 <!-- {{-- <th scope="col">#</th> --}} -->
-                <th scope="col">Ảnh đại diện </th>
+                <!-- <th scope="col">Ảnh đại diện </th> -->
                 <th scope="col">Tên khách </th>
                 <th scope="col">Phòng đã ở</th>               
                 <th scope="col">Số điện thoại</th>               
@@ -35,7 +37,7 @@
         <tbody>
         @foreach ($users as $u )
             <tr> 
-            <td><img src="{{$u->avatar}}" alt="" width="50px" height="50px" class="rounded-circle"></td>
+            <!-- <td><img src="{{$u->avatar}}" alt="" width="50px" height="50px" class="rounded-circle"></td> -->
                 <td>{{ $u->name }}</td>
                 <td>{{ $u->room->name }}</td>
                 <td>{{ $u->phone }}</td>

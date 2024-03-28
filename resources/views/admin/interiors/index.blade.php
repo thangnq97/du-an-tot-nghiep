@@ -11,7 +11,7 @@
 <div class="bg-light ms-auto  ">
 <div class="action-room me-3">
     <a href="{{ route('interiors.create') }}" class="btn btn-primary mx-2 mt-3 ">Thêm nội thất</a>   
-    <a href="{{ route('Roominterior.index') }}" class="btn btn-info mt-3 me">Chi tiết</a>
+    <a href="{{ route('Roominterior.index') }}" class="btn btn-info mt-3 ">Chi tiết</a>
 </div>
 
     <table class="table">

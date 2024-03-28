@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 
 
 use App\Models\User;
+use App\Models\Room;
+use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -18,14 +20,23 @@ class user_informationController extends Controller
     {
         $query = User::query()->latest();
         $title = 'Danh sách khách hàng';
+    
         // Handle search
         if ($request->has('search')) {
             $searchTerm = $request->input('search');
             $query->where('name', 'LIKE', '%' . $searchTerm . '%');
         }
-
-        $users = $query->paginate(5);
-        return view(self::PATH_VIEW . __FUNCTION__, compact('users','title'));
+    
+        // Check condition for role id
+        $roleId = 1; // Change this value based on your requirement
+        if (Role::where('id', $roleId)->first()) {
+            $users = $query->paginate(5);
+            return view(self::PATH_VIEW . __FUNCTION__, compact('users', 'title'));
+        } else {
+            // Handle the case when the condition is not met
+            // For example, you can redirect to another page
+            return redirect()->route('some.other.route');
+        }
     }
 
     // public function create()

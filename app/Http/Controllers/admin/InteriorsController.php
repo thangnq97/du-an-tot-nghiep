@@ -38,7 +38,8 @@ class InteriorsController extends Controller
      */
     public function create()
     {
-        return view(self::PATH_VIEW . __FUNCTION__);
+        $title = 'Quản lí cơ sở vật chất';
+        return view(self::PATH_VIEW . __FUNCTION__,compact('title'));
     }
 
     /**
