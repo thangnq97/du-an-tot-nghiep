@@ -82,8 +82,8 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <h2 class="text-center ">Tính tiền</h2>
-                            <form action="{{ route('bill.store') }}" method="POST" enctype="multipart/form-data"
+                            {{-- <h2 class="text-center ">Tính tiền</h2> --}}
+                            {{-- <form action="{{ route('bill.store') }}" method="POST" enctype="multipart/form-data"
                                 class="row">
                                 @csrf
                                 <div>
@@ -118,7 +118,7 @@
                                     <button type="submit" class="btn btn-success">Tính</button>
                                 </div>
 
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
 
@@ -149,27 +149,28 @@
                             <td>{{ $item->paid_amount }}</td>
                             <td>{{ $item->remaining_amount }}</td>
                             <td>
-                                @if ($item->is_paid == 1)
+                                {{-- @if ($item->is_paid == 1)
                                     <p class="btn btn-success"><i class="fa-solid fa-money-bill-1-wave"></i></p>
                                 @else
                                     <p class="btn btn-danger"><i class="fa-solid fa-money-bill-1-wave"></i></p>
-                                @endif
+                                @endif --}}
+                                <a  href="{{ route('user.bill.generatePDF', $item) }}" class="btn btn-success"><i
+                                    class="fa-solid fa-eye"></i></a>
+
+                            <a href="" class="btn btn-primary"><i
+                                    class="fa-solid fa-money-bill-1-wave"></i></a>
                             </td>
 
                             <td>
-                                <form action="{{ route('bill.destroy', $item) }}" method="POST">
-                                <a  href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
-                                        class="fa-solid fa-eye"></i></a>
-
-                                <a href="" class="btn btn-primary"><i
-                                        class="fa-solid fa-money-bill-1-wave"></i></a>
+                                
+                               
                                
                                     {{-- @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger button-action" type="submit"
                                         onclick="return confirm('Bạn có muốn xóa không')">
                                         <i class="fa-solid fa-trash-can"></i></button> --}}
-                                </form>
+                                
                             </td>
                         </tr>
                     @endforeach

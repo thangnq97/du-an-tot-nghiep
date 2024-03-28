@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/payment/{bill}', [BillUserController::class, 'payment'])->name('user.payment');
     Route::get('/', [BillUserController::class, 'index'])->name('user.index');
     Route::get('/handle', [BillUserController::class, 'handle'])->name('user.handlePayment');
+    Route::get('/bill/{id}/generate-pdf', [BillUserController::class, 'generatePDF'])->name('user.bill.generatePDF');
 });
 
 Route::prefix('admin/')->middleware('admin')->group(function() {
@@ -95,7 +96,8 @@ Route::prefix('admin/')->middleware('admin')->group(function() {
     // Route::get('/electric', [ElectricController::class,'index']);
     Route::resource('/electric', ElectricController::class);
     Route::resource('/user_bill', BillUserController::class);
-    Route::get('/bill/{id}/generate-pdf', [BillUserController::class, 'generatePDF'])->name('bill.generatePDF');
+    // Route::get('/bill', [BillUserController::class,'index'])->name('user.bill.index');
+  
     // Route::get('user_bill/{id}/bill_user', [BillUserController::class, 'index'])->name('user.index');
 });
 

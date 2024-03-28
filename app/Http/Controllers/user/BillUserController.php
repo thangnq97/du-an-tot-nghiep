@@ -21,7 +21,7 @@ class BillUserController extends Controller
 
     public function index()
     {
-        $title = 'Quản lí hóa đơn';
+        $title = 'Xem hóa đơn';
         $water = Water_usage::all();
         $bills = Bill::query()->with('room')->latest()->paginate(5);
         $room = Room::query()->pluck('name', 'id');
@@ -84,20 +84,24 @@ class BillUserController extends Controller
         $id_detail = $id;
         $bill_details = Bill_detail::where('bill_id', $id_detail)->get();
 
+
         $used_water = 0;
         $used_electricity = 0;
+
+
+
         foreach ($bill_details as $detail) {
+
+            $total_price  = DB::table('bills')->where('id', $detail->bill_id)->get()[0];
             $used_water += $detail->current_water - $detail->pre_water;
             $used_electricity += $detail->current_electricity - $detail->pre_electricity;
             $water_price = $detail->water_price;
             $electricity_price =  $detail->electricity_price;
-            $room_price = $detail->room_price;
-            $garbage_price = $detail->garbage_price;
-            $wifi_price = $detail->wifi_price;
         }
+
         $water_Total = $used_water * $water_price;
         $electricity_Total = $used_electricity * $electricity_price;
-        $total_price = $water_Total + $electricity_Total + $room_price + $garbage_price + $wifi_price;
+
 
         $data = $bill_details->toArray();
 
@@ -105,10 +109,9 @@ class BillUserController extends Controller
             'bill_details' => $data,
             'used_water' => $used_water,
             'used_electricity' => $used_electricity,
-
             'water_Total' => $water_Total,
             'electricity_Total' => $electricity_Total,
-            'total_price' => $total_price
+            'total_price' => $total_price->total_price
         ]);
 
         return $pdf->stream('show.pdf');

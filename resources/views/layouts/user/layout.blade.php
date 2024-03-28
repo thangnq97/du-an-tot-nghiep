@@ -37,7 +37,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Trang chủ')
                                 active
-                            @endif" href="./index.html" aria-expanded="false">
+                            @endif" href="{{ route('user.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="fa-solid fa-house"></i>
                                      {{-- sửa lại icon của menu --}}
@@ -47,23 +47,23 @@
                         </li>
 
                         <li class="sidebar-item">
-                            <a class="sidebar-link @if ($title === 'Quản lí phòng')
+                            <a class="sidebar-link @if ($title === 'Xem hóa đơn')
                             active
-                        @endif" href="{{ route('room.index') }}" aria-expanded="false">
+                        @endif" href="{{ route('bill.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-article"></i>
                                 </span>
-                                <span class="hide-menu">Quản lí phòng</span>
+                                <span class="hide-menu">Xem hóa đơn</span>
                             </a>
                         </li>
-                        <li class="sidebar-item">
+                        {{-- <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí dịch vụ')
                             active
                         @endif" href="{{ route('service.index') }}" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-wifi"></i>
+                                    <i class="fa-solid fa-wifi"></i> --}}
                                     {{-- sửa lại icon của menu --}}
-                                </span>
+                                {{-- </span>
                                 <span class="hide-menu">Quản lí dịch vụ</span>
                             </a>
                         </li>
@@ -72,9 +72,9 @@
                             active
                         @endif" href="./ui-bill.html" aria-expanded="false">
                                 <span>
-                                                      <i class="fa-solid fa-bolt"></i>
+                                                      <i class="fa-solid fa-bolt"></i> --}}
                                                     {{-- sửa lại icon của menu --}}
-                </span>
+                {{-- </span>
                                 <span class="hide-menu">Quản lí điện</span>
                             </a>
                         </li>
@@ -83,9 +83,9 @@
                             active
                         @endif" href="{{ route('waters.index') }}" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-water"></i>
+                                    <i class="fa-solid fa-water"></i> --}}
                                     {{-- sửa lại icon của menu --}}
-                                </span>
+                                {{-- </span>
                                 <span class="hide-menu">Quản lí nước</span>
                             </a>
                         </li>
@@ -105,9 +105,9 @@
                             active
                         @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-file-contract"></i>
+                                    <i class="fa-solid fa-file-contract"></i> --}}
                                     {{-- sửa lại icon của menu --}}
-                                </span>
+                                {{-- </span>
                                 <span class="hide-menu">Quản lí hợp đồng</span>
                             </a>
                         </li>
@@ -117,9 +117,9 @@
                             active
                         @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                                    <i class="fa-solid fa-money-bill"></i>
+                                    <i class="fa-solid fa-money-bill"></i> --}}
                                  {{-- sửa lại icon của menu --}}
-                                </span>
+                                {{-- </span>
                                 <span class="hide-menu">Quản lí giao dịch</span>
                             </a>
                         </li>
@@ -129,12 +129,12 @@
                             active
                         @endif" href="ui-contact.html" aria-expanded="false">
                                 <span>
-                                    <i class="fa-brands fa-intercom"></i>
+                                    <i class="fa-brands fa-intercom"></i> --}}
                                     {{-- sửa lại icon của menu --}}
-                                </span>
+                                {{-- </span>
                                 <span class="hide-menu">Quản lí cơ sở vật chất</span>
                             </a>
-                        </li>
+                        </li> --}}
 
 
                         <!-- End Sidebar navigation -->
@@ -184,7 +184,7 @@
                                             <p class="mb-0 fs-3">Đổi mật khẩu</p>
                                         </a>
 
-                                        <a href="./authentication-login.html"
+                                        <a href="{{ route('admin.signout')}}"
                                             class="btn btn-outline-primary mx-3 mt-2 d-block">Đăng xuất</a>
                                     </div>
                                 </div>
