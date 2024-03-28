@@ -1,5 +1,10 @@
 @extends('admin.room.layout')
 @section('room_content')
+    @if (Session::has('msg'))
+        <div class="alert alert-danger">
+            {{ Session::get('msg') }}
+        </div>
+    @endif
     <div class="action-room action-button">
         <a href="{{ route('room.create_service', ['room' => $room->id]) }}" class="btn btn-primary my-3">Thêm dịch
             vụ</a>

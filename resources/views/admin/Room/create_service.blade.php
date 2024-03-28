@@ -5,28 +5,26 @@
             {{ Session::get('msg') }}
         </div>
     @endif
-    @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-    <form action="{{ route('room.store_service', ['room' => $room->id]) }}" method="POST">  
+    <form action="{{ route('room.store_service', ['room' => $room->id]) }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Tên Dịch vụ</label>
-            <select class="form-control" name="service_id" id="">
+            <select aria-label="State" class="form-control" name="service_id">
                 @foreach ($service as $query)
-                <option @foreach ($service_id as $id)
+                    <option
+                        @foreach ($service_id as $id)
                     @if ($query->id == $id->service_id)
-                    hidden disabled
-                    @endif
-                @endforeach value="{{ $query->id }}">{{ $query->name }} - {{ number_format($query->price) }}</option>
+                    id = "toRemove"
+                    @endif @endforeach
+                        value="{{ $query->id }}">{{ $query->name }} - {{ number_format($query->price) }}</option>
                 @endforeach
             </select>
+            <script>
+                let toRemove = document.querySelectorAll("#toRemove");
+                toRemove.forEach(element => {
+                    element.remove();
+                });
+            </script>
         </div>
         <button type="submit" class="btn btn-primary">Gửi</button>
         <a href="{{ route('room.show_service', ['room' => $room->id]) }}" class="btn btn-danger ">quay lại</a>
