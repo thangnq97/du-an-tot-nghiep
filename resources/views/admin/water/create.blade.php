@@ -72,8 +72,8 @@
             @enderror
         </div>
 </div>
-<a class="btn btn-warning" href="{{ route('waters.index') }}">Trở về</a>
 <button type="submit" class="btn btn-primary ">Thêm</button>
+<a class="btn btn-warning" href="{{ route('waters.index') }}">Trở về</a>
 </form>
 </div>
 

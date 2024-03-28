@@ -61,7 +61,7 @@
 
       
         <div>
-            <button type="submit" class="btn btn-success">Sửa</button>
+            <button type="submit" class="btn btn-primary">Sửa</button>
             <a class="btn btn-warning" href="{{ route('waters.index') }}">Trở về</a>
         </div>
     </form>
