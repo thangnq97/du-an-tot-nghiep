@@ -10,6 +10,7 @@ use App\Models\User;
 use Dotenv\Util\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Termwind\Components\Dd;
 
 class RoomController extends Controller
 {
@@ -129,8 +130,13 @@ class RoomController extends Controller
     public function store_service(Request $request, Room $room)
     {
         $data = ['room_id' => $room->id, 'service_id' => $request->service_id];
+        $service = Service::query()->where('id', '=',$request->service_id)->get();
+        foreach ($service as $s){
+            $servicename = $s->name;
+        };
         Room_service::query()->create($data);
-        return back()->with('msg', 'Thêm thành công');
+        $msg = 'Dịch vụ '. $servicename . ' thêm thành công';
+        return back()->with('msg', $msg );
     }
 
     public function edit(Room $room)
