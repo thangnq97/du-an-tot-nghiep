@@ -25,7 +25,7 @@
                 <option value="{{ $id }}">{{ $id }}--{{ $name }}</option>
                 @endforeach
             </select>
-            @error('pre_water')
+            @error('room_id')
             <div class="text-danger ">{{ $message }}</div>
             @enderror
         </div>

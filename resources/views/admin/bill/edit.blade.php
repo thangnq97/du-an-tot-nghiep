@@ -41,8 +41,8 @@
             </div>
 
             <div>
-            <button type="submit" class="btn btn-success">Thu</button>
-            <a href="{{ route('bill.index') }}" class="btn btn-warning">Trở về</a>
+                <a href="{{ route('bill.index') }}" class="btn btn-warning">Trở về</a>
+                <button type="submit" class="btn btn-success">Thu</button>
 
             </div>
 

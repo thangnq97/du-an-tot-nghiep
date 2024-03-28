@@ -138,7 +138,8 @@ class BillController extends Controller
             foreach ($item as $key => $value) {
                 $sevice_price = $value;
 
-                $description_room .=  '<p>' . $key . ' (Giá: ' . $sevice_price . ')' . '</p>' . '<p style="padding-left: 500px">' . $value . '</p>';
+                $description_room .= '<p>' . $key . ' (Giá: ' . number_format($sevice_price, 0, ',', '.') 
+                . ') : ' . '</p>' . ' <p>' . number_format($value, 0, ',', '.') . ' VNĐ'. '</p>';
                 // dd($description_room);
             }
         }
@@ -147,7 +148,8 @@ class BillController extends Controller
             foreach ($item as $key => $value) {
                 $sevice_price = $value / $room->member_quantity;
 
-                $description .= '<p>' . $key . ' (Giá: ' . $sevice_price . 'ND: ' . $room->member_quantity . ')' . '</p>' . '<p style="padding-left: 510px">' . $value . '</p>';
+                $description .= '<p>' . $key . ' (Giá: ' . number_format($sevice_price, 0, ',', '.') . 'ND: ' . number_format($room->member_quantity, 0, ',', '.')
+                 . ') :' . '</p>' . ' <p>' . number_format($value, 0, ',', '.') . ' VNĐ'.'</p>';
             }
         }
 
@@ -192,7 +194,7 @@ class BillController extends Controller
 
         ]);
         // Them chi tiết hóa đơn
-        return redirect()->back();
+        return back()->with('msg','Tính tiền thành công');
     }
 
 

@@ -3,27 +3,31 @@
     <h1>
         Quản lí hóa đơn</h1>
     <hr>
+    <div>
+        @if (\Session::has('msc'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong> {{ \Session::get('msc') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    @if (\Session::has('msg'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong> {{ \Session::get('msg') }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+    </div>
     <div class="bg-light">
         <div class="d-flex justify-content-end">
-            <button type="button" class="close btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" class="close btn btn-primary m-2" data-bs-toggle="modal"
+                data-bs-target="#staticBackdrop">
                 Tính tiền
             </button>
 
 
         </div>
         <div class="">
-            @if (\Session::has('msc'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong> {{ \Session::get('msc') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-            @if (\Session::has('msg'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong> {{ \Session::get('msg') }}</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
+
 
             <!-- Tính tiền -->
 
@@ -51,13 +55,15 @@
                                                 </option>
                                             @endforeach
                                         </select>
-                                        <small class="text-danger error" style="display: none">Phòng không được để trống</small>
+                                        <small class="text-danger error" style="display: none">Phòng không được để
+                                            trống</small>
                                     </div>
 
                                     <div class="mb-3">
                                         <label for="exampleInputEmail1" class="form-label">Ngày/tháng</label>
                                         <input class="form-control " type="date" id="month_quantity" name="date_time">
-                                        <small class="text-danger error" style="display: none">Ngày/tháng không được để trống</small>
+                                        <small class="text-danger error" style="display: none">Ngày/tháng không được để
+                                            trống</small>
                                     </div>
 
                                     <div class="mb-3">
@@ -81,7 +87,7 @@
             {{-- Lọc dữ liệu --}}
             <form action="{{ route('bill.index') }}" method="GET">
                 @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
-            
+
                 <div class="row align-items-center mx-1">
                     <div class="col-md-4 mb-2">
                         <select class="form-select" name="room" id="room1"> <!-- Đặt tên cho trường select -->
@@ -91,7 +97,7 @@
                             @endforeach
                         </select>
                     </div>
-                  
+
                     <div class="col-md-4 mb-2">
                         <select class="form-select" name="date_time" id="room2"> <!-- Đặt tên cho trường select -->
                             <option selected disabled>--Ngày/tháng--</option>
@@ -100,7 +106,7 @@
                             @endforeach
                         </select>
                     </div>
-            
+
                     <div class="col-md-4 mb-2">
                         <button type="submit" class="btn btn-success">Tìm kiếm</button>
                     </div>
@@ -167,38 +173,38 @@
             const month_quantity = document.getElementById("month_quantity");
             const form = document.getElementById("form1");
             const close = document.querySelectorAll(".close");
-    
+
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 let check = false;
-    
-                if(!started_at.value) {
+
+                if (!started_at.value) {
                     started_at.parentElement.querySelector('.error').style.display = 'block';
                     check = false;
-                }else {
+                } else {
                     started_at.parentElement.querySelector('.error').style.display = 'none';
                     check = true;
                 }
-    
-                if(!month_quantity.value.trim()) {
+
+                if (!month_quantity.value.trim()) {
                     month_quantity.parentElement.querySelector('.error').style.display = 'block';
                     check = false;
-                }else {
+                } else {
                     month_quantity.parentElement.querySelector('.error').style.display = 'none';
                     check = true;
                 }
-    
-                if(check) {
+
+                if (check) {
                     form.submit();
                 }
             })
-    
+
             month_quantity.addEventListener('change', (e) => {
-                if(e.target.value <= 0) {
+                if (e.target.value <= 0) {
                     e.target.value = 1;
                 }
             })
-    
+
             close.forEach(element => {
                 element.addEventListener('click', (e) => {
                     started_at.parentElement.querySelector('.error').style.display = 'none';
