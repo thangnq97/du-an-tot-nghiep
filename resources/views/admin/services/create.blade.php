@@ -5,25 +5,22 @@
             {{ Session::get('msg') }}
         </div>
     @endif
-    @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
     <form action="{{ route('service.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="name" class="form-label">Tên Dịch vụ</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
+        @error('name')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
         <div class="mb-3">
             <label for="price" class="form-label">Giá dịch vụ</label>
             <input type="number" class="form-control" id="price" name="price">
         </div>
+        @error('price')
+            <p class="text-danger">{{ $message }}</p>
+        @enderror
         <div class="mb-3">
             <label for="name" class="form-label">Phương thức tính</label>
             <select class="form-control" name="method" id="">
