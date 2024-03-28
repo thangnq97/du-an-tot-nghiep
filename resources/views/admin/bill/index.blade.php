@@ -40,7 +40,7 @@
                         </div>
                         <div class="modal-body">
                             <h2 class="text-center ">Tính tiền</h2>
-                            <form action="{{ route('bill.store') }}" method="POST" enctype="multipart/form-data"
+                            <form action="{{ route('admin.bill.store') }}" method="POST" enctype="multipart/form-data"
                                 class="row" id="form1">
                                 @csrf
                                 <div>
@@ -85,7 +85,7 @@
             </div>
 
             {{-- Lọc dữ liệu --}}
-            <form action="{{ route('bill.index') }}" method="GET">
+            <form action="{{ route('admin.bill.index') }}" method="GET">
                 @csrf <!-- Thêm token CSRF để bảo vệ biểu mẫu -->
 
                 <div class="row align-items-center mx-1">
@@ -147,11 +147,11 @@
                             </td>
 
                             <td>
-                                <form action="{{ route('bill.destroy', $item) }}" method="POST">
-                                    <a href="{{ route('bill.generatePDF', $item) }}" class="btn btn-success"><i
+                                <form action="{{ route('admin.bill.destroy', $item) }}" method="POST">
+                                    <a href="{{ route('admin.bill.generatePDF', $item) }}" class="btn btn-success"><i
                                             class="fa-solid fa-eye"></i></a>
 
-                                    <a href="{{ route('bill.edit', $item) }}" class="btn btn-primary"><i
+                                    <a href="{{ route('admin.bill.edit', $item) }}" class="btn btn-primary"><i
                                             class="fa-solid fa-money-bill-1-wave"></i></a>
 
                                     @csrf

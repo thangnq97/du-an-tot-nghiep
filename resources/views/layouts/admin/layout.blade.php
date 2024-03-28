@@ -93,7 +93,7 @@
                         <li class="sidebar-item">
                             <a class="sidebar-link @if ($title === 'Quản lí hóa đơn')
                             active
-                        @endif" href="{{ route('bill.index') }}" aria-expanded="false">
+                        @endif" href="{{ route('admin.bill.index') }}" aria-expanded="false">
                                 <span>
                                     <i class="ti ti-file-description"></i>
                                 </span>

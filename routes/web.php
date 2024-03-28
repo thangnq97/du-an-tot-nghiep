@@ -82,14 +82,14 @@ Route::prefix('admin/')->middleware('admin')->group(function() {
     Route::resource('service', ServiceController::class);
     //Dinh
     Route::resource('waters', WaterController::class);
-    Route::get('/bill', [BillController::class,'index'])->name('bill.index');
-    Route::post('/bill/demoShow', [BillController::class,'store'])->name('bill.store');
-    Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('bill.show');
-    Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->name('bill.generatePDF');
-    Route::get('/bill/{id}/edit', [BillController::class, 'edit'])->name('bill.edit');
-    Route::put('/bill/{id}/update', [BillController::class, 'update'])->name('bill.update');
-    Route::delete('/bill/{id}/delete', [BillController::class, 'destroy'])->name('bill.destroy');
-    Route::get('/bill/search', [BillController::class,'search'])->name('bill.search');
+    Route::get('/bill', [BillController::class,'index'])->name('admin.bill.index');
+    Route::post('/bill/demoShow', [BillController::class,'store'])->name('admin.bill.store');
+    Route::get('/bill/{id}/bill_detail', [BillController::class,'show'])->name('admin.bill.show');
+    Route::get('/bill/{id}/generate-pdf', [BillController::class, 'generatePDF'])->name('admin.bill.generatePDF');
+    Route::get('/bill/{id}/edit', [BillController::class, 'edit'])->name('admin.bill.edit');
+    Route::put('/bill/{id}/update', [BillController::class, 'update'])->name('admin.bill.update');
+    Route::delete('/bill/{id}/delete', [BillController::class, 'destroy'])->name('admin.bill.destroy');
+    Route::get('/bill/search', [BillController::class,'search'])->name('admin.bill.search');
 
     //DUNG
     // Route::get('/electric', [ElectricController::class,'index']);

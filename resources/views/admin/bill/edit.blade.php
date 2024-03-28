@@ -13,7 +13,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         @endif
-        <form action="{{ route('bill.update',$bill) }}" method="POST" enctype="multipart/form-data" class="row">
+        <form action="{{ route('admin.bill.update',$bill) }}" method="POST" enctype="multipart/form-data" class="row">
             @csrf
             @method('PUT')
             <div class="mb-3">
@@ -41,7 +41,7 @@
             </div>
 
             <div>
-                <a href="{{ route('bill.index') }}" class="btn btn-warning">Trở về</a>
+                <a href="{{ route('admin.bill.index') }}" class="btn btn-warning">Trở về</a>
                 <button type="submit" class="btn btn-success">Thu</button>
 
             </div>
